@@ -10,6 +10,8 @@ class Academy extends Model
 {
     use HasUuids, HasFactory;
 
+    protected $table = 'academy';
+
     /**
      * The attributes that are mass assignable.
      *
