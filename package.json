@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "GradeBook",
   "scripts": {
-    "start": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "start": "concurrently --names \"Laravel,React\" --prefix-colors \"red,blue\" \"npm run backend\" \"npm run frontend\"",
     "backend": "cd backend && php artisan serve",
     "frontend": "cd frontend && npm run dev",
     "install-all": "cd frontend && npm install && cd ../backend && npm install && composer install"

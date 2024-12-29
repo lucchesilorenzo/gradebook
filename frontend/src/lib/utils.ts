@@ -14,7 +14,7 @@ export function parseDates<T>(data: T): T {
     return Object.fromEntries(
       Object.entries(data).map(([key, value]) => {
         if (
-          (key === "createdAt" || key === "updatedAt") &&
+          (key === "created_at" || key === "updated_at") &&
           typeof value === "string"
         ) {
           return [key, new Date(value)];
