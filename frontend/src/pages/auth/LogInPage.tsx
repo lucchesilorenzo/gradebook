@@ -6,8 +6,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import env from "@/lib/env";
+import { useEffect } from "react";
 
 export default function LogInPage() {
+  useEffect(() => {
+    document.title = `Log In | ${env.VITE_APP_NAME}`;
+  }, []);
+
   return (
     <div className="flex flex-col gap-6">
       <Card>

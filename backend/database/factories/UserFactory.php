@@ -34,6 +34,7 @@ class UserFactory extends Factory
             'tax_id' => $faker->unique()->taxId(),
             'phone_number' => fake()->unique()->e164PhoneNumber(),
             'gender' => fake()->randomElement(['male', 'female']),
+            'image' => null,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ];
