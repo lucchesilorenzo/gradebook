@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LogInRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Hash;
 
@@ -34,14 +33,13 @@ class AuthController extends Controller
 
             return response()->json(['token' => $token], 200);
         } catch (\Throwable $e) {
-            return response()->json(['message' => 'Could not login user.'], 500);
+            return response()->json(['message' => 'Could not login user.', 'error' => $e->getMessage()], 500);
         }
     }
 
     /**
      * Handle the logout of a user.
      *
-     * @param  Request  $request
      * @return JsonResource
      */
     public function logOut(): JsonResponse

@@ -19,7 +19,7 @@ class AcademyFactory extends Factory
         return [
             'name' => 'ITS Prodigi',
             'email' => fake()->unique()->safeEmail(),
-            'phone_number' => fake()->unique()->phoneNumber(),
+            'phone_number' => fake()->unique()->e164PhoneNumber(),
             'address' => fake()->streetAddress(),
         ];
     }
