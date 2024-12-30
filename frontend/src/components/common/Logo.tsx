@@ -2,9 +2,13 @@ import { LibraryBig } from "lucide-react";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 
-export default function Logo() {
+type LogoProps = {
+  onOpenChange?: () => void;
+};
+
+export default function Logo({ onOpenChange }: LogoProps) {
   return (
-    <Link to="/" className="flex items-center space-x-2">
+    <Link to="/" className="flex items-center space-x-3" onClick={onOpenChange}>
       <Button size="icon" className="hover:bg-primary">
         <LibraryBig />
       </Button>
