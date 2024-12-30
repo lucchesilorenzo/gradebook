@@ -31,16 +31,26 @@ class CourseUnitFactory extends Factory
     public function configure(): self
     {
         return $this->state(new Sequence(
-            ['name' => 'Algorithms'],
-            ['name' => 'Data Structures'],
-            ['name' => 'Operating System'],
-            ['name' => 'Computer Networks'],
-            ['name' => 'Database'],
-            ["description" => "This course covers the fundamental concepts of algorithms, focusing on problem-solving and efficiency."],
-            ["description" => "Learn about the organization and manipulation of data using various structures like arrays, trees, and graphs."],
-            ["description" => "Understand the architecture and management of operating systems, focusing on processes, memory, and file systems."],
-            ["description" => "Study the principles of computer networks, including network protocols, security, and communication models."],
-            ["description" => "Explore the design, implementation, and optimization of databases, with a focus on relational and non-relational models."],
+            [
+                'name' => 'Algorithms',
+                'description' => 'This course covers the fundamental concepts of algorithms, focusing on problem-solving and efficiency.'
+            ],
+            [
+                'name' => 'Data Structures',
+                'description' => 'Learn about the organization and manipulation of data using various structures like arrays, trees, and graphs.'
+            ],
+            [
+                'name' => 'Operating System',
+                'description' => 'Understand the architecture and management of operating systems, focusing on processes, memory, and file systems.'
+            ],
+            [
+                'name' => 'Computer Networks',
+                'description' => 'Study the principles of computer networks, including network protocols, security, and communication models.'
+            ],
+            [
+                'name' => 'Database',
+                'description' => 'Explore the design, implementation, and optimization of databases, with a focus on relational and non-relational models.'
+            ],
         ));
     }
 }

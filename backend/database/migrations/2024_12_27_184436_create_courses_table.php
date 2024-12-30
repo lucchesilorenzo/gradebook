@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name')->unique();
+            $table->string('course_code')->unique();
+            $table->string('description');
+            $table->integer('max_students');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->enum('status', ['BEGINNER', 'INTERMEDIATE', 'ADVANCED']);
             $table->timestamps();
         });
     }

@@ -1,8 +1,8 @@
 import axios, { AxiosInstance } from "axios";
 import env from "./env";
-import { parseDates } from "./utils";
+import { createAxiosDateTransformer } from "axios-date-transformer";
 
-const api = axios.create({
+const api = createAxiosDateTransformer({
   baseURL: `${env.VITE_BASE_URL}/api`,
 });
 
@@ -20,7 +20,6 @@ function applyInterceptors(axiosInstance: AxiosInstance) {
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
       }
-      response.data = parseDates(response.data);
       return response;
     },
     (error) => {
