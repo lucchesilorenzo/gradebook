@@ -10,6 +10,7 @@ import { Toaster } from "sonner";
 import AppLayout from "./components/layouts/AppLayout.tsx";
 import DashboardPage from "./pages/app/DashboardPage.tsx";
 import CoursesPage from "./pages/app/CoursesPage.tsx";
+import CoursePage from "./pages/app/CoursePage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -26,7 +27,10 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/" element={<AppLayout />}>
             <Route index element={<Navigate to="dashboard" />} />
             <Route path="dashboard" element={<DashboardPage />} />
-            <Route path="courses" element={<CoursesPage />} />
+            <Route path="courses">
+              <Route index element={<CoursesPage />} />
+              <Route path=":courseSlug" element={<CoursePage />} />
+            </Route>
           </Route>
 
           <Route path="*" element={<NotFoundPage />} />

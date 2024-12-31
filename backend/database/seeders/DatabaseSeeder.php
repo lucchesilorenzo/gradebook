@@ -6,6 +6,7 @@ use App\Models\Academy;
 use App\Models\Course;
 use App\Models\CourseUnit;
 use App\Models\Student;
+use App\Models\Tutor;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,6 +20,9 @@ class DatabaseSeeder extends Seeder
     {
         // Create one Academy
         Academy::factory(1)->create();
+
+        // Create 5 Tutors
+        Tutor::factory(5)->create();
 
         // Create 5 Courses with custom configuration
         $courses = Course::factory(5)->configure()->create();

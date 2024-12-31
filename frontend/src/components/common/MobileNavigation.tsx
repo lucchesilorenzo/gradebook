@@ -16,7 +16,7 @@ import { Menu } from "lucide-react";
 import { useState } from "react";
 
 export default function MobileNavigation() {
-  const [isSheetOpen, setIsSheetOpen] = useState(true);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   return (
     <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -28,7 +28,7 @@ export default function MobileNavigation() {
       <SheetContent side="left" className="bg-zinc-100">
         <SheetHeader>
           <SheetTitle>
-            <Logo onOpenChange={() => setIsSheetOpen(false)} />
+            <Logo onOpenChange={() => setIsSheetOpen(!isSheetOpen)} />
           </SheetTitle>
           <VisuallyHidden>
             <SheetDescription>Navigation menu</SheetDescription>

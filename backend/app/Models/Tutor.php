@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Student extends Model
+class Tutor extends Model
 {
     use HasUuids, HasFactory;
 
@@ -17,7 +17,6 @@ class Student extends Model
      * @var array
      */
     protected $fillable = [
-        'course_id',
         'first_name',
         'last_name',
         'email',
@@ -27,12 +26,12 @@ class Student extends Model
     ];
 
     /**
-     * Get the course that owns the student.
+     * Get the courses for the tutor.
      *
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function course(): BelongsTo
+    public function courses(): HasMany
     {
-        return $this->belongsTo(Course::class);
+        return $this->hasMany(Course::class);
     }
 }

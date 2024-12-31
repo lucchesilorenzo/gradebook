@@ -14,11 +14,11 @@ class CourseController extends Controller
     public function getTeacherCourses(): JsonResponse
     {
         try {
-            $courses = auth()->user()->courses()
-                ->with(['students', 'units'])
+            $teacherCourses = auth()->user()->courses()
+                ->with(['students', 'units', 'tutor'])
                 ->get();
 
-            return response()->json($courses);
+            return response()->json($teacherCourses);
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not get teacher courses.',

@@ -12,6 +12,7 @@ import { BookOpen, Calendar, Users } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Progress } from "../ui/progress";
+import { Link } from "react-router-dom";
 
 type CourseCardProps = {
   course: TeacherCourse;
@@ -40,7 +41,7 @@ export default function CourseCard({ course }: CourseCardProps) {
           <CardTitle className="text-md font-bold sm:text-xl">
             {course.name}
           </CardTitle>
-          <Badge>{capitalize(course.status)}</Badge>
+          <Badge>{capitalize(course.type)}</Badge>
         </div>
         <CardDescription>{course.course_code}</CardDescription>
       </CardHeader>
@@ -83,7 +84,9 @@ export default function CourseCard({ course }: CourseCardProps) {
         </div>
       </CardContent>
       <CardFooter>
-        <Button>Course Details</Button>
+        <Button asChild>
+          <Link to={`/courses/${course.slug}`}>Course Details</Link>
+        </Button>
       </CardFooter>
     </Card>
   );

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -18,7 +19,15 @@ class Course extends Model
      * @var array
      */
     protected $fillable = [
+        'coordinator_id',
         'name',
+        'slug',
+        'course_code',
+        'description',
+        'max_students',
+        'start_date',
+        'end_date',
+        'status',
     ];
 
     /**
@@ -49,5 +58,15 @@ class Course extends Model
     public function units(): BelongsToMany
     {
         return $this->belongsToMany(CourseUnit::class);
+    }
+
+    /**
+     * Get the tutor for the course.
+     *
+     * @return BelongsTo
+     */
+    public function tutor(): BelongsTo
+    {
+        return $this->belongsTo(Tutor::class);
     }
 }
