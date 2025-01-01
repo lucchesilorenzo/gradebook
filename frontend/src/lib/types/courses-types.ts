@@ -37,7 +37,10 @@ export type TeacherCourse = {
   units: {
     id: string;
     name: string;
+    slug: string;
     description: string;
+    theory_hours: number;
+    lab_hours: number;
     created_at: Date;
     updated_at: Date;
     pivot: {
@@ -50,3 +53,5 @@ export type TeacherCourse = {
     course_id: string;
   };
 };
+
+export type CourseUnit = TeacherCourse["units"][number];

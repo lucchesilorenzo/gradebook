@@ -18,7 +18,10 @@ class CourseUnit extends Model
      */
     protected $fillable = [
         'name',
+        'slug',
         'description',
+        'theory_hours',
+        'lab_hours',
     ];
 
     /**

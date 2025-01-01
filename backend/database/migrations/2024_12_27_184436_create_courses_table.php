@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    // 2024_12_31_163747_create_tutors_table
     /**
      * Run the migrations.
      */

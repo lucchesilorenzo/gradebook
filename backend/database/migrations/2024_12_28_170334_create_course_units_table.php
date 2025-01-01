@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('course_units', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name')->unique();
+            $table->string('slug')->unique();
             $table->text('description');
+            $table->integer('theory_hours');
+            $table->integer('lab_hours');
             $table->timestamps();
         });
     }

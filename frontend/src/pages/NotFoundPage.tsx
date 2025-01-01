@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import env from "@/lib/env";
+import { ArrowLeft } from "lucide-react";
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -27,7 +28,9 @@ export default function NotFoundPage({ content = "page" }: NotFoundPageProps) {
       </h1>
 
       <Button variant="link">
-        <Link to="/">&larr; Go back to dashboard</Link>
+        <Link to="/" className="flex items-center gap-2">
+          <ArrowLeft /> Go back to dashboard
+        </Link>
       </Button>
     </main>
   );
