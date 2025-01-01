@@ -15,9 +15,13 @@ import { Progress } from "../ui/progress";
 
 type CourseUnitProps = {
   courseUnit: CourseUnit;
+  courseSlug: string;
 };
 
-export default function CourseUnit({ courseUnit }: CourseUnitProps) {
+export default function CourseUnit({
+  courseUnit,
+  courseSlug,
+}: CourseUnitProps) {
   const theory = courseUnit.theory_hours;
   const lab = courseUnit.lab_hours;
   const total = theory + lab;
@@ -41,14 +45,14 @@ export default function CourseUnit({ courseUnit }: CourseUnitProps) {
             <Clock className="h-4 w-4 text-muted-foreground" />
             <span className="font-semibold">Total:</span>{" "}
             <span>
-              {total}h (Theory: {theory}h, Lab: {lab}h)
+              {total}h (Theory: {theory}h | Lab: {lab}h)
             </span>
           </p>
         </div>
       </CardContent>
       <CardFooter>
         <Button className="w-full py-5" asChild>
-          <Link to={`/courses/${courseUnit.slug}`}>
+          <Link to={`/courses/${courseSlug}/course-units/${courseUnit.slug}`}>
             Access Unit <ArrowRight />
           </Link>
         </Button>

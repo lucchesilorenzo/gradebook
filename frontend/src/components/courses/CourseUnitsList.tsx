@@ -24,7 +24,11 @@ export default function CourseUnitsList({ course }: CourseUnitsListProps) {
       <CardContent>
         <div className="mt-2 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {course.units.map((unit) => (
-            <CourseUnit key={unit.id} courseUnit={unit} />
+            <CourseUnit
+              key={unit.id}
+              courseUnit={unit}
+              courseSlug={course.slug}
+            />
           ))}
         </div>
       </CardContent>

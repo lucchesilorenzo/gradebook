@@ -11,6 +11,7 @@ import AppLayout from "./components/layouts/AppLayout.tsx";
 import DashboardPage from "./pages/app/DashboardPage.tsx";
 import CoursesPage from "./pages/app/CoursesPage.tsx";
 import CoursePage from "./pages/app/CoursePage.tsx";
+import CourseUnitPage from "./pages/app/CourseUnitPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -29,7 +30,12 @@ createRoot(document.getElementById("root")!).render(
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="courses">
               <Route index element={<CoursesPage />} />
-              <Route path=":courseSlug" element={<CoursePage />} />
+              <Route path=":courseSlug">
+                <Route index element={<CoursePage />} />
+                <Route path="course-units">
+                  <Route path=":courseUnitSlug" element={<CourseUnitPage />} />
+                </Route>
+              </Route>
             </Route>
           </Route>
 
