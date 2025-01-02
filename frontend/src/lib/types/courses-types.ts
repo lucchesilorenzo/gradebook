@@ -55,3 +55,5 @@ export type TeacherCourse = {
 };
 
 export type CourseUnit = TeacherCourse["units"][number];
+
+export type Student = TeacherCourse["students"][number];

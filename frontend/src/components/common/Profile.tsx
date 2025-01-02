@@ -32,7 +32,7 @@ export default function Profile({ type }: ProfileProps) {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem onSelect={handleLogOut}>Logout</DropdownMenuItem>
+        <DropdownMenuItem onSelect={handleLogOut}>Log out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
