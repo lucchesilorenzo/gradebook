@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CourseUnit extends Model
 {
@@ -32,5 +33,15 @@ class CourseUnit extends Model
     public function courses(): BelongsToMany
     {
         return $this->belongsToMany(Course::class);
+    }
+
+    /**
+     * Get all the attendances the unit belongs to.
+     *
+     * @return HasMany
+     */
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class);
     }
 }
