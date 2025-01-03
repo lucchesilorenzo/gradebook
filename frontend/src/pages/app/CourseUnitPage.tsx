@@ -12,11 +12,12 @@ export default function CourseUnitPage() {
 
   const courseUnit = course.units.find((unit) => unit.slug === courseUnitSlug);
   if (!courseUnit) return <Navigate to="*" state={{ content: "unit" }} />;
+
   return (
     <main className="space-y-2">
       <H1>{courseUnit.name}</H1>
       <h2>{courseUnit.description}</h2>
-      <CourseUnitTabs students={course.students} />
+      <CourseUnitTabs students={course.students} courseUnit={courseUnit} />
     </main>
   );
 }

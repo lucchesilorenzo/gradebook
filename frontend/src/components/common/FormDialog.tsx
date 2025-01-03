@@ -9,6 +9,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useCreateAttendances } from "@/hooks/mutations/attendances/useCreateAttendances";
 import { format } from "date-fns";
 import { Clock } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -16,20 +17,24 @@ import { Badge } from "../ui/badge";
 
 type FormDialogProps<T> = {
   children: React.ReactNode;
-  studentsWithStatus: T;
+  attendanceData: T;
 };
 
 export default function FormDialog<T>({
   children,
-  studentsWithStatus,
+  attendanceData,
 }: FormDialogProps<T>) {
-  console.log(studentsWithStatus);
+  const { mutateAsync: createAttendances } = useCreateAttendances();
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
+
+  async function handleCreateAttendances() {
+    await createAttendances(attendanceData);
+  }
 
   return (
     <AlertDialog>
@@ -53,7 +58,9 @@ export default function FormDialog<T>({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={handleCreateAttendances}>
+            Continue
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

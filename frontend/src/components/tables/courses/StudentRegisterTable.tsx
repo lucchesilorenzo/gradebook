@@ -19,6 +19,7 @@ import {
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import TablePagination from "../ui/TablePagination";
+import { format } from "date-fns";
 
 type StudentRegisterTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -44,14 +45,16 @@ export default function StudentRegisterTable<TData, TValue>({
     },
   });
 
-  const selectedStudentData = table.getCoreRowModel().rows.map((row) => ({
-    student: row.original,
+  const attendanceData = table.getCoreRowModel().rows.map((row) => ({
+    ...row.original,
     status: row.getIsSelected(),
+    date: format(new Date(), "yyyy-MM-dd"),
+    start_time: format(new Date(), "HH:mm"),
   }));
 
   return (
     <div className="space-y-4">
-      <FormDialog studentsWithStatus={selectedStudentData}>
+      <FormDialog attendanceData={attendanceData}>
         <Button disabled={!isAnyRowSelected}>
           <Plus /> Confirm attendance
         </Button>
