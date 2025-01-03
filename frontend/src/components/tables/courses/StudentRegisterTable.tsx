@@ -59,7 +59,7 @@ export default function StudentRegisterTable<TData, TValue>({
           <Plus /> Confirm attendance
         </Button>
       </FormDialog>
-      <div className="rounded-md border">
+      <div>
         <Table>
           <TableHeader className="bg-zinc-200">
             {table.getHeaderGroups().map((headerGroup) => (

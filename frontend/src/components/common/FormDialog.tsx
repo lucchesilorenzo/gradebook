@@ -39,13 +39,13 @@ export default function FormDialog<T>({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="space-y-2">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-xl uppercase">
             Confirm attendance
           </AlertDialogTitle>
           <AlertDialogDescription asChild>
-            <div className="mt-1 flex items-center gap-2">
+            <div className="flex items-center gap-2">
               <Clock className="h-5 w-5 text-muted-foreground" />
               <span className="text-lg font-semibold text-black">
                 Current time:
