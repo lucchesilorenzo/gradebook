@@ -16,10 +16,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { format } from "date-fns";
 import { Plus } from "lucide-react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import TablePagination from "../ui/TablePagination";
-import { format } from "date-fns";
 
 type StudentRegisterTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -31,6 +32,7 @@ export default function StudentRegisterTable<TData, TValue>({
   data,
 }: StudentRegisterTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({});
+  const { courseUnitSlug } = useParams();
 
   const isAnyRowSelected = Object.keys(rowSelection).length > 0;
 
@@ -45,20 +47,38 @@ export default function StudentRegisterTable<TData, TValue>({
     },
   });
 
-  const attendanceData = table.getCoreRowModel().rows.map((row) => ({
-    ...row.original,
+  if (!courseUnitSlug) return null;
+
+  // Start lesson
+  const attendanceStart = table.getCoreRowModel().rows.map((row) => ({
+    ...row.original, // ID only
     status: row.getIsSelected(),
     date: format(new Date(), "yyyy-MM-dd"),
     start_time: format(new Date(), "HH:mm"),
   }));
 
+  // End lesson
+  const attendanceEnd = {
+    course_unit_slug: courseUnitSlug,
+    end_time: format(new Date(), "HH:mm"),
+  };
+
   return (
     <div className="space-y-4">
-      <FormDialog attendanceData={attendanceData}>
-        <Button disabled={!isAnyRowSelected}>
-          <Plus /> Confirm attendance
-        </Button>
-      </FormDialog>
+      <div className="space-x-2">
+        <FormDialog attendanceStart={attendanceStart} type="start">
+          <Button disabled={!isAnyRowSelected}>
+            <Plus /> Confirm start lesson
+          </Button>
+        </FormDialog>
+
+        <FormDialog attendanceEnd={attendanceEnd} type="end">
+          <Button>
+            <Plus /> Confirm end lesson
+          </Button>
+        </FormDialog>
+      </div>
+
       <div>
         <Table>
           <TableHeader className="bg-zinc-200">

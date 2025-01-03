@@ -42,7 +42,12 @@ createRoot(document.getElementById("root")!).render(
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
-      <Toaster duration={4000} position="top-right" richColors />
+      <Toaster
+        duration={4000}
+        visibleToasts={1}
+        position="top-right"
+        richColors
+      />
     </QueryClientProvider>
   </StrictMode>,
 );
