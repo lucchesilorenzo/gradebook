@@ -63,15 +63,15 @@ export default function StudentRegisterTable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <div className="space-x-2">
+      <div className="flex items-center gap-2">
         <FormDialog attendanceStart={attendanceStart} type="start">
-          <Button>
+          <Button size="responsive">
             <Plus /> Confirm start lesson
           </Button>
         </FormDialog>
 
         <FormDialog attendanceEnd={attendanceEnd} type="end">
-          <Button>
+          <Button size="responsive">
             <Plus /> Confirm end lesson
           </Button>
         </FormDialog>

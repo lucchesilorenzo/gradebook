@@ -2,6 +2,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { StudentWithCourseUnit } from "@/lib/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Clock, IdCard, Mail } from "lucide-react";
+import StudentActions from "./StudentActions";
 
 export const columns: ColumnDef<StudentWithCourseUnit>[] = [
   {
@@ -33,7 +34,7 @@ export const columns: ColumnDef<StudentWithCourseUnit>[] = [
       const lastName = row.original.last_name;
 
       return (
-        <div className="font-medium uppercase">{`${firstName} ${lastName}`}</div>
+        <div className="w-[150px] font-medium uppercase">{`${firstName} ${lastName}`}</div>
       );
     },
   },
@@ -91,7 +92,7 @@ export const columns: ColumnDef<StudentWithCourseUnit>[] = [
       // TODO: Create actions for early departures / late arrivals
       const student = row.original;
 
-      return <div className="flex items-center gap-2">X</div>;
+      return <StudentActions student={student} />;
     },
   },
 ];
