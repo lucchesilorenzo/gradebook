@@ -28,6 +28,7 @@ class StudentFactory extends Factory
             'tax_id' => $faker->unique()->taxId(),
             'phone_number' => fake()->unique()->e164PhoneNumber(),
             'gender' => fake()->randomElement(['MALE', 'FEMALE']),
+            'attendance_rate' => 0,
         ];
     }
 }

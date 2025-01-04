@@ -20,6 +20,7 @@ export type TeacherCourse = {
     tax_id: string;
     phone_number: string;
     gender: string;
+    attendance_rate: number;
     created_at: Date;
     updated_at: Date;
   }[];

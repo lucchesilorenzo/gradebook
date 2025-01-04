@@ -26,6 +26,26 @@ class Attendance extends Model
     ];
 
     /**
+     * Update the student's attendance rate.
+     *
+     * @param string $studentId
+     * @return void
+     */
+    public function updateStudentAttendanceRate(string $studentId): void
+    {
+        $currentStudentAttendances = Attendance::where('student_id', $studentId)->count();
+
+        $currentStudentWithPresentAttendances = Attendance::where('student_id', $studentId)
+            ->where('status', 'PRESENT')
+            ->count();
+
+        $attendanceRate = ($currentStudentWithPresentAttendances / $currentStudentAttendances) * 100;
+
+        Student::where('id', $studentId)
+            ->update(['attendance_rate' => $attendanceRate]);
+    }
+
+    /**
      * Get the student that owns the attendance.
      *
      * @return BelongsTo

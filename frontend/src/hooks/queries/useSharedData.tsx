@@ -6,9 +6,8 @@ export function useSharedData() {
   return useQueries({
     queries: [
       {
-        queryKey: ["teacher-courses"],
-        queryFn: (): Promise<TeacherCourse[]> =>
-          fetchData("/courses/teacher-courses"),
+        queryKey: ["courses"],
+        queryFn: (): Promise<TeacherCourse[]> => fetchData("/courses/teacher"),
       },
     ],
   });

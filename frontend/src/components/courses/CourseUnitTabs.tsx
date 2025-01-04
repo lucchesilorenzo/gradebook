@@ -1,9 +1,9 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import StudentRegisterTable from "../tables/courses/StudentRegisterTable";
-import { CourseUnit, Student } from "@/lib/types";
 import { columns } from "@/components/tables/courses/columns";
-import { useEffect } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import env from "@/lib/env";
+import { CourseUnit, Student } from "@/lib/types";
+import { useEffect } from "react";
+import StudentRegisterTable from "../tables/courses/StudentRegisterTable";
 
 type CourseUnitTabsProps = {
   students: Student[];
@@ -15,8 +15,8 @@ export default function CourseUnitTabs({
   courseUnit,
 }: CourseUnitTabsProps) {
   useEffect(() => {
-    document.title = `${courseUnit.name} | ${env.VITE_APP_NAME}`;
-  }, [courseUnit.name]);
+    document.title = `${courseUnit?.name} | ${env.VITE_APP_NAME}`;
+  }, [courseUnit?.name]);
 
   const studentsWithCourseUnit = students.map((student) => ({
     ...student,

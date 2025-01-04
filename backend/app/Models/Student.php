@@ -25,6 +25,7 @@ class Student extends Model
         'tax_id',
         'phone_number',
         'gender',
+        'attendance_rate',
     ];
 
     /**

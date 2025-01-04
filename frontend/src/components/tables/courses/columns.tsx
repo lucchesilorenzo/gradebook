@@ -68,17 +68,17 @@ export const columns: ColumnDef<StudentWithCourseUnit>[] = [
     },
   },
   {
-    accessorKey: "Attendance",
-    id: "attendance",
+    accessorKey: "attendance_rate",
+    id: "attendance_rate",
     header: "Attendance",
     cell: ({ row }) => {
-      // TODO: Get attendance rate
-      const attendanceRate = 5;
+      const attendanceRate: StudentWithCourseUnit["attendance_rate"] =
+        row.getValue("attendance_rate");
 
       return (
         <div className="flex items-center gap-2">
           <Clock className="h-4 w-4 text-muted-foreground" />
-          <span>{attendanceRate}</span>
+          <span>{attendanceRate}%</span>
         </div>
       );
     },

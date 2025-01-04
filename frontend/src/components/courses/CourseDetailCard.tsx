@@ -5,10 +5,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import env from "@/lib/env";
 import { TeacherCourse } from "@/lib/types";
 import { BookOpen, Calendar, Users } from "lucide-react";
-import { useEffect } from "react";
 
 type CourseDetailCardProps = {
   course: TeacherCourse;
@@ -17,10 +15,6 @@ type CourseDetailCardProps = {
 export default function CourseDetailCard({ course }: CourseDetailCardProps) {
   const start = course.start_date.toLocaleDateString("it-IT");
   const end = course.end_date.toLocaleDateString("it-IT");
-
-  useEffect(() => {
-    document.title = `${course.name} | ${env.VITE_APP_NAME}`;
-  }, [course.name]);
 
   return (
     <Card className="max-w-[800px]">

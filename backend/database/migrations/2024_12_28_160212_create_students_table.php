@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tax_id')->unique();
             $table->string('phone_number')->unique()->nullable();
             $table->enum('gender', ['MALE', 'FEMALE']);
+            $table->decimal('attendance_rate', 5, 2)->default(0);
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Http\JsonResponse;
 
 class CourseController extends Controller
@@ -23,6 +24,27 @@ class CourseController extends Controller
             return response()->json([
                 'message' => 'Could not get teacher courses.',
                 'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Get teacher's course.
+     *
+     * @param string $courseSlug
+     * @return JsonResponse
+     */
+    public function getTeacherCourse(string $courseSlug): JsonResponse
+    {
+        try {
+            $teacherCourse = Course::where('slug', $courseSlug)
+                ->with(['students', 'units', 'tutor'])
+                ->firstOrFail();
+
+            return response()->json($teacherCourse);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not get teacher course.',
             ], 500);
         }
     }

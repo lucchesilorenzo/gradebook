@@ -34,8 +34,6 @@ export default function StudentRegisterTable<TData, TValue>({
   const [rowSelection, setRowSelection] = useState({});
   const { courseUnitSlug } = useParams();
 
-  const isAnyRowSelected = Object.keys(rowSelection).length > 0;
-
   const table = useReactTable({
     data,
     columns,
@@ -67,7 +65,7 @@ export default function StudentRegisterTable<TData, TValue>({
     <div className="space-y-4">
       <div className="space-x-2">
         <FormDialog attendanceStart={attendanceStart} type="start">
-          <Button disabled={!isAnyRowSelected}>
+          <Button>
             <Plus /> Confirm start lesson
           </Button>
         </FormDialog>

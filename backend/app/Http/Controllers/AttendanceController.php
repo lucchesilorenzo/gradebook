@@ -23,10 +23,13 @@ class AttendanceController extends Controller
         $validatedAttendances = $request->validated();
 
         try {
-            // Check if attendance was already created
+            // Get today's date (YYYY-mm-dd)
             $today = Carbon::now()->toDateString();
+
+            // Check if attendance was already created
             $courseUnit = Attendance::where('course_unit_id', $validatedAttendances[0]['course_unit_id'])
-                ->whereDate('date', $today)->exists();
+                ->whereDate('date', $today)
+                ->exists();
 
             if ($courseUnit) {
                 return response()->json([
@@ -89,18 +92,19 @@ class AttendanceController extends Controller
             }
 
             // Check if end time has already been updated
-            foreach ($attendances as $attendance) {
-                if ($attendance->end_time !== null) {
-                    return response()->json([
-                        'message' => 'Attendance end time has already been updated for today.'
-                    ], 400);
-                }
+            if ($attendances->contains(fn($attendance) => $attendance->end_time !== null)) {
+                return response()->json([
+                    'message' => 'Attendance end time has already been updated for today.'
+                ], 400);
             }
 
-            // Update daily attendance end time for the course unit
-            $attendances->each(function ($attendance) use ($validatedData) {
+            foreach ($attendances as $attendance) {
+                // Update daily attendance end time for the course unit
                 $attendance->update(['end_time' => $validatedData['end_time']]);
-            });
+
+                // Update student's attendance rate
+                $attendance->updateStudentAttendanceRate($attendance->student_id);
+            }
 
             return response()->json([
                 'message' => 'Attendance end time updated successfully.'
