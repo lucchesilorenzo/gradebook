@@ -6,7 +6,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import FormDialog from "@/components/common/FormDialog";
+import MainAlertDialog from "@/components/common/MainAlertDialog";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -64,17 +64,17 @@ export default function StudentRegisterTable<TData, TValue>({
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
-        <FormDialog attendanceStart={attendanceStart} type="start">
+        <MainAlertDialog attendanceStart={attendanceStart} type="start">
           <Button size="responsive">
             <Plus /> Confirm start lesson
           </Button>
-        </FormDialog>
+        </MainAlertDialog>
 
-        <FormDialog attendanceEnd={attendanceEnd} type="end">
+        <MainAlertDialog attendanceEnd={attendanceEnd} type="end">
           <Button size="responsive">
             <Plus /> Confirm end lesson
           </Button>
-        </FormDialog>
+        </MainAlertDialog>
       </div>
 
       <div>
