@@ -9,9 +9,10 @@ import AuthLayout from "./components/layouts/AuthLayout.tsx";
 import { Toaster } from "sonner";
 import AppLayout from "./components/layouts/AppLayout.tsx";
 import DashboardPage from "./pages/app/DashboardPage.tsx";
-import CoursesPage from "./pages/app/CoursesPage.tsx";
-import CoursePage from "./pages/app/CoursePage.tsx";
-import CourseUnitPage from "./pages/app/CourseUnitPage.tsx";
+import CoursesPage from "./pages/app/courses/CoursesPage.tsx";
+import CoursePage from "./pages/app/courses/CoursePage.tsx";
+import CourseUnitPage from "./pages/app/courses/CourseUnitPage.tsx";
+import CalendarPage from "./pages/app/CalendarPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -37,11 +38,13 @@ createRoot(document.getElementById("root")!).render(
                 </Route>
               </Route>
             </Route>
+            <Route path="calendar" element={<CalendarPage />} />
           </Route>
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
+
       <Toaster
         duration={4000}
         visibleToasts={1}

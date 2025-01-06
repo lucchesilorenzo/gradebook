@@ -38,7 +38,7 @@ class CourseUnitSchedule extends Model
      *
      * @return BelongsTo
      */
-    public function unit(): BelongsTo
+    public function courseUnit(): BelongsTo
     {
         return $this->belongsTo(CourseUnit::class);
     }
