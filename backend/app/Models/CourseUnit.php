@@ -44,4 +44,14 @@ class CourseUnit extends Model
     {
         return $this->hasMany(Attendance::class);
     }
+
+    /**
+     * Get all the course unit schedules for the course.
+     *
+     * @return HasMany
+     */
+    public function schedules(): HasMany
+    {
+        return $this->hasMany(CourseUnitSchedule::class);
+    }
 }

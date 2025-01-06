@@ -69,4 +69,14 @@ class Course extends Model
     {
         return $this->belongsTo(Tutor::class);
     }
+
+    /**
+     * Get all the course unit schedules for the course.
+     *
+     * @return HasMany
+     */
+    public function schedules(): HasMany
+    {
+        return $this->hasMany(CourseUnitSchedule::class);
+    }
 }
