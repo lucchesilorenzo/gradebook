@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { StudentWithCourseUnit } from "@/lib/types";
-import StudentEditForm from "../courses/StudentEditForm";
+import AttendanceEditForm from "../attendances/AttendanceEditForm";
 
 type FormDialogProps = {
   open: boolean;
@@ -34,7 +34,7 @@ export default function FormDialog({
             Attendance: {student.attendance_rate}%
           </DialogDescription>
         </DialogHeader>
-        <StudentEditForm onFormSubmit={handleFormSubmit} student={student} />
+        <AttendanceEditForm onFormSubmit={handleFormSubmit} student={student} />
       </DialogContent>
     </Dialog>
   );

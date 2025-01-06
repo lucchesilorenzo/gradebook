@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAttendancesRequest;
 use App\Http\Requests\UpdateAttendanceEndTimeRequest;
+use App\Http\Requests\UpdateAttendanceRequest;
 use App\Models\Attendance;
 use App\Models\CourseUnit;
+use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 
@@ -91,19 +93,22 @@ class AttendanceController extends Controller
                 ], 404);
             }
 
-            // Check if end time has already been updated
-            if ($attendances->contains(fn($attendance) => $attendance->end_time !== null)) {
+            // Check if all records already have an end time
+            if ($attendances->every(fn($attendance) => $attendance->end_time !== null)) {
                 return response()->json([
                     'message' => 'Attendance end time has already been updated for today.'
                 ], 400);
             }
 
+            // Otherwise, update only records that don't have an end time
             foreach ($attendances as $attendance) {
-                // Update daily attendance end time for the course unit
-                $attendance->update(['end_time' => $validatedData['end_time']]);
+                if (!$attendance->end_time) {
+                    // Update daily attendance end time for the course unit
+                    $attendance->update(['end_time' => $validatedData['end_time']]);
 
-                // Update student's attendance rate
-                $attendance->updateStudentAttendanceRate($attendance->student_id);
+                    // Update student's attendance rate
+                    $attendance->updateStudentAttendanceRate($attendance->student_id);
+                }
             }
 
             return response()->json([
@@ -112,6 +117,82 @@ class AttendanceController extends Controller
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not update attendance end time.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Update attendance.
+     *
+     * @param UpdateAttendanceRequest $request
+     * @param Student $student
+     * @param CourseUnit $courseUnit
+     * @return JsonResponse
+     */
+    public function updateAttendance(
+        UpdateAttendanceRequest $request,
+        Student $student,
+        CourseUnit $courseUnit
+    ): JsonResponse {
+        // Validation
+        $validatedData = $request->validated();
+
+        try {
+            // Get today's date (YYYY-mm-dd)
+            $today = Carbon::now()->toDateString();
+
+            // Check if attendance exists
+            $attendance = Attendance::where('student_id', $student->id)
+                ->where('course_unit_id', $courseUnit->id)
+                ->whereDate('date', $today)
+                ->first();
+
+            if (!$attendance) {
+                return response()->json([
+                    'message' => 'No attendance found for today.'
+                ], 404);
+            }
+
+            // -- Early departure -- 
+            if ($validatedData['attendance_type'] === 'early_departure') {
+                // TODO: Complete checks when course schedules are implemented
+                if ($attendance->end_time !== null || $attendance->status === 'ABSENT') {
+                    return response()->json([
+                        'message' => 'Student is already marked as absent or lesson has already ended.'
+                    ], 400);
+                }
+
+                $attendance->update([
+                    'end_time' => $validatedData['time'],
+                    'status' => 'ABSENT',
+                ]);
+                // -- Late arrival --
+            } elseif ($validatedData['attendance_type'] === 'late_arrival') {
+                if (
+                    $validatedData['time'] < $attendance->start_time ||
+                    $attendance->status === 'PRESENT'
+                ) {
+                    return response()->json([
+                        'message' => 'Invalid late arrival time or student is already present.'
+                    ], 400);
+                }
+
+                $attendance->update([
+                    'start_time' => $validatedData['time'],
+                    'status' => 'PRESENT',
+                ]);
+            }
+
+            // Update student's attendance rate
+            $attendance->updateStudentAttendanceRate($student->id);
+
+            return response()->json([
+                'message' => 'Attendance updated successfully.'
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not update attendance.',
                 'error' => $e->getMessage()
             ], 500);
         }

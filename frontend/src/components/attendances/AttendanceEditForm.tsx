@@ -9,9 +9,9 @@ import {
 import { useUpdateAttendance } from "@/hooks/mutations/attendances/useUpdateAttendance";
 import { StudentWithCourseUnit } from "@/lib/types";
 import {
-  StudentEditFormSchema,
-  TStudentEditFormSchema,
-} from "@/lib/validations/student-validations";
+  AttendanceEditFormSchema,
+  TAttendanceEditFormSchema,
+} from "@/lib/validations/attendance-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { LoadingButton } from "../common/LoadingButton";
@@ -24,25 +24,25 @@ import {
   SelectValue,
 } from "../ui/select";
 
-type StudentEditFormProps = {
+type AttendanceEditFormProps = {
   onFormSubmit: () => void;
   student: StudentWithCourseUnit;
 };
 
-export default function StudentEditForm({
+export default function AttendanceEditForm({
   onFormSubmit,
   student,
-}: StudentEditFormProps) {
+}: AttendanceEditFormProps) {
   const { mutateAsync: updateAttendance } = useUpdateAttendance();
   const form = useForm({
-    resolver: zodResolver(StudentEditFormSchema),
+    resolver: zodResolver(AttendanceEditFormSchema),
     defaultValues: {
       attendance_type: "",
       time: "",
     },
   });
 
-  async function onSubmit(data: TStudentEditFormSchema) {
+  async function onSubmit(data: TAttendanceEditFormSchema) {
     await updateAttendance({
       data,
       student_id: student.id,
@@ -86,7 +86,7 @@ export default function StudentEditForm({
             <FormItem className="w-[120px]">
               <FormLabel>Time</FormLabel>
               <FormControl>
-                <Input type="time" {...field} />
+                <Input type="time" min="09:00" max="18:00" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
