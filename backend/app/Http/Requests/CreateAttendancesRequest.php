@@ -23,6 +23,7 @@ class CreateAttendancesRequest extends FormRequest
     {
         return [
             '*.id' => 'required|uuid|exists:students,id',
+            '*.course_id' => 'required|uuid|exists:courses,id',
             '*.course_unit_id' => 'required|uuid|exists:course_units,id',
             '*.status' => 'required|boolean',
             '*.date' => 'required|date',

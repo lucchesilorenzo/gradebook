@@ -8,12 +8,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { StudentWithCourseUnit } from "@/lib/types";
+import { StudentWithCourseAndUnit } from "@/lib/types";
 import { EllipsisVertical } from "lucide-react";
 import { useState } from "react";
 
 type StudentActionsProps = {
-  student: StudentWithCourseUnit;
+  student: StudentWithCourseAndUnit;
 };
 
 export default function StudentActions({ student }: StudentActionsProps) {

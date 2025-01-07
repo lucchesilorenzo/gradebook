@@ -5,13 +5,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { StudentWithCourseUnit } from "@/lib/types";
+import { StudentWithCourseAndUnit } from "@/lib/types";
 import AttendanceEditForm from "../attendances/AttendanceEditForm";
 
 type FormDialogProps = {
   open: boolean;
   setOpen: (open: boolean) => void;
-  student: StudentWithCourseUnit;
+  student: StudentWithCourseAndUnit;
 };
 
 export default function FormDialog({

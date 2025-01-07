@@ -59,6 +59,7 @@ export type CourseUnit = TeacherCourse["units"][number];
 
 export type Student = TeacherCourse["students"][number];
 
-export type StudentWithCourseUnit = Student & {
+export type StudentWithCourseAndUnit = Student & {
+  course_id: TeacherCourse["id"];
   course_unit_id: CourseUnit["id"];
 };

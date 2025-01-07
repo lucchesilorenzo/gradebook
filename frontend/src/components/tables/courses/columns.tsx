@@ -1,10 +1,10 @@
 import { Checkbox } from "@/components/ui/checkbox";
-import { StudentWithCourseUnit } from "@/lib/types";
+import { StudentWithCourseAndUnit } from "@/lib/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Clock, IdCard, Mail } from "lucide-react";
 import StudentActions from "./StudentActions";
 
-export const columns: ColumnDef<StudentWithCourseUnit>[] = [
+export const columns: ColumnDef<StudentWithCourseAndUnit>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -58,7 +58,7 @@ export const columns: ColumnDef<StudentWithCourseUnit>[] = [
     id: "email",
     header: "Email",
     cell: ({ row }) => {
-      const email: StudentWithCourseUnit["email"] = row.getValue("email");
+      const email: StudentWithCourseAndUnit["email"] = row.getValue("email");
 
       return (
         <div className="flex items-center gap-2">
@@ -73,7 +73,7 @@ export const columns: ColumnDef<StudentWithCourseUnit>[] = [
     id: "attendance_rate",
     header: "Attendance",
     cell: ({ row }) => {
-      const attendanceRate: StudentWithCourseUnit["attendance_rate"] =
+      const attendanceRate: StudentWithCourseAndUnit["attendance_rate"] =
         row.getValue("attendance_rate");
 
       return (

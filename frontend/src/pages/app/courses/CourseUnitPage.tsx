@@ -20,7 +20,7 @@ export default function CourseUnitPage() {
     <main className="space-y-2">
       <H1>{courseUnit.name}</H1>
       <h2>{courseUnit.description}</h2>
-      <CourseUnitTabs students={course.students} courseUnit={courseUnit} />
+      <CourseUnitTabs course={course} courseUnit={courseUnit} />
     </main>
   );
 }

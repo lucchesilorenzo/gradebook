@@ -25,17 +25,32 @@ class AttendanceController extends Controller
         $validatedAttendances = $request->validated();
 
         try {
-            // Get today's date (YYYY-mm-dd)
-            $today = Carbon::now()->toDateString();
+            // Get today's date
+            $today = Carbon::now();
 
             // Check if attendance was already created
-            $courseUnit = Attendance::where('course_unit_id', $validatedAttendances[0]['course_unit_id'])
+            $attendance = Attendance::where('course_unit_id', $validatedAttendances[0]['course_unit_id'])
                 ->whereDate('date', $today)
                 ->exists();
 
-            if ($courseUnit) {
+            if ($attendance) {
                 return response()->json([
                     'message' => 'Attendance was already created for today.'
+                ], 400);
+            }
+
+            // Check if schedule is valid
+            $courseUnit = CourseUnit::findOrFail($validatedAttendances[0]['course_unit_id']);
+
+            $isValidSchedule = $courseUnit->schedules()
+                ->where('course_id', $validatedAttendances[0]['course_id'])
+                ->where('start_datetime', '<=', $today)
+                ->where('end_datetime', '>=', $today)
+                ->exists();
+
+            if (!$isValidSchedule) {
+                return response()->json([
+                    'message' => 'Schedule for course unit is not valid.'
                 ], 400);
             }
 

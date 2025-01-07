@@ -7,7 +7,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useUpdateAttendance } from "@/hooks/mutations/attendances/useUpdateAttendance";
-import { StudentWithCourseUnit } from "@/lib/types";
+import { StudentWithCourseAndUnit } from "@/lib/types";
 import {
   AttendanceEditFormSchema,
   TAttendanceEditFormSchema,
@@ -26,7 +26,7 @@ import {
 
 type AttendanceEditFormProps = {
   onFormSubmit: () => void;
-  student: StudentWithCourseUnit;
+  student: StudentWithCourseAndUnit;
 };
 
 export default function AttendanceEditForm({
