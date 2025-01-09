@@ -32,7 +32,7 @@ export default function StudentRegisterTable<TData, TValue>({
   data,
 }: StudentRegisterTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({});
-  const { courseUnitSlug } = useParams();
+  const { courseSlug, courseUnitSlug } = useParams();
 
   const table = useReactTable({
     data,
@@ -45,7 +45,7 @@ export default function StudentRegisterTable<TData, TValue>({
     },
   });
 
-  if (!courseUnitSlug) return null;
+  if (!courseSlug || !courseUnitSlug) return null;
 
   // Start lesson
   const attendanceStart = table.getCoreRowModel().rows.map((row) => ({
@@ -57,6 +57,7 @@ export default function StudentRegisterTable<TData, TValue>({
 
   // End lesson
   const attendanceEnd = {
+    course_slug: courseSlug,
     course_unit_slug: courseUnitSlug,
     end_time: format(new Date(), "HH:mm"),
   };

@@ -20,6 +20,7 @@ type MainAlertDialogProps<T> = {
   children: React.ReactNode;
   attendanceStart?: T;
   attendanceEnd?: {
+    course_slug: string;
     course_unit_slug: string;
     end_time: string;
   };

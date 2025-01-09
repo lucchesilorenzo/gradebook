@@ -6,6 +6,7 @@ use App\Http\Requests\CreateAttendancesRequest;
 use App\Http\Requests\UpdateAttendanceEndTimeRequest;
 use App\Http\Requests\UpdateAttendanceRequest;
 use App\Models\Attendance;
+use App\Models\Course;
 use App\Models\CourseUnit;
 use App\Models\Student;
 use Carbon\Carbon;
@@ -87,20 +88,25 @@ class AttendanceController extends Controller
      */
     public function updateAttendanceEndTime(
         UpdateAttendanceEndTimeRequest $request,
+        string $courseSlug,
         string $courseUnitSlug
     ): JsonResponse {
         // Validation
         $validatedData = $request->validated();
 
         try {
-            // Get course unit
-            $courseUnit = CourseUnit::where('slug', $courseUnitSlug)->firstOrFail();
+            // Get course
+            $course = Course::where('slug', $courseSlug)->firstOrFail();
 
-            // Get today's date (YYYY-mm-dd)
-            $today = Carbon::now()->toDateString();
+            // Get course unit
+            $courseUnit = $course->units()->where('slug', $courseUnitSlug)->firstOrFail();
+
+            // Get today's date
+            $today = Carbon::now();
 
             // Check if attendances exist
             $attendances = Attendance::where('course_unit_id', $courseUnit->id)
+                ->where('course_id', $course->id)
                 ->whereDate('date', $today)
                 ->get();
 
