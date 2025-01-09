@@ -44,15 +44,15 @@ class AttendanceController extends Controller
             // Check if schedule is valid
             $courseUnit = CourseUnit::findOrFail($validatedAttendances[0]['course_unit_id']);
 
-            $isValidSchedule = $courseUnit->schedules()
+            $schedule = $courseUnit->schedules()
                 ->where('course_id', $validatedAttendances[0]['course_id'])
                 ->where('start_datetime', '<=', $today)
                 ->where('end_datetime', '>=', $today)
                 ->exists();
 
-            if (!$isValidSchedule) {
+            if (!$schedule) {
                 return response()->json([
-                    'message' => 'Schedule for course unit is not valid.'
+                    'message' => 'Schedule for course unit is not valid.',
                 ], 400);
             }
 
@@ -83,6 +83,7 @@ class AttendanceController extends Controller
      * Update attendance end time.
      *
      * @param UpdateAttendanceEndTimeRequest $request
+     * @param string $courseSlug
      * @param string $courseUnitSlug
      * @return JsonResponse
      */
@@ -91,6 +92,8 @@ class AttendanceController extends Controller
         string $courseSlug,
         string $courseUnitSlug
     ): JsonResponse {
+        // IDEA: Check end time within a period of time (1-2 hours) if forgotten
+
         // Validation
         $validatedData = $request->validated();
 
@@ -150,23 +153,26 @@ class AttendanceController extends Controller
      *
      * @param UpdateAttendanceRequest $request
      * @param Student $student
+     * @param Course $course
      * @param CourseUnit $courseUnit
      * @return JsonResponse
      */
     public function updateAttendance(
         UpdateAttendanceRequest $request,
-        Student $student,
-        CourseUnit $courseUnit
+        Course $course,
+        CourseUnit $courseUnit,
+        Student $student
     ): JsonResponse {
         // Validation
         $validatedData = $request->validated();
 
         try {
-            // Get today's date (YYYY-mm-dd)
-            $today = Carbon::now()->toDateString();
+            // Get today's date
+            $today = Carbon::now();
 
             // Check if attendance exists
             $attendance = Attendance::where('student_id', $student->id)
+                ->where('course_id', $course->id)
                 ->where('course_unit_id', $courseUnit->id)
                 ->whereDate('date', $today)
                 ->first();
@@ -177,9 +183,21 @@ class AttendanceController extends Controller
                 ], 404);
             }
 
+            // Check if schedule is valid
+            $schedule = $courseUnit->schedules()
+                ->where('course_id', $course->id)
+                ->whereDate('start_datetime', $today)
+                ->where('end_datetime', '>', $today)
+                ->exists();
+
+            if (!$schedule) {
+                return response()->json([
+                    'message' => 'Schedule for course unit is not valid.'
+                ], 400);
+            }
+
             // -- Early departure -- 
             if ($validatedData['attendance_type'] === 'early_departure') {
-                // TODO: Complete checks when course schedules are implemented
                 if ($attendance->end_time !== null || $attendance->status === 'ABSENT') {
                     return response()->json([
                         'message' => 'Student is already marked as absent or lesson has already ended.'

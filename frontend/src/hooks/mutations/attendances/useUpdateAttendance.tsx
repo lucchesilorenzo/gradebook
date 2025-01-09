@@ -6,6 +6,7 @@ import { toast } from "sonner";
 type useUpdateAttendanceProps = {
   data: TAttendanceEditFormSchema;
   student_id: string;
+  course_id: string;
   course_unit_id: string;
 };
 
@@ -16,9 +17,13 @@ export function useUpdateAttendance() {
     mutationFn: ({
       data,
       student_id,
+      course_id,
       course_unit_id,
     }: useUpdateAttendanceProps) =>
-      updateData(`/attendances/${student_id}/${course_unit_id}`, data),
+      updateData(
+        `/attendances/${course_id}/${course_unit_id}/${student_id}`,
+        data,
+      ),
     onSuccess: (response) => {
       queryClient.invalidateQueries({ queryKey: ["attendances"] });
       toast.success(response.message);

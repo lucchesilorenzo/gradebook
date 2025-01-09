@@ -46,6 +46,7 @@ export default function AttendanceEditForm({
     await updateAttendance({
       data,
       student_id: student.id,
+      course_id: student.course_id,
       course_unit_id: student.course_unit_id,
     });
 
