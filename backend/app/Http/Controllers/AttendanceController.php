@@ -14,6 +14,35 @@ use Illuminate\Http\JsonResponse;
 
 class AttendanceController extends Controller
 {
+    public function getCourseUnitAttendances(
+        string $courseSlug,
+        string $courseUnitSlug
+    ): JsonResponse {
+        try {
+            // Get course
+            $course = Course::where('slug', $courseSlug)->firstOrFail();
+
+            // Get course unit
+            $courseUnit = $course->units()->where('slug', $courseUnitSlug)->firstOrFail();
+
+            // Get today's date
+            $today = Carbon::now();
+
+            // Get attendances 
+            // TODO: When a lesson ends, the status column must be updated to N/A
+            $attendances = Attendance::where('course_unit_id', $courseUnit->id)
+                ->where('course_id', $course->id)
+                ->whereDate('date', $today)
+                ->where('start_time', '<=', $today)
+                ->get();
+
+            return response()->json($attendances);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not get course unit attendances.',
+            ], 500);
+        }
+    }
     /**
      * Create attendances.
      *

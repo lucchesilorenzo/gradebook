@@ -1,11 +1,3 @@
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-
 import MainAlertDialog from "@/components/common/MainAlertDialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,23 +8,32 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 import { format } from "date-fns";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import TablePagination from "../ui/TablePagination";
 
 type StudentRegisterTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  courseSlug: string;
+  courseUnitSlug: string;
 };
 
 export default function StudentRegisterTable<TData, TValue>({
   columns,
   data,
+  courseSlug,
+  courseUnitSlug,
 }: StudentRegisterTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({});
-  const { courseSlug, courseUnitSlug } = useParams();
 
   const table = useReactTable({
     data,
@@ -45,11 +46,9 @@ export default function StudentRegisterTable<TData, TValue>({
     },
   });
 
-  if (!courseSlug || !courseUnitSlug) return null;
-
   // Start lesson
   const attendanceStart = table.getCoreRowModel().rows.map((row) => ({
-    ...row.original, // ID only
+    ...row.original, // Taking ID only
     status: row.getIsSelected(),
     date: format(new Date(), "yyyy-MM-dd"),
     start_time: format(new Date(), "HH:mm"),

@@ -1,9 +1,13 @@
 import { Spinner } from "../ui/spinner";
 
-export default function Loading() {
+type LoadingProps = {
+  size?: "sm" | "md" | "lg";
+};
+
+export default function Loading({ size = "lg" }: LoadingProps) {
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <Spinner size="lg" className="bg-black dark:bg-white" />
+      <Spinner size={size} className="bg-black dark:bg-white" />
     </div>
   );
 }

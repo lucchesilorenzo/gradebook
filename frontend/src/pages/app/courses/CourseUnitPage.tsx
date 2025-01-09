@@ -1,15 +1,20 @@
 import H1 from "@/components/common/H1";
 import Loading from "@/components/common/Loading";
 import CourseUnitTabs from "@/components/courses/CourseUnitTabs";
+import { useAttendances } from "@/hooks/queries/useAttendances";
 import { useCourseBySlug } from "@/hooks/queries/useCourseBySlug";
 import { Navigate, useParams } from "react-router-dom";
 
 export default function CourseUnitPage() {
   const { courseSlug, courseUnitSlug } = useParams();
-  const { data: course, isLoading } = useCourseBySlug(courseSlug);
+  const { data: course, isLoading: isCourseLoading } =
+    useCourseBySlug(courseSlug);
+  const { data: attendances, isLoading: isAttendancesLoading } = useAttendances(
+    { courseSlug, courseUnitSlug },
+  );
 
-  if (isLoading) return <Loading />;
-  if (!course || !courseSlug || !courseUnitSlug) {
+  if (isCourseLoading || isAttendancesLoading) return <Loading />;
+  if (!course || !attendances || !courseSlug || !courseUnitSlug) {
     return <Navigate to="*" state={{ content: "course" }} />;
   }
 
@@ -20,7 +25,12 @@ export default function CourseUnitPage() {
     <main className="space-y-2">
       <H1>{courseUnit.name}</H1>
       <h2>{courseUnit.description}</h2>
-      <CourseUnitTabs course={course} courseUnit={courseUnit} />
+
+      <CourseUnitTabs
+        course={course}
+        courseUnit={courseUnit}
+        attendances={attendances}
+      />
     </main>
   );
 }

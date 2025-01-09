@@ -6,10 +6,7 @@ import Header from "../common/Header";
 import Loading from "../common/Loading";
 
 export default function AppLayout() {
-  const [{ data: teacherCourses = [], isLoading: isTeacherCoursesLoading }] =
-    useSharedData();
-
-  const isLoading = isTeacherCoursesLoading;
+  const [{ data: teacherCourses = [], isLoading }] = useSharedData();
 
   return (
     <AuthGuard>

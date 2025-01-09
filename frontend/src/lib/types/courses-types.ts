@@ -59,7 +59,8 @@ export type CourseUnit = TeacherCourse["units"][number];
 
 export type Student = TeacherCourse["students"][number];
 
-export type StudentWithCourseAndUnit = Student & {
+export type StudentRegisterData = Student & {
   course_id: TeacherCourse["id"];
   course_unit_id: CourseUnit["id"];
+  status?: string;
 };

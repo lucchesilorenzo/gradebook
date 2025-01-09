@@ -45,6 +45,7 @@ class CourseController extends Controller
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not get teacher course.',
+                'error' => $e->getMessage(),
             ], 500);
         }
     }

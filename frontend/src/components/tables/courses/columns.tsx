@@ -1,10 +1,10 @@
 import { Checkbox } from "@/components/ui/checkbox";
-import { StudentWithCourseAndUnit } from "@/lib/types";
+import { StudentRegisterData } from "@/lib/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { Clock, IdCard, Mail } from "lucide-react";
+import { Annoyed, Clock, IdCard, Mail, Smile } from "lucide-react";
 import StudentActions from "./StudentActions";
 
-export const columns: ColumnDef<StudentWithCourseAndUnit>[] = [
+export const columns: ColumnDef<StudentRegisterData>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -26,8 +26,8 @@ export const columns: ColumnDef<StudentWithCourseAndUnit>[] = [
     ),
   },
   {
-    accessorKey: "fullName",
-    id: "fullName",
+    accessorKey: "full_name",
+    id: "full_name",
     header: "Name",
     cell: ({ row }) => {
       const firstName = row.original.first_name;
@@ -39,8 +39,8 @@ export const columns: ColumnDef<StudentWithCourseAndUnit>[] = [
     },
   },
   {
-    accessorKey: "taxId",
-    id: "taxId",
+    accessorKey: "tax_id",
+    id: "tax_id",
     header: "Tax ID",
     cell: ({ row }) => {
       const taxId = row.original.tax_id;
@@ -58,7 +58,7 @@ export const columns: ColumnDef<StudentWithCourseAndUnit>[] = [
     id: "email",
     header: "Email",
     cell: ({ row }) => {
-      const email: StudentWithCourseAndUnit["email"] = row.getValue("email");
+      const email: StudentRegisterData["email"] = row.getValue("email");
 
       return (
         <div className="flex items-center gap-2">
@@ -69,11 +69,32 @@ export const columns: ColumnDef<StudentWithCourseAndUnit>[] = [
     },
   },
   {
+    accessorKey: "status",
+    id: "status",
+    header: "Status",
+    cell: ({ row }) => {
+      const status: StudentRegisterData["status"] = row.getValue("status");
+      const statusEmoji =
+        status === "PRESENT" ? (
+          <Smile className="h-4 w-4 text-muted-foreground" />
+        ) : (
+          <Annoyed className="h-4 w-4 text-muted-foreground" />
+        );
+
+      return (
+        <div className="flex items-center gap-2">
+          {(status && statusEmoji) ?? null}
+          <span className="font-medium">{status ?? "N/A"}</span>
+        </div>
+      );
+    },
+  },
+  {
     accessorKey: "attendance_rate",
     id: "attendance_rate",
     header: "Attendance",
     cell: ({ row }) => {
-      const attendanceRate: StudentWithCourseAndUnit["attendance_rate"] =
+      const attendanceRate: StudentRegisterData["attendance_rate"] =
         row.getValue("attendance_rate");
 
       return (
