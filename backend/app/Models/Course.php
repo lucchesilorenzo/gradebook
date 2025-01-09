@@ -71,6 +71,16 @@ class Course extends Model
     }
 
     /**
+     * Get all the attendances for the course.
+     *
+     * @return HasMany
+     */
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
+    /**
      * Get all the course unit schedules for the course.
      *
      * @return HasMany

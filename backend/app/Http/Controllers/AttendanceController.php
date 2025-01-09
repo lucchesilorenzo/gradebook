@@ -30,6 +30,7 @@ class AttendanceController extends Controller
 
             // Check if attendance was already created
             $attendance = Attendance::where('course_unit_id', $validatedAttendances[0]['course_unit_id'])
+                ->where('course_id', $validatedAttendances[0]['course_id'])
                 ->whereDate('date', $today)
                 ->exists();
 
@@ -58,6 +59,7 @@ class AttendanceController extends Controller
             foreach ($validatedAttendances as $attendance) {
                 Attendance::create([
                     'student_id' => $attendance['id'],
+                    'course_id' => $attendance['course_id'],
                     'course_unit_id' => $attendance['course_unit_id'],
                     'date' => $attendance['date'],
                     'start_time' => $attendance['start_time'],

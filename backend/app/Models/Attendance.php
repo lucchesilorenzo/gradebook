@@ -18,6 +18,7 @@ class Attendance extends Model
      */
     protected $fillable = [
         'student_id',
+        'course_id',
         'course_unit_id',
         'date',
         'start_time',
@@ -53,6 +54,16 @@ class Attendance extends Model
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
+    }
+
+    /**
+     * Get the course that owns the attendance.
+     *
+     * @return BelongsTo
+     */
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
     }
 
     /**

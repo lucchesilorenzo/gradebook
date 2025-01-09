@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Course;
 use App\Models\CourseUnit;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,6 +21,7 @@ class AttendanceFactory extends Factory
     {
         return [
             'student_id' => Student::inRandomOrder()->first()->id,
+            'course_id' => Course::inRandomOrder()->first()->id,
             'course_unit_id' => CourseUnit::inRandomOrder()->first()->id,
             'date' => fake()->date(),
             'start_time' => fake()->time(),
