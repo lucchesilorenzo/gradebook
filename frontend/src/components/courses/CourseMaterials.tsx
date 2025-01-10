@@ -9,8 +9,14 @@ import { Plus } from "lucide-react";
 import FormDialog from "../common/FormDialog";
 import { Button } from "../ui/button";
 import CourseMaterial from "./CourseMaterial";
+import { useCourseMaterials } from "@/hooks/queries/useCourseMaterials";
+import Loading from "../common/Loading";
 
 export default function CourseMaterials() {
+  const { data: courseMaterials = [], isLoading } = useCourseMaterials();
+
+  if (isLoading) return <Loading />;
+
   return (
     <Card className="max-w-6xl">
       <CardHeader>
@@ -30,7 +36,9 @@ export default function CourseMaterials() {
       </CardHeader>
       <CardContent>
         <ul className="space-y-2">
-          <CourseMaterial />
+          {courseMaterials.map((material) => (
+            <CourseMaterial key={material.id} material={material} />
+          ))}
         </ul>
       </CardContent>
     </Card>

@@ -20,7 +20,7 @@ class CourseUnitMaterialFactory extends Factory
         return [
             'course_unit_id' => CourseUnit::inRandomOrder()->first()->id,
             'title' => fake()->sentence(),
-            'description' => fake()->paragraph(),
+            'description' => fake()->sentence(),
             'type' => fake()->randomElement(['PDF', 'VIDEO', 'LINK']),
             'file' => null,
             'url' => fake()->url(),

@@ -6,6 +6,7 @@ import {
   LinkIcon,
   Video,
 } from "lucide-react";
+import React from "react";
 
 export const routes = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -14,7 +15,7 @@ export const routes = [
 ];
 
 export const courseMaterialIcons = {
-  PDF: FileText,
-  VIDEO: Video,
-  LINK: LinkIcon,
+  PDF: React.createElement(FileText),
+  VIDEO: React.createElement(Video),
+  LINK: React.createElement(LinkIcon),
 };

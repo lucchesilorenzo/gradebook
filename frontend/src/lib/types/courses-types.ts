@@ -71,3 +71,14 @@ export type StudentRegisterData = Student & {
   course_unit_id: CourseUnit["id"];
   status?: string;
 };
+
+export type CourseMaterial = {
+  id: string;
+  title: string;
+  description: string | null;
+  type: "PDF" | "VIDEO" | "LINK";
+  file: string | null;
+  url: string | null;
+  created_at: string;
+  updated_at: string;
+};
