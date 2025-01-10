@@ -38,7 +38,12 @@ export default function StudentActions({ student }: StudentActionsProps) {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <FormDialog open={isOpen} setOpen={setIsOpen} student={student} />
+      <FormDialog
+        actionType="attendance"
+        open={isOpen}
+        setOpen={setIsOpen}
+        student={student}
+      />
     </>
   );
 }

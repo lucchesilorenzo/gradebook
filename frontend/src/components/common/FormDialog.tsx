@@ -4,37 +4,70 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { StudentRegisterData } from "@/lib/types";
+import { useState } from "react";
 import AttendanceEditForm from "../attendances/AttendanceEditForm";
+import CourseMaterialsForm from "../courses/CourseMaterialsForm";
 
 type FormDialogProps = {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  student: StudentRegisterData;
+  children?: React.ReactNode;
+  actionType: "attendance" | "course-materials";
+  open?: boolean;
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  student?: StudentRegisterData;
 };
 
 export default function FormDialog({
+  children,
+  actionType,
   open,
   setOpen,
   student,
 }: FormDialogProps) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = open ?? internalOpen;
+  const setIsOpen = setOpen ?? setInternalOpen;
+
   function handleFormSubmit() {
-    setOpen(!open);
+    setIsOpen(!open);
+  }
+
+  if (actionType === "attendance" && student) {
+    return (
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              {student.first_name} {student.last_name}
+            </DialogTitle>
+            <DialogDescription>
+              Attendance: {student.attendance_rate}%
+            </DialogDescription>
+          </DialogHeader>
+          <AttendanceEditForm
+            onFormSubmit={handleFormSubmit}
+            student={student}
+          />
+        </DialogContent>
+      </Dialog>
+    );
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>
-            {student.first_name} {student.last_name}
-          </DialogTitle>
+          <DialogTitle>Add New Material</DialogTitle>
           <DialogDescription>
-            Attendance: {student.attendance_rate}%
+            Add a new material to this course unit.
           </DialogDescription>
         </DialogHeader>
-        <AttendanceEditForm onFormSubmit={handleFormSubmit} student={student} />
+        {actionType === "course-materials" && (
+          <CourseMaterialsForm onFormSubmit={handleFormSubmit} />
+        )}
       </DialogContent>
     </Dialog>
   );

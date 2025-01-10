@@ -5,6 +5,7 @@ import { CourseUnit, TeacherCourse } from "@/lib/types";
 import { useEffect } from "react";
 import StudentRegisterTable from "../tables/courses/StudentRegisterTable";
 import { Attendance } from "@/lib/types/attendances-types";
+import CourseMaterials from "./CourseMaterials";
 
 type CourseUnitTabsProps = {
   course: TeacherCourse;
@@ -48,7 +49,7 @@ export default function CourseUnitTabs({
         />
       </TabsContent>
       <TabsContent value="course-materials" className="my-4">
-        Course Materials
+        <CourseMaterials />
       </TabsContent>
     </Tabs>
   );
