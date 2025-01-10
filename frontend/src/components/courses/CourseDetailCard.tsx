@@ -13,8 +13,8 @@ type CourseDetailCardProps = {
 };
 
 export default function CourseDetailCard({ course }: CourseDetailCardProps) {
-  const start = course.start_date.toLocaleDateString("it-IT");
-  const end = course.end_date.toLocaleDateString("it-IT");
+  const start = new Date(course.start_date);
+  const end = new Date(course.end_date);
 
   return (
     <Card className="max-w-[800px]">
@@ -46,7 +46,8 @@ export default function CourseDetailCard({ course }: CourseDetailCardProps) {
             <Calendar className="h-5 w-5 text-muted-foreground" />
             <span className="font-semibold">Course duration:</span>{" "}
             <span>
-              {start} - {end}
+              {start.toLocaleDateString("it-IT")} -{" "}
+              {end.toLocaleDateString("it-IT")}
             </span>
           </p>
         </div>

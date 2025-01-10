@@ -1,8 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import env from "./env";
-import { createAxiosDateTransformer } from "axios-date-transformer";
 
-const api = createAxiosDateTransformer({
+const api = axios.create({
   baseURL: `${env.VITE_BASE_URL}/api`,
 });
 

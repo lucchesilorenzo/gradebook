@@ -3,10 +3,10 @@ export type Attendance = {
   student_id: string;
   course_id: string;
   course_unit_id: string;
-  date: Date;
-  start_time: Date;
-  end_time: Date | null;
+  date: string;
+  start_time: string;
+  end_time: string | null;
   status: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
 };

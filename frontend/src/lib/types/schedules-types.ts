@@ -10,8 +10,8 @@ export type Schedule = {
     name: string;
   };
   course_unit_id: string;
-  start_datetime: Date;
-  end_datetime: Date;
-  created_at: Date;
-  updated_at: Date;
+  start_datetime: string;
+  end_datetime: string;
+  created_at: string;
+  updated_at: string;
 };

@@ -19,16 +19,13 @@ type CourseCardProps = {
 };
 
 export default function CourseCard({ course }: CourseCardProps) {
-  const start = course.start_date.toLocaleDateString("it-IT");
-  const end = course.end_date.toLocaleDateString("it-IT");
+  const start = new Date(course.start_date);
+  const end = new Date(course.end_date);
 
   const currentStudents = course.students.length;
   const totalCourseUnits = course.units.length;
 
-  const courseProgress = calculateCourseProgress(
-    course.start_date,
-    course.end_date,
-  );
+  const courseProgress = calculateCourseProgress(start, end);
   const formattedProgress =
     courseProgress > 0 && courseProgress < 100
       ? courseProgress.toFixed(2)
@@ -50,7 +47,8 @@ export default function CourseCard({ course }: CourseCardProps) {
           <div className="flex items-center gap-2">
             <Calendar className="h-4 w-4 opacity-70" />
             <span className="text-sm text-muted-foreground">
-              {start} - {end}
+              {start.toLocaleDateString("it-IT")} -{" "}
+              {end.toLocaleDateString("it-IT")}
             </span>
           </div>
 

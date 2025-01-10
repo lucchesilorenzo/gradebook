@@ -6,11 +6,11 @@ export type TeacherCourse = {
   course_code: string;
   description: string;
   max_students: number;
-  start_date: Date;
-  end_date: Date;
+  start_date: string;
+  end_date: string;
   type: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
   students: {
     id: string;
     course_id: string;
@@ -21,8 +21,8 @@ export type TeacherCourse = {
     phone_number: string;
     gender: string;
     attendance_rate: number;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
   }[];
   tutor: {
     id: string;
@@ -32,8 +32,8 @@ export type TeacherCourse = {
     tax_id: string;
     phone_number: string;
     gender: string;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
   };
   units: {
     id: string;
@@ -42,8 +42,8 @@ export type TeacherCourse = {
     description: string;
     theory_hours: number;
     lab_hours: number;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
     pivot: {
       course_id: string;
       course_unit_id: string;
