@@ -33,6 +33,7 @@ export default function CourseMaterialsForm({
     resolver: zodResolver(courseMaterialsFormSchema),
     defaultValues: {
       title: "",
+      description: "",
       type: "",
       file: "",
       url: "",
@@ -63,6 +64,20 @@ export default function CourseMaterialsForm({
 
         <FormField
           control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter material description" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
           name="type"
           render={({ field }) => (
             <FormItem>
@@ -74,9 +89,9 @@ export default function CourseMaterialsForm({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="pdf">PDF</SelectItem>
-                  <SelectItem value="video">Video</SelectItem>
-                  <SelectItem value="link">Link</SelectItem>
+                  <SelectItem value="PDF">PDF</SelectItem>
+                  <SelectItem value="VIDEO">Video</SelectItem>
+                  <SelectItem value="LINK">Link</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

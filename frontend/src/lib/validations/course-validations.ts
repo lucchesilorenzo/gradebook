@@ -2,7 +2,8 @@ import { z } from "zod";
 
 export const courseMaterialsFormSchema = z
   .object({
-    title: z.string().min(1, "Title is required."),
+    title: z.string().trim().min(1, "Title is required."),
+    description: z.string().trim(),
     type: z.string().min(1, "Type is required."),
     file: z.string(),
     url: z.string(),

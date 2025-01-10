@@ -52,4 +52,14 @@ class CourseUnit extends Model
     {
         return $this->hasMany(CourseUnitSchedule::class);
     }
+
+    /**
+     * Get all the course unit materials for the course.
+     *
+     * @return HasMany
+     */
+    public function materials(): HasMany
+    {
+        return $this->hasMany(CourseUnitMaterial::class);
+    }
 }

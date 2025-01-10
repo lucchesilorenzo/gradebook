@@ -14,7 +14,7 @@ export const routes = [
 ];
 
 export const courseMaterialIcons = {
-  pdf: FileText,
-  video: Video,
-  link: LinkIcon,
+  PDF: FileText,
+  VIDEO: Video,
+  LINK: LinkIcon,
 };
