@@ -136,6 +136,21 @@ class AttendanceController extends Controller
             // Get today's date
             $today = Carbon::now();
 
+            // Check if schedule is valid
+            $schedule = $courseUnit->schedules()
+                ->where('course_id', $course->id)
+                ->where('start_datetime', '<=', $today)
+                ->where('end_datetime', '>=', $today)
+                ->first();
+
+            if ($schedule) {
+                $time = Carbon::parse($schedule->end_datetime)->format('H:i');
+
+                return response()->json([
+                    'message' => 'You can end the lesson after ' . $time . '.',
+                ], 400);
+            }
+
             // Check if attendances exist
             $attendances = Attendance::where('course_unit_id', $courseUnit->id)
                 ->where('course_id', $course->id)

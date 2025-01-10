@@ -27,6 +27,7 @@ export default function CourseUnitsList({ course }: CourseUnitsListProps) {
             <CourseUnit
               key={unit.id}
               courseUnit={unit}
+              courseId={course.id}
               courseSlug={course.slug}
             />
           ))}

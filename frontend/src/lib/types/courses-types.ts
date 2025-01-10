@@ -40,14 +40,21 @@ export type TeacherCourse = {
     name: string;
     slug: string;
     description: string;
-    theory_hours: number;
-    lab_hours: number;
     created_at: string;
     updated_at: string;
     pivot: {
       course_id: string;
       course_unit_id: string;
     };
+    schedules: {
+      id: string;
+      course_id: string;
+      course_unit_id: string;
+      start_datetime: string;
+      end_datetime: string;
+      created_at: string;
+      updated_at: string;
+    }[];
   }[];
   pivot: {
     user_id: string;

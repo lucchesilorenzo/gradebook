@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->text('description');
-            $table->integer('theory_hours');
-            $table->integer('lab_hours');
             $table->timestamps();
         });
     }

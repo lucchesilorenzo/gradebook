@@ -21,8 +21,6 @@ class CourseUnit extends Model
         'name',
         'slug',
         'description',
-        'theory_hours',
-        'lab_hours',
     ];
 
     /**

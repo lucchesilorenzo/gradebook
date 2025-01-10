@@ -16,7 +16,7 @@ class CourseController extends Controller
     {
         try {
             $teacherCourses = auth()->user()->courses()
-                ->with(['students', 'units', 'tutor'])
+                ->with(['students', 'units.schedules', 'tutor'])
                 ->get();
 
             return response()->json($teacherCourses);
@@ -38,7 +38,7 @@ class CourseController extends Controller
     {
         try {
             $teacherCourse = Course::where('slug', $courseSlug)
-                ->with(['students', 'units', 'tutor'])
+                ->with(['students', 'units.schedules', 'tutor'])
                 ->firstOrFail();
 
             return response()->json($teacherCourse);

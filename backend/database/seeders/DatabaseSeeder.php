@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         // Create 5 CourseUnits with custom configuration and attach them to the created courses (via pivot table)
         CourseUnit::factory(5)->configure()->hasAttached($courses)->create();
 
-        // Create 50 CourseUnitSchedules
-        CourseUnitSchedule::factory(50)->create();
+        // Create 200 CourseUnitSchedules
+        CourseUnitSchedule::factory(200)->create();
     }
 }
