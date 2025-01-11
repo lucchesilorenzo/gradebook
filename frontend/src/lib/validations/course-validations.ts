@@ -16,10 +16,13 @@ export const courseMaterialsFormSchema = z
     message: "File is required.",
     path: ["file"],
   })
-  .refine((data) => data.type !== "VIDEO" && data.type !== "LINK", {
-    message: "URL is required.",
-    path: ["url"],
-  });
+  .refine(
+    (data) => (data.type !== "VIDEO" && data.type !== "LINK") || data.url,
+    {
+      message: "URL is required.",
+      path: ["url"],
+    },
+  );
 
 export type TCourseMaterialsFormSchema = z.infer<
   typeof courseMaterialsFormSchema

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateMaterialRequest;
-use App\Models\CourseUnit;
+use App\Models\Course;
 use App\Models\CourseUnitMaterial;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Storage;
 
 class CourseUnitMaterialController extends Controller
 {
@@ -15,10 +14,19 @@ class CourseUnitMaterialController extends Controller
      *
      * @return JsonResponse
      */
-    public function getMaterials(): JsonResponse
+    public function getMaterials(string $courseSlug, string $courseUnitSlug): JsonResponse
     {
         try {
-            $courseMaterials = CourseUnitMaterial::all();
+            $course = Course::where('slug', $courseSlug)->firstOrFail();
+
+            $courseUnit = $course->units()
+                ->where('slug', $courseUnitSlug)
+                ->firstOrFail();
+
+            $courseMaterials = CourseUnitMaterial::where('course_id', $course->id)
+                ->where('course_unit_id', $courseUnit->id)
+                ->get();
+
             return response()->json($courseMaterials);
         } catch (\Throwable $e) {
             return response()->json([
@@ -35,17 +43,22 @@ class CourseUnitMaterialController extends Controller
      */
     public function createMaterial(
         CreateMaterialRequest $request,
+        string $courseSlug,
         string $courseUnitSlug
     ): JsonResponse {
         // Validation
         $validatedData = $request->validated();
 
         try {
-            // Get course unit
-            $courseUnitId = CourseUnit::where('slug', $courseUnitSlug)->firstOrFail()->id;
+            // Get course
+            $course = Course::where('slug', $courseSlug)->firstOrFail();
+
+            // Get course unit ID
+            $courseUnitId = $course->units()->where('slug', $courseUnitSlug)->firstOrFail()->id;
 
             // Create course material
             $courseMaterial = CourseUnitMaterial::create([
+                'course_id' => $course->id,
                 'course_unit_id' => $courseUnitId,
                 'title' => $validatedData['title'],
                 'description' => $validatedData['description'],

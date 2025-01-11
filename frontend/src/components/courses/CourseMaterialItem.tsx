@@ -15,7 +15,7 @@ type CourseMaterialProps = {
   material: CourseMaterial;
 };
 
-export default function CourseMaterial({ material }: CourseMaterialProps) {
+export default function CourseMaterialItem({ material }: CourseMaterialProps) {
   let link;
 
   switch (material.type) {

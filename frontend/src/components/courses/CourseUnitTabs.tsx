@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import StudentRegisterTable from "../tables/courses/StudentRegisterTable";
 import { Attendance } from "@/lib/types/attendances-types";
 import CourseMaterials from "./CourseMaterials";
+import { useCourseMaterials } from "@/hooks/queries/useCourseMaterials";
+import Loading from "../common/Loading";
 
 type CourseUnitTabsProps = {
   course: TeacherCourse;
@@ -21,6 +23,11 @@ export default function CourseUnitTabs({
   useEffect(() => {
     document.title = `${courseUnit?.name} | ${env.VITE_APP_NAME}`;
   }, [courseUnit?.name]);
+
+  const { data: courseMaterials = [], isLoading } = useCourseMaterials({
+    courseSlug: course.slug,
+    courseUnitSlug: courseUnit.slug,
+  });
 
   const studentRegisterData = course.students.map((student) => ({
     ...student,
@@ -49,7 +56,8 @@ export default function CourseUnitTabs({
         />
       </TabsContent>
       <TabsContent value="course-materials" className="my-4">
-        <CourseMaterials />
+        {isLoading && <Loading />}
+        <CourseMaterials courseMaterials={courseMaterials} />
       </TabsContent>
     </Tabs>
   );

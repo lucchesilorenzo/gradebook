@@ -15,13 +15,24 @@ class CourseUnitMaterial extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
+        'course_id',
         'course_unit_id',
         'title',
         'description',
-        'url',
-        'file',
         'type',
+        'file',
+        'url',
     ];
+
+    /**
+     * Get the course that owns the course unit material.
+     *
+     * @return BelongsTo
+     */
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
+    }
 
     /**
      * Get the course unit that owns the course unit material.

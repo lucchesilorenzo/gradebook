@@ -4,6 +4,7 @@ import { toast } from "sonner";
 
 type CourseMaterialWithSlug = {
   data: FormData;
+  courseSlug?: string;
   courseUnitSlug?: string;
 };
 
@@ -11,8 +12,12 @@ export function useCreateCourseMaterial() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ data, courseUnitSlug }: CourseMaterialWithSlug) =>
-      postData(`/materials/${courseUnitSlug}`, data),
+    mutationFn: ({
+      data,
+      courseSlug,
+      courseUnitSlug,
+    }: CourseMaterialWithSlug) =>
+      postData(`/materials/${courseSlug}/${courseUnitSlug}`, data),
     onSuccess: (response) => {
       queryClient.invalidateQueries({ queryKey: ["course-materials"] });
       toast.success(response.message);

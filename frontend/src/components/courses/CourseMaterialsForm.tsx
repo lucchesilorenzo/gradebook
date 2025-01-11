@@ -31,7 +31,7 @@ type CourseMaterialsFormProps = {
 export default function CourseMaterialsForm({
   onFormSubmit,
 }: CourseMaterialsFormProps) {
-  const { courseUnitSlug } = useParams();
+  const { courseSlug, courseUnitSlug } = useParams();
   const { mutateAsync: createCourseMaterial } = useCreateCourseMaterial();
   const form = useForm({
     resolver: zodResolver(courseMaterialsFormSchema),
@@ -54,7 +54,7 @@ export default function CourseMaterialsForm({
     if (data.file) formData.append("file", data.file);
     if (data.url) formData.append("url", data.url);
 
-    await createCourseMaterial({ data: formData, courseUnitSlug });
+    await createCourseMaterial({ data: formData, courseSlug, courseUnitSlug });
     onFormSubmit();
   }
 

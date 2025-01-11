@@ -18,6 +18,7 @@ class CourseUnitMaterialFactory extends Factory
     public function definition(): array
     {
         return [
+            'course_id' => Course::inRandomOrder()->first()->id,
             'course_unit_id' => CourseUnit::inRandomOrder()->first()->id,
             'title' => fake()->sentence(),
             'description' => fake()->sentence(),

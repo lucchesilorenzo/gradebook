@@ -8,15 +8,16 @@ import {
 import { Plus } from "lucide-react";
 import FormDialog from "../common/FormDialog";
 import { Button } from "../ui/button";
-import CourseMaterial from "./CourseMaterial";
-import { useCourseMaterials } from "@/hooks/queries/useCourseMaterials";
-import Loading from "../common/Loading";
+import { CourseMaterial } from "@/lib/types";
+import CourseMaterialItem from "./CourseMaterialItem";
 
-export default function CourseMaterials() {
-  const { data: courseMaterials = [], isLoading } = useCourseMaterials();
+type CourseMaterialsProps = {
+  courseMaterials: CourseMaterial[];
+};
 
-  if (isLoading) return <Loading />;
-
+export default function CourseMaterials({
+  courseMaterials,
+}: CourseMaterialsProps) {
   return (
     <Card className="max-w-6xl">
       <CardHeader>
@@ -40,7 +41,7 @@ export default function CourseMaterials() {
         ) : (
           <ul className="space-y-2">
             {courseMaterials.map((material) => (
-              <CourseMaterial key={material.id} material={material} />
+              <CourseMaterialItem key={material.id} material={material} />
             ))}
           </ul>
         )}
