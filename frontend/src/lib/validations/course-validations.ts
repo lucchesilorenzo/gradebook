@@ -24,6 +24,17 @@ export const courseMaterialsFormSchema = z
     },
   );
 
+export const courseMaterialsEditFormSchema = z.object({
+  title: z.string().trim().max(20, "Title is too long."),
+  description: z.string().trim().max(40, "Description is too long."),
+  file: z.instanceof(File).optional(),
+  url: z.string().trim(),
+});
+
+// Types
 export type TCourseMaterialsFormSchema = z.infer<
   typeof courseMaterialsFormSchema
+>;
+export type TCourseMaterialsEditFormSchema = z.infer<
+  typeof courseMaterialsEditFormSchema
 >;

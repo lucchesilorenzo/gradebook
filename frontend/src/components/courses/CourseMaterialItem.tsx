@@ -1,6 +1,6 @@
 import { courseMaterialIcons } from "@/lib/data";
 import { type CourseMaterial } from "@/lib/types";
-import { ExternalLink } from "lucide-react";
+import { Edit, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import {
@@ -10,41 +10,55 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import env from "@/lib/env";
+import FormDialog from "../common/FormDialog";
 
 type CourseMaterialProps = {
-  material: CourseMaterial;
+  courseMaterial: CourseMaterial;
 };
 
-export default function CourseMaterialItem({ material }: CourseMaterialProps) {
+export default function CourseMaterialItem({
+  courseMaterial,
+}: CourseMaterialProps) {
   let link;
 
-  switch (material.type) {
+  switch (courseMaterial.type) {
     case "PDF":
-      link = `${env.VITE_BASE_URL}/storage/${material.file}`;
+      link = `${env.VITE_BASE_URL}/storage/${courseMaterial.file}`;
       break;
     default:
-      link = material.url || "";
+      link = courseMaterial.url || "";
   }
 
   return (
     <li className="flex items-center justify-between rounded-md bg-secondary p-2">
       <div className="flex items-center gap-2">
-        {courseMaterialIcons[material.type]}
+        {courseMaterialIcons[courseMaterial.type]}
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger>{material.title}</TooltipTrigger>
+            <TooltipTrigger>{courseMaterial.title}</TooltipTrigger>
             <TooltipContent>
-              <p>{material.description}</p>
+              <p>{courseMaterial.description}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </div>
 
-      <Button size="sm" variant="ghost" asChild>
-        <Link to={link} target="_blank" rel="noopener noreferrer">
-          <ExternalLink className="h-4 w-4" />
-        </Link>
-      </Button>
+      <div>
+        <FormDialog
+          actionType="edit-course-material"
+          courseMaterial={courseMaterial}
+        >
+          <Button size="sm" variant="ghost">
+            <Edit />
+          </Button>
+        </FormDialog>
+
+        <Button size="sm" variant="ghost" asChild>
+          <Link to={link} target="_blank" rel="noopener noreferrer">
+            <ExternalLink className="h-4 w-4" />
+          </Link>
+        </Button>
+      </div>
     </li>
   );
 }

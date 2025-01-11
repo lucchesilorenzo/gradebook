@@ -26,7 +26,7 @@ export default function CourseMaterials({
             Course Materials
           </CardTitle>
 
-          <FormDialog actionType="course-materials">
+          <FormDialog actionType="add-course-material">
             <Button>
               <Plus />
               Add material
@@ -41,7 +41,7 @@ export default function CourseMaterials({
         ) : (
           <ul className="space-y-2">
             {courseMaterials.map((material) => (
-              <CourseMaterialItem key={material.id} material={material} />
+              <CourseMaterialItem key={material.id} courseMaterial={material} />
             ))}
           </ul>
         )}

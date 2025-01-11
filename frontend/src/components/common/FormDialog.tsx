@@ -6,17 +6,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { StudentRegisterData } from "@/lib/types";
+import { CourseMaterial, StudentRegisterData } from "@/lib/types";
 import { useState } from "react";
 import AttendanceEditForm from "../attendances/AttendanceEditForm";
 import CourseMaterialsForm from "../courses/CourseMaterialsForm";
+import CourseMaterialsEditForm from "../courses/CourseMaterialsEditForm";
 
 type FormDialogProps = {
   children?: React.ReactNode;
-  actionType: "attendance" | "course-materials";
+  actionType: "attendance" | "add-course-material" | "edit-course-material";
   open?: boolean;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   student?: StudentRegisterData;
+  courseMaterial?: CourseMaterial;
 };
 
 export default function FormDialog({
@@ -25,6 +27,7 @@ export default function FormDialog({
   open,
   setOpen,
   student,
+  courseMaterial,
 }: FormDialogProps) {
   const [internalOpen, setInternalOpen] = useState(false);
   const isOpen = open ?? internalOpen;
@@ -33,6 +36,31 @@ export default function FormDialog({
   function handleFormSubmit() {
     setIsOpen(false);
   }
+
+  const formDialogMapping: Record<
+    string,
+    {
+      title: string;
+      description: string;
+      component: React.ReactNode;
+    }
+  > = {
+    "add-course-material": {
+      title: "Add New Material",
+      description: "Add a new material to this course unit.",
+      component: <CourseMaterialsForm onFormSubmit={handleFormSubmit} />,
+    },
+    "edit-course-material": {
+      title: "Edit Material",
+      description: "Edit this course material.",
+      component: (
+        <CourseMaterialsEditForm
+          onFormSubmit={handleFormSubmit}
+          courseMaterial={courseMaterial!}
+        />
+      ),
+    },
+  };
 
   if (actionType === "attendance" && student) {
     return (
@@ -60,14 +88,12 @@ export default function FormDialog({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add New Material</DialogTitle>
+          <DialogTitle>{formDialogMapping[actionType].title}</DialogTitle>
           <DialogDescription>
-            Add a new material to this course unit.
+            {formDialogMapping[actionType].description}
           </DialogDescription>
         </DialogHeader>
-        {actionType === "course-materials" && (
-          <CourseMaterialsForm onFormSubmit={handleFormSubmit} />
-        )}
+        {formDialogMapping[actionType].component}
       </DialogContent>
     </Dialog>
   );
