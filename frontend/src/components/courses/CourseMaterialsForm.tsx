@@ -1,5 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
@@ -8,6 +6,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useCreateCourseMaterial } from "@/hooks/mutations/materials/useCreateCourseMaterial";
+import {
+  courseMaterialsFormSchema,
+  TCourseMaterialsFormSchema,
+} from "@/lib/validations/course-validations";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import { LoadingButton } from "../common/LoadingButton";
 import { Input } from "../ui/input";
 import {
@@ -17,10 +23,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import {
-  courseMaterialsFormSchema,
-  TCourseMaterialsFormData,
-} from "@/lib/validations/course-validations";
 
 type CourseMaterialsFormProps = {
   onFormSubmit: () => void;
@@ -29,19 +31,30 @@ type CourseMaterialsFormProps = {
 export default function CourseMaterialsForm({
   onFormSubmit,
 }: CourseMaterialsFormProps) {
+  const { courseUnitSlug } = useParams();
+  const { mutateAsync: createCourseMaterial } = useCreateCourseMaterial();
   const form = useForm({
     resolver: zodResolver(courseMaterialsFormSchema),
     defaultValues: {
       title: "",
       description: "",
       type: "",
-      file: "",
+      file: undefined,
       url: "",
     },
+    shouldUnregister: true,
   });
 
-  async function onSubmit(data: TCourseMaterialsFormData) {
-    console.log(data);
+  async function onSubmit(data: TCourseMaterialsFormSchema) {
+    const formData = new FormData();
+
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("type", data.type);
+    if (data.file) formData.append("file", data.file);
+    if (data.url) formData.append("url", data.url);
+
+    await createCourseMaterial({ data: formData, courseUnitSlug });
     onFormSubmit();
   }
 
@@ -99,7 +112,7 @@ export default function CourseMaterialsForm({
           )}
         />
 
-        {form.watch("type") === "pdf" ? (
+        {form.watch("type") === "PDF" && (
           <FormField
             control={form.control}
             name="file"
@@ -107,13 +120,21 @@ export default function CourseMaterialsForm({
               <FormItem>
                 <FormLabel>Upload PDF</FormLabel>
                 <FormControl>
-                  <Input type="file" accept=".pdf" {...field} />
+                  <Input
+                    type="file"
+                    accept="application/pdf"
+                    onChange={(e) =>
+                      field.onChange(e.target.files && e.target.files[0])
+                    }
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-        ) : (
+        )}
+
+        {(form.watch("type") === "VIDEO" || form.watch("type") === "LINK") && (
           <FormField
             control={form.control}
             name="url"

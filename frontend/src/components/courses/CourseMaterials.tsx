@@ -35,11 +35,15 @@ export default function CourseMaterials() {
         <CardDescription>All the materials of this course unit</CardDescription>
       </CardHeader>
       <CardContent>
-        <ul className="space-y-2">
-          {courseMaterials.map((material) => (
-            <CourseMaterial key={material.id} material={material} />
-          ))}
-        </ul>
+        {!courseMaterials.length ? (
+          <p>Start adding materials!</p>
+        ) : (
+          <ul className="space-y-2">
+            {courseMaterials.map((material) => (
+              <CourseMaterial key={material.id} material={material} />
+            ))}
+          </ul>
+        )}
       </CardContent>
     </Card>
   );

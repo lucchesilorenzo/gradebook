@@ -9,12 +9,23 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import env from "@/lib/env";
 
 type CourseMaterialProps = {
   material: CourseMaterial;
 };
 
 export default function CourseMaterial({ material }: CourseMaterialProps) {
+  let link;
+
+  switch (material.type) {
+    case "PDF":
+      link = `${env.VITE_BASE_URL}/storage/${material.file}`;
+      break;
+    default:
+      link = material.url || "";
+  }
+
   return (
     <li className="flex items-center justify-between rounded-md bg-secondary p-2">
       <div className="flex items-center gap-2">
@@ -30,7 +41,7 @@ export default function CourseMaterial({ material }: CourseMaterialProps) {
       </div>
 
       <Button size="sm" variant="ghost" asChild>
-        <Link to="#" target="_blank" rel="noopener noreferrer">
+        <Link to={link} target="_blank" rel="noopener noreferrer">
           <ExternalLink className="h-4 w-4" />
         </Link>
       </Button>

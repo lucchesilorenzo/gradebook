@@ -31,7 +31,7 @@ export default function FormDialog({
   const setIsOpen = setOpen ?? setInternalOpen;
 
   function handleFormSubmit() {
-    setIsOpen(!open);
+    setIsOpen(false);
   }
 
   if (actionType === "attendance" && student) {

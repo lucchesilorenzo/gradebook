@@ -6,21 +6,21 @@ export const courseMaterialsFormSchema = z
       .string()
       .trim()
       .min(1, "Title is required.")
-      .max(10, "Title is too long."),
-    description: z.string().trim().max(15, "Type is too long."),
+      .max(20, "Title is too long."),
+    description: z.string().trim().max(40, "Description is too long."),
     type: z.string().min(1, "Type is required."),
-    file: z.string(),
-    url: z.string(),
+    file: z.instanceof(File).optional(),
+    url: z.string().trim().optional(),
   })
-  .refine((data) => data.type !== "pdf", {
+  .refine((data) => data.type !== "PDF" || data.file, {
     message: "File is required.",
     path: ["file"],
   })
-  .refine((data) => data.type !== "video" && data.type !== "link", {
+  .refine((data) => data.type !== "VIDEO" && data.type !== "LINK", {
     message: "URL is required.",
     path: ["url"],
   });
 
-export type TCourseMaterialsFormData = z.infer<
+export type TCourseMaterialsFormSchema = z.infer<
   typeof courseMaterialsFormSchema
 >;
