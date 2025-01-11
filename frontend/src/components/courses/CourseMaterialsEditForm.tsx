@@ -26,7 +26,9 @@ export default function CourseMaterialsEditForm({
   onFormSubmit,
   courseMaterial,
 }: CourseMaterialsEditFormProps) {
-  const { mutateAsync: updateCourseMaterial } = useUpdateCourseMaterial();
+  const { mutateAsync: updateCourseMaterial } = useUpdateCourseMaterial(
+    courseMaterial.type,
+  );
   const form = useForm({
     resolver: zodResolver(courseMaterialsEditFormSchema),
     defaultValues: {
@@ -35,7 +37,6 @@ export default function CourseMaterialsEditForm({
       file: undefined,
       url: courseMaterial.url || "",
     },
-    shouldUnregister: true,
   });
 
   async function onSubmit(data: TCourseMaterialsEditFormSchema) {
@@ -45,7 +46,7 @@ export default function CourseMaterialsEditForm({
       if (data.title) formData.append("title", data.title);
       if (data.description) formData.append("description", data.description);
       if (data.file) formData.append("file", data.file);
-      if (data.url) formData.append("url", data.url);
+      formData.append("_method", "PATCH");
 
       await updateCourseMaterial({
         data: formData,
@@ -136,7 +137,7 @@ export default function CourseMaterialsEditForm({
           className="w-full"
           isLoading={form.formState.isSubmitting}
         >
-          Add Material
+          Edit Material
         </LoadingButton>
       </form>
     </Form>

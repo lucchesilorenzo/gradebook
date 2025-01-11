@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateMaterialRequest;
+use App\Http\Requests\CreateCourseUnitMaterialRequest;
+use App\Http\Requests\UpdateCourseUnitMaterialRequest;
 use App\Models\Course;
 use App\Models\CourseUnitMaterial;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class CourseUnitMaterialController extends Controller
 {
@@ -25,6 +27,7 @@ class CourseUnitMaterialController extends Controller
 
             $courseMaterials = CourseUnitMaterial::where('course_id', $course->id)
                 ->where('course_unit_id', $courseUnit->id)
+                ->orderBy('created_at', 'desc')
                 ->get();
 
             return response()->json($courseMaterials);
@@ -38,11 +41,13 @@ class CourseUnitMaterialController extends Controller
     /**
      * Create course unit material.
      *
-     * @param CreateMaterialRequest $request
+     * @param CreateCourseUnitMaterialRequest $request
+     * @param string $courseSlug
+     * @param string $courseUnitSlug
      * @return JsonResponse
      */
     public function createMaterial(
-        CreateMaterialRequest $request,
+        CreateCourseUnitMaterialRequest $request,
         string $courseSlug,
         string $courseUnitSlug
     ): JsonResponse {
@@ -78,6 +83,45 @@ class CourseUnitMaterialController extends Controller
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not create course unit material.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Update course unit material.
+     *
+     * @param UpdateCourseUnitMaterialRequest $request
+     * @param CourseUnitMaterial $courseUnitMaterial
+     * @return JsonResponse
+     */
+    public function updateMaterial(
+        UpdateCourseUnitMaterialRequest $request,
+        CourseUnitMaterial $courseUnitMaterial
+    ): JsonResponse {
+        // Validation 
+        $validatedData = $request->validated();
+
+        try {
+            // Check if file exists
+            if ($request->hasFile('file') && $courseUnitMaterial->file) {
+                if (Storage::disk('public')->exists($courseUnitMaterial->file)) {
+                    Storage::disk('public')->delete($courseUnitMaterial->file);
+                }
+
+                $path = $request->file('file')->store('courses/materials', 'public');
+                $validatedData['file'] = $path;
+            }
+
+            // Update course material
+            $courseUnitMaterial->update($validatedData);
+
+            return response()->json([
+                'message' => 'Course unit material updated.',
+            ], 200);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not update course unit material.',
                 'error' => $e->getMessage(),
             ], 500);
         }

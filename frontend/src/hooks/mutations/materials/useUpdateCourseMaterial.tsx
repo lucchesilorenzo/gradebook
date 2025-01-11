@@ -1,4 +1,4 @@
-import { updateData } from "@/lib/api-client";
+import { postData, updateData } from "@/lib/api-client";
 import { TCourseMaterialsEditFormSchema } from "@/lib/validations/course-validations";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -8,12 +8,13 @@ type CourseMaterialEditForm = {
   courseMaterialId: string;
 };
 
-export function useUpdateCourseMaterial() {
+export function useUpdateCourseMaterial(courseMaterialType: string) {
   const queryClient = useQueryClient();
+  const httpMethod = courseMaterialType === "PDF" ? postData : updateData;
 
   return useMutation({
     mutationFn: ({ data, courseMaterialId }: CourseMaterialEditForm) =>
-      updateData(`/materials/${courseMaterialId}`, data),
+      httpMethod(`/materials/${courseMaterialId}`, data),
     onSuccess: (response) => {
       queryClient.invalidateQueries({ queryKey: ["course-materials"] });
       toast.success(response.message);

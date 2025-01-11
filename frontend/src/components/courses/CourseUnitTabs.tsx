@@ -36,6 +36,8 @@ export default function CourseUnitTabs({
     course_unit_id: courseUnit.id,
   }));
 
+  if (isLoading) return <Loading />;
+
   return (
     <Tabs defaultValue="student-register">
       <TabsList>
@@ -56,7 +58,6 @@ export default function CourseUnitTabs({
         />
       </TabsContent>
       <TabsContent value="course-materials" className="my-4">
-        {isLoading && <Loading />}
         <CourseMaterials courseMaterials={courseMaterials} />
       </TabsContent>
     </Tabs>
