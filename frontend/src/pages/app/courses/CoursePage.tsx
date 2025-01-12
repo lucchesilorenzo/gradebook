@@ -1,7 +1,7 @@
 import H1 from "@/components/common/H1";
 import Loading from "@/components/common/Loading";
 import CourseDetailCard from "@/components/courses/CourseDetailCard";
-import CourseUnitsList from "@/components/courses/CourseUnitsList";
+import CourseUnitsList from "@/components/courses/units/CourseUnitsList";
 import { Badge } from "@/components/ui/badge";
 import { useCourseBySlug } from "@/hooks/queries/useCourseBySlug";
 import env from "@/lib/env";

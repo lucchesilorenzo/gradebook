@@ -6,41 +6,41 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useUpdateCourseMaterial } from "@/hooks/mutations/materials/useUpdateCourseMaterial";
-import { CourseMaterial } from "@/lib/types";
-import {
-  courseMaterialsEditFormSchema,
-  TCourseMaterialsEditFormSchema,
-} from "@/lib/validations/course-validations";
+import { useUpdateCourseUnitMaterial } from "@/hooks/mutations/materials/useUpdateCourseUnitMaterial";
+import { CourseUnitMaterial } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { LoadingButton } from "../common/LoadingButton";
-import { Input } from "../ui/input";
+import { LoadingButton } from "../../../common/LoadingButton";
+import { Input } from "../../../ui/input";
+import {
+  courseUnitMaterialsEditFormSchema,
+  TCourseUnitMaterialsEditFormSchema,
+} from "@/lib/validations/course-validations";
 
-type CourseMaterialsEditFormProps = {
+type CourseUnitMaterialsEditFormProps = {
   onFormSubmit: () => void;
-  courseMaterial: CourseMaterial;
+  courseUnitMaterial: CourseUnitMaterial;
 };
 
-export default function CourseMaterialsEditForm({
+export default function CourseUnitMaterialsEditForm({
   onFormSubmit,
-  courseMaterial,
-}: CourseMaterialsEditFormProps) {
-  const { mutateAsync: updateCourseMaterial } = useUpdateCourseMaterial(
-    courseMaterial.type,
+  courseUnitMaterial,
+}: CourseUnitMaterialsEditFormProps) {
+  const { mutateAsync: updateCourseUnitMaterial } = useUpdateCourseUnitMaterial(
+    courseUnitMaterial.type,
   );
   const form = useForm({
-    resolver: zodResolver(courseMaterialsEditFormSchema),
+    resolver: zodResolver(courseUnitMaterialsEditFormSchema),
     defaultValues: {
-      title: courseMaterial.title || "",
-      description: courseMaterial.description || "",
+      title: courseUnitMaterial.title || "",
+      description: courseUnitMaterial.description || "",
       file: undefined,
-      url: courseMaterial.url || "",
+      url: courseUnitMaterial.url || "",
     },
   });
 
-  async function onSubmit(data: TCourseMaterialsEditFormSchema) {
-    if (courseMaterial.type === "PDF") {
+  async function onSubmit(data: TCourseUnitMaterialsEditFormSchema) {
+    if (courseUnitMaterial.type === "PDF") {
       const formData = new FormData();
 
       if (data.title) formData.append("title", data.title);
@@ -48,12 +48,15 @@ export default function CourseMaterialsEditForm({
       if (data.file) formData.append("file", data.file);
       formData.append("_method", "PATCH");
 
-      await updateCourseMaterial({
+      await updateCourseUnitMaterial({
         data: formData,
-        courseMaterialId: courseMaterial.id,
+        courseUnitMaterialId: courseUnitMaterial.id,
       });
     } else {
-      await updateCourseMaterial({ data, courseMaterialId: courseMaterial.id });
+      await updateCourseUnitMaterial({
+        data,
+        courseUnitMaterialId: courseUnitMaterial.id,
+      });
     }
 
     onFormSubmit();
@@ -90,7 +93,7 @@ export default function CourseMaterialsEditForm({
           )}
         />
 
-        {courseMaterial.type === "PDF" && (
+        {courseUnitMaterial.type === "PDF" && (
           <FormField
             control={form.control}
             name="file"
@@ -112,8 +115,8 @@ export default function CourseMaterialsEditForm({
           />
         )}
 
-        {(courseMaterial.type === "LINK" ||
-          courseMaterial.type === "VIDEO") && (
+        {(courseUnitMaterial.type === "LINK" ||
+          courseUnitMaterial.type === "VIDEO") && (
           <FormField
             control={form.control}
             name="url"

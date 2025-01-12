@@ -1,5 +1,5 @@
 import { fetchData } from "@/lib/api-client";
-import { CourseMaterial } from "@/lib/types";
+import { CourseUnitMaterial } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 
 type Slug = {
@@ -7,10 +7,10 @@ type Slug = {
   courseUnitSlug: string;
 };
 
-export function useCourseMaterials({ courseSlug, courseUnitSlug }: Slug) {
+export function useCourseUnitMaterials({ courseSlug, courseUnitSlug }: Slug) {
   return useQuery({
     queryKey: ["course-materials"],
-    queryFn: (): Promise<CourseMaterial[]> =>
+    queryFn: (): Promise<CourseUnitMaterial[]> =>
       fetchData(`/materials/${courseSlug}/${courseUnitSlug}`),
   });
 }

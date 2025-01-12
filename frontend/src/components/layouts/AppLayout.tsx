@@ -1,12 +1,12 @@
 import CourseProvider from "@/contexts/CourseProvider";
-import { useSharedData } from "@/hooks/queries/useSharedData";
+import { useCourses } from "@/hooks/queries/useCourses";
 import { Outlet } from "react-router-dom";
 import AuthGuard from "../common/AuthGuard";
 import Header from "../common/Header";
 import Loading from "../common/Loading";
 
 export default function AppLayout() {
-  const [{ data: teacherCourses = [], isLoading }] = useSharedData();
+  const { data: teacherCourses = [], isLoading } = useCourses();
 
   return (
     <AuthGuard>

@@ -72,7 +72,7 @@ export type StudentRegisterData = Student & {
   status?: string;
 };
 
-export type CourseMaterial = {
+export type CourseUnitMaterial = {
   id: string;
   title: string;
   description: string | null;

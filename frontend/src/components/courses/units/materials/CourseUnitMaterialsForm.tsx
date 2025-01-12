@@ -6,35 +6,36 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useCreateCourseMaterial } from "@/hooks/mutations/materials/useCreateCourseMaterial";
+import { useCreateCourseUnitMaterial } from "@/hooks/mutations/materials/useCreateCourseUnitMaterial";
 import {
-  courseMaterialsFormSchema,
-  TCourseMaterialsFormSchema,
+  courseUnitMaterialsFormSchema,
+  TCourseUnitMaterialsFormSchema,
 } from "@/lib/validations/course-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { LoadingButton } from "../common/LoadingButton";
-import { Input } from "../ui/input";
+import { LoadingButton } from "../../../common/LoadingButton";
+import { Input } from "../../../ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "../../../ui/select";
 
-type CourseMaterialsFormProps = {
+type CourseUnitMaterialsFormProps = {
   onFormSubmit: () => void;
 };
 
-export default function CourseMaterialsForm({
+export default function CourseUnitMaterialsForm({
   onFormSubmit,
-}: CourseMaterialsFormProps) {
+}: CourseUnitMaterialsFormProps) {
   const { courseSlug, courseUnitSlug } = useParams();
-  const { mutateAsync: createCourseMaterial } = useCreateCourseMaterial();
+  const { mutateAsync: createCourseUnitMaterial } =
+    useCreateCourseUnitMaterial();
   const form = useForm({
-    resolver: zodResolver(courseMaterialsFormSchema),
+    resolver: zodResolver(courseUnitMaterialsFormSchema),
     defaultValues: {
       title: "",
       description: "",
@@ -45,7 +46,7 @@ export default function CourseMaterialsForm({
     shouldUnregister: true,
   });
 
-  async function onSubmit(data: TCourseMaterialsFormSchema) {
+  async function onSubmit(data: TCourseUnitMaterialsFormSchema) {
     const formData = new FormData();
 
     formData.append("title", data.title);
@@ -54,7 +55,11 @@ export default function CourseMaterialsForm({
     if (data.file) formData.append("file", data.file);
     if (data.url) formData.append("url", data.url);
 
-    await createCourseMaterial({ data: formData, courseSlug, courseUnitSlug });
+    await createCourseUnitMaterial({
+      data: formData,
+      courseSlug,
+      courseUnitSlug,
+    });
     onFormSubmit();
   }
 

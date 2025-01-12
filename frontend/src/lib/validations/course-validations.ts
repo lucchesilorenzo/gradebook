@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const courseMaterialsFormSchema = z
+export const courseUnitMaterialsFormSchema = z
   .object({
     title: z
       .string()
@@ -24,7 +24,7 @@ export const courseMaterialsFormSchema = z
     },
   );
 
-export const courseMaterialsEditFormSchema = z.object({
+export const courseUnitMaterialsEditFormSchema = z.object({
   title: z.string().trim().max(20, "Title is too long."),
   description: z.string().trim().max(40, "Description is too long."),
   file: z.instanceof(File).optional(),
@@ -32,9 +32,9 @@ export const courseMaterialsEditFormSchema = z.object({
 });
 
 // Types
-export type TCourseMaterialsFormSchema = z.infer<
-  typeof courseMaterialsFormSchema
+export type TCourseUnitMaterialsFormSchema = z.infer<
+  typeof courseUnitMaterialsFormSchema
 >;
-export type TCourseMaterialsEditFormSchema = z.infer<
-  typeof courseMaterialsEditFormSchema
+export type TCourseUnitMaterialsEditFormSchema = z.infer<
+  typeof courseUnitMaterialsEditFormSchema
 >;

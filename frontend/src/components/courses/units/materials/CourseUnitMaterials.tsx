@@ -6,18 +6,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Plus } from "lucide-react";
-import FormDialog from "../common/FormDialog";
-import { Button } from "../ui/button";
-import { CourseMaterial } from "@/lib/types";
-import CourseMaterialItem from "./CourseMaterialItem";
+import FormDialog from "../../../common/FormDialog";
+import { Button } from "../../../ui/button";
+import { CourseUnitMaterial } from "@/lib/types";
+import CourseUnitMaterialItem from "./CourseUnitMaterialItem";
 
-type CourseMaterialsProps = {
-  courseMaterials: CourseMaterial[];
+type CourseUnitMaterialsProps = {
+  courseUnitMaterials: CourseUnitMaterial[];
 };
 
-export default function CourseMaterials({
-  courseMaterials,
-}: CourseMaterialsProps) {
+export default function CourseUnitMaterials({
+  courseUnitMaterials,
+}: CourseUnitMaterialsProps) {
   return (
     <Card className="max-w-6xl">
       <CardHeader>
@@ -26,7 +26,7 @@ export default function CourseMaterials({
             Course Materials
           </CardTitle>
 
-          <FormDialog actionType="add-course-material">
+          <FormDialog actionType="add-course-unit-material">
             <Button>
               <Plus />
               Add material
@@ -36,12 +36,15 @@ export default function CourseMaterials({
         <CardDescription>All the materials of this course unit</CardDescription>
       </CardHeader>
       <CardContent>
-        {!courseMaterials.length ? (
+        {!courseUnitMaterials.length ? (
           <p>Start adding materials!</p>
         ) : (
           <ul className="space-y-2">
-            {courseMaterials.map((material) => (
-              <CourseMaterialItem key={material.id} courseMaterial={material} />
+            {courseUnitMaterials.map((material) => (
+              <CourseUnitMaterialItem
+                key={material.id}
+                courseUnitMaterial={material}
+              />
             ))}
           </ul>
         )}

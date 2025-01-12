@@ -1,13 +1,13 @@
 import { columns } from "@/components/tables/courses/columns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useCourseUnitMaterials } from "@/hooks/queries/useCourseUnitMaterials";
 import env from "@/lib/env";
 import { CourseUnit, TeacherCourse } from "@/lib/types";
-import { useEffect } from "react";
-import StudentRegisterTable from "../tables/courses/StudentRegisterTable";
 import { Attendance } from "@/lib/types/attendances-types";
-import CourseMaterials from "./CourseMaterials";
-import { useCourseMaterials } from "@/hooks/queries/useCourseMaterials";
-import Loading from "../common/Loading";
+import { useEffect } from "react";
+import Loading from "../../common/Loading";
+import StudentRegisterTable from "../../tables/courses/StudentRegisterTable";
+import CourseUnitMaterials from "./materials/CourseUnitMaterials";
 
 type CourseUnitTabsProps = {
   course: TeacherCourse;
@@ -24,7 +24,7 @@ export default function CourseUnitTabs({
     document.title = `${courseUnit?.name} | ${env.VITE_APP_NAME}`;
   }, [courseUnit?.name]);
 
-  const { data: courseMaterials = [], isLoading } = useCourseMaterials({
+  const { data: courseUnitMaterials = [], isLoading } = useCourseUnitMaterials({
     courseSlug: course.slug,
     courseUnitSlug: courseUnit.slug,
   });
@@ -58,7 +58,7 @@ export default function CourseUnitTabs({
         />
       </TabsContent>
       <TabsContent value="course-materials" className="my-4">
-        <CourseMaterials courseMaterials={courseMaterials} />
+        <CourseUnitMaterials courseUnitMaterials={courseUnitMaterials} />
       </TabsContent>
     </Tabs>
   );

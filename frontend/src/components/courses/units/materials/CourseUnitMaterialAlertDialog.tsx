@@ -9,21 +9,22 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useDeleteCourseMaterial } from "@/hooks/mutations/materials/useDeleteCourseMaterial";
+import { useDeleteCourseUnitMaterial } from "@/hooks/mutations/materials/useDeleteCourseUnitMaterial";
 
 type CourseUnitMaterialAlertDialogProps = {
   children: React.ReactNode;
-  courseMaterialId: string;
+  courseUnitMaterialId: string;
 };
 
-export default function CourseMaterialAlertDialog({
+export default function CourseUnitMaterialAlertDialog({
   children,
-  courseMaterialId,
+  courseUnitMaterialId,
 }: CourseUnitMaterialAlertDialogProps) {
-  const { mutateAsync: deleteCourseMaterial } = useDeleteCourseMaterial();
+  const { mutateAsync: deleteCourseUnitMaterial } =
+    useDeleteCourseUnitMaterial();
 
   async function handleDeleteCourseUnitMaterial() {
-    await deleteCourseMaterial(courseMaterialId);
+    await deleteCourseUnitMaterial(courseUnitMaterialId);
   }
 
   return (

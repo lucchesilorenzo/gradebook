@@ -6,19 +6,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { CourseMaterial, StudentRegisterData } from "@/lib/types";
+import { CourseUnitMaterial, StudentRegisterData } from "@/lib/types";
 import { useState } from "react";
 import AttendanceEditForm from "../attendances/AttendanceEditForm";
-import CourseMaterialsForm from "../courses/CourseMaterialsForm";
-import CourseMaterialsEditForm from "../courses/CourseMaterialsEditForm";
+import CourseUnitMaterialsForm from "../courses/units/materials/CourseUnitMaterialsForm";
+import CourseUnitMaterialsEditForm from "../courses/units/materials/CourseUnitMaterialsEditForm";
 
 type FormDialogProps = {
   children?: React.ReactNode;
-  actionType: "attendance" | "add-course-material" | "edit-course-material";
+  actionType:
+    | "attendance"
+    | "add-course-unit-material"
+    | "edit-course-unit-material";
   open?: boolean;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   student?: StudentRegisterData;
-  courseMaterial?: CourseMaterial;
+  courseUnitMaterial?: CourseUnitMaterial;
 };
 
 export default function FormDialog({
@@ -27,7 +30,7 @@ export default function FormDialog({
   open,
   setOpen,
   student,
-  courseMaterial,
+  courseUnitMaterial,
 }: FormDialogProps) {
   const [internalOpen, setInternalOpen] = useState(false);
   const isOpen = open ?? internalOpen;
@@ -45,18 +48,18 @@ export default function FormDialog({
       component: React.ReactNode;
     }
   > = {
-    "add-course-material": {
+    "add-course-unit-material": {
       title: "Add New Material",
       description: "Add a new material to this course unit.",
-      component: <CourseMaterialsForm onFormSubmit={handleFormSubmit} />,
+      component: <CourseUnitMaterialsForm onFormSubmit={handleFormSubmit} />,
     },
-    "edit-course-material": {
+    "edit-course-unit-material": {
       title: "Edit Material",
       description: "Edit this course material.",
       component: (
-        <CourseMaterialsEditForm
+        <CourseUnitMaterialsEditForm
           onFormSubmit={handleFormSubmit}
-          courseMaterial={courseMaterial!}
+          courseUnitMaterial={courseUnitMaterial!}
         />
       ),
     },

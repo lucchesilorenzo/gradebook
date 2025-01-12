@@ -14,7 +14,7 @@ export const routes = [
   { name: "Calendar", href: "/calendar", icon: CalendarClock },
 ];
 
-export const courseMaterialIcons = {
+export const courseUnitMaterialIcons = {
   PDF: React.createElement(FileText),
   VIDEO: React.createElement(Video),
   LINK: React.createElement(LinkIcon),

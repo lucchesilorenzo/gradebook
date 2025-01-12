@@ -2,12 +2,12 @@ import { deleteData } from "@/lib/api-client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-export function useDeleteCourseMaterial() {
+export function useDeleteCourseUnitMaterial() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (courseMaterialId: string) =>
-      deleteData(`/materials/${courseMaterialId}`),
+    mutationFn: (courseUnitMaterialId: string) =>
+      deleteData(`/materials/${courseUnitMaterialId}`),
     onSuccess: (response) => {
       queryClient.invalidateQueries({ queryKey: ["course-materials"] });
       toast.success(response.message);

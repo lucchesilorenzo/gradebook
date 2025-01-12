@@ -2,13 +2,13 @@ import { postData } from "@/lib/api-client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-type CourseMaterialWithSlug = {
+type CourseUnitMaterialWithSlug = {
   data: FormData;
   courseSlug?: string;
   courseUnitSlug?: string;
 };
 
-export function useCreateCourseMaterial() {
+export function useCreateCourseUnitMaterial() {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -16,7 +16,7 @@ export function useCreateCourseMaterial() {
       data,
       courseSlug,
       courseUnitSlug,
-    }: CourseMaterialWithSlug) =>
+    }: CourseUnitMaterialWithSlug) =>
       postData(`/materials/${courseSlug}/${courseUnitSlug}`, data),
     onSuccess: (response) => {
       queryClient.invalidateQueries({ queryKey: ["course-materials"] });
