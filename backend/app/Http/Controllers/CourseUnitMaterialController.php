@@ -61,21 +61,22 @@ class CourseUnitMaterialController extends Controller
             // Get course unit ID
             $courseUnitId = $course->units()->where('slug', $courseUnitSlug)->firstOrFail()->id;
 
+            // Upload file if it exists
+            if ($request->hasFile('file')) {
+                $path = $request->file('file')->store('courses/materials', 'public');
+                $validatedData['file'] = $path;
+            }
+
             // Create course material
-            $courseMaterial = CourseUnitMaterial::create([
+            CourseUnitMaterial::create([
                 'course_id' => $course->id,
                 'course_unit_id' => $courseUnitId,
                 'title' => $validatedData['title'],
                 'description' => $validatedData['description'],
                 'type' => $validatedData['type'],
+                'file' => $validatedData['file'] ?? null,
                 'url' => $validatedData['url'] ?? null,
             ]);
-
-            // Upload file if it exists
-            if ($request->hasFile('file')) {
-                $path = $request->file('file')->store('courses/materials', 'public');
-                $courseMaterial->update(['file' => $path]);
-            }
 
             return response()->json([
                 'message' => 'Course unit material created successfully.',
