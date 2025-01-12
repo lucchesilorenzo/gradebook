@@ -78,7 +78,7 @@ class CourseUnitMaterialController extends Controller
             }
 
             return response()->json([
-                'message' => 'Course unit material created.',
+                'message' => 'Course unit material created successfully.',
             ], 201);
         } catch (\Throwable $e) {
             return response()->json([
@@ -117,11 +117,41 @@ class CourseUnitMaterialController extends Controller
             $courseUnitMaterial->update($validatedData);
 
             return response()->json([
-                'message' => 'Course unit material updated.',
+                'message' => 'Course unit material updated successfully.',
             ], 200);
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not update course unit material.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Delete course unit material.
+     *
+     * @param CourseUnitMaterial $courseUnitMaterial
+     * @return JsonResponse
+     */
+    public function deleteMaterial(CourseUnitMaterial $courseUnitMaterial): JsonResponse
+    {
+        try {
+            // Check if file exists
+            if ($courseUnitMaterial->file) {
+                if (Storage::disk('public')->exists($courseUnitMaterial->file)) {
+                    Storage::disk('public')->delete($courseUnitMaterial->file);
+                }
+            }
+
+            // Delete course material
+            $courseUnitMaterial->delete();
+
+            return response()->json([
+                'message' => 'Course unit material deleted successfully.',
+            ], 200);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not delete course unit material.',
                 'error' => $e->getMessage(),
             ], 500);
         }
