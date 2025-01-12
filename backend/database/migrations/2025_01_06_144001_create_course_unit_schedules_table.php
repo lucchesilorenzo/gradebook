@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('course_unit_schedules', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
             $table->foreignUuid('course_id')->constrained()->onDelete('cascade');
             $table->foreignUuid('course_unit_id')->constrained()->onDelete('cascade');
             $table->dateTime('start_datetime');

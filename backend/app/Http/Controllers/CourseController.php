@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
 use Illuminate\Http\JsonResponse;
 
 class CourseController extends Controller
@@ -37,7 +36,8 @@ class CourseController extends Controller
     public function getTeacherCourse(string $courseSlug): JsonResponse
     {
         try {
-            $teacherCourse = Course::where('slug', $courseSlug)
+            $teacherCourse = auth()->user()->courses()
+                ->where('slug', $courseSlug)
                 ->with(['students', 'units.schedules', 'tutor'])
                 ->firstOrFail();
 

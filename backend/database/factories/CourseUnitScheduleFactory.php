@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Course;
 use App\Models\CourseUnit;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -39,6 +40,7 @@ class CourseUnitScheduleFactory extends Factory
         $endDate = $startDate->copy()->addHours(2);
 
         return [
+            'user_id' => User::inRandomOrder()->first()->id,
             'course_id' => $course->id,
             'course_unit_id' => CourseUnit::inRandomOrder()->first()->id,
             'start_datetime' => $startDate,
