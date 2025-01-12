@@ -1,6 +1,6 @@
 import { courseMaterialIcons } from "@/lib/data";
 import { type CourseMaterial } from "@/lib/types";
-import { Edit, ExternalLink } from "lucide-react";
+import { CircleX, Edit, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import {
@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/tooltip";
 import env from "@/lib/env";
 import FormDialog from "../common/FormDialog";
+import CourseMaterialAlertDialog from "./CourseMaterialAlertDialog";
 
 type CourseMaterialProps = {
   courseMaterial: CourseMaterial;
@@ -44,6 +45,12 @@ export default function CourseMaterialItem({
       </div>
 
       <div>
+        <CourseMaterialAlertDialog courseMaterialId={courseMaterial.id}>
+          <Button size="sm" variant="ghost">
+            <CircleX />
+          </Button>
+        </CourseMaterialAlertDialog>
+
         <FormDialog
           actionType="edit-course-material"
           courseMaterial={courseMaterial}
@@ -55,7 +62,7 @@ export default function CourseMaterialItem({
 
         <Button size="sm" variant="ghost" asChild>
           <Link to={link} target="_blank" rel="noopener noreferrer">
-            <ExternalLink className="h-4 w-4" />
+            <ExternalLink />
           </Link>
         </Button>
       </div>
