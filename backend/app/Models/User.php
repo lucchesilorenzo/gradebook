@@ -75,4 +75,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(CourseUnitSchedule::class);
     }
+
+    /**
+     * Get all the tasks the teacher belongs to.
+     *
+     * @return HasMany
+     */
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
 }
