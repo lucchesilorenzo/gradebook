@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const toDoListFormSchema = z.object({
+export const taskFormSchema = z.object({
   title: z
     .string()
     .trim()
@@ -8,4 +8,4 @@ export const toDoListFormSchema = z.object({
     .max(20, "Title is too long."),
 });
 
-export type TToDoListFormSchema = z.infer<typeof toDoListFormSchema>;
+export type TTaskFormSchema = z.infer<typeof taskFormSchema>;

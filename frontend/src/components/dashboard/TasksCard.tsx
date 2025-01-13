@@ -6,21 +6,19 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import ToDoListForm from "./ToDoListForm";
+import TasksForm from "./TasksForm";
 
 export default function ToDoList() {
   return (
     <Card className="max-w-4xl">
       <CardHeader>
-        <CardTitle className="text-md font-bold sm:text-xl">
-          To-Do List
-        </CardTitle>
+        <CardTitle className="text-md font-bold sm:text-xl">Tasks</CardTitle>
         <VisuallyHidden>
-          <CardDescription>To-Do List</CardDescription>
+          <CardDescription>Tasks</CardDescription>
         </VisuallyHidden>
       </CardHeader>
       <CardContent>
-        <ToDoListForm />
+        <TasksForm />
       </CardContent>
     </Card>
   );

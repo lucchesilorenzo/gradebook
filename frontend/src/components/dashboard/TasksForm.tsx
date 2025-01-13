@@ -1,7 +1,7 @@
 import {
-  toDoListFormSchema,
-  TToDoListFormSchema,
-} from "@/lib/validations/to-do-validations";
+  taskFormSchema,
+  TTaskFormSchema,
+} from "@/lib/validations/task-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -15,15 +15,15 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 
-export default function ToDoListForm() {
+export default function TasksForm() {
   const form = useForm({
-    resolver: zodResolver(toDoListFormSchema),
+    resolver: zodResolver(taskFormSchema),
     defaultValues: {
       title: "",
     },
   });
 
-  async function onSubmit(data: TToDoListFormSchema) {
+  async function onSubmit(data: TTaskFormSchema) {
     console.log(data);
   }
 
