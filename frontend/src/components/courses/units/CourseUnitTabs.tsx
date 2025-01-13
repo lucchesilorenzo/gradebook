@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCourseUnitMaterials } from "@/hooks/queries/useCourseUnitMaterials";
 import env from "@/lib/env";
 import { CourseUnit, TeacherCourse } from "@/lib/types";
-import { Attendance } from "@/lib/types/attendances-types";
+import { Attendance } from "@/lib/types/attendance-types";
 import { useEffect } from "react";
 import Loading from "../../common/Loading";
 import StudentRegisterTable from "../../tables/courses/StudentRegisterTable";

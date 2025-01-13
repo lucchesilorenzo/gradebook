@@ -1,5 +1,5 @@
 import { fetchData } from "@/lib/api-client";
-import { Attendance } from "@/lib/types/attendances-types";
+import { Attendance } from "@/lib/types/attendance-types";
 import { useQuery } from "@tanstack/react-query";
 
 type Slug = {

@@ -9,4 +9,5 @@ Route::middleware('auth:sanctum')->group(function () {
   require __DIR__ . '/api/attendances.php';
   require __DIR__ . '/api/schedules.php';
   require __DIR__ . '/api/materials.php';
+  require __DIR__ . '/api/tasks.php';
 });
