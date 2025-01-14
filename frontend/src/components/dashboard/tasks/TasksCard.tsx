@@ -24,7 +24,7 @@ export default function TasksCard() {
       </CardHeader>
       <CardContent className="space-y-6">
         {isLoading ? (
-          <Loading />
+          <Loading size="sm" />
         ) : (
           <ul className="space-y-4">
             {tasks.map((task) => (

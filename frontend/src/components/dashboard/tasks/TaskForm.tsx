@@ -14,8 +14,10 @@ import {
   FormMessage,
 } from "../../ui/form";
 import { Input } from "../../ui/input";
+import { useCreateTask } from "@/hooks/mutations/tasks/useCreateTask";
 
 export default function TaskForm() {
+  const { mutateAsync: createTask } = useCreateTask();
   const form = useForm({
     resolver: zodResolver(taskFormSchema),
     defaultValues: {
@@ -24,7 +26,8 @@ export default function TaskForm() {
   });
 
   async function onSubmit(data: TTaskFormSchema) {
-    console.log(data);
+    await createTask(data);
+    form.reset();
   }
 
   return (

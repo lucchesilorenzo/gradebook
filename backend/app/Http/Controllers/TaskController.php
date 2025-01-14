@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\JsonResponse;
 
@@ -25,6 +26,30 @@ class TaskController extends Controller
     }
 
     /**
+     * Create a task.
+     *
+     * @param CreateTaskRequest $request
+     * @return JsonResponse
+     */
+    public function createTask(CreateTaskRequest $request): JsonResponse
+    {
+        $validatedData = $request->validated();
+
+        try {
+            $task = auth()->user()->tasks()->create($validatedData);
+
+            return response()->json([
+                'task' => $task,
+                'message' => 'Task created successfully.',
+            ], 201);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not create task.',
+            ], 500);
+        }
+    }
+
+    /**
      * Delete a task.
      *
      * @param Task $task
@@ -34,10 +59,12 @@ class TaskController extends Controller
     {
         try {
             $task->delete();
+            $task->completed = true;
+            $task->save();
 
             return response()->json([
                 'message' => 'Task deleted successfully.',
-            ], 200);
+            ]);
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not delete task.',
