@@ -14,8 +14,8 @@ export default function Task({ task }: TaskProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <li key={task.id} className="flex items-center justify-between">
-      <div>
+    <li key={task.id} className="flex justify-between">
+      <div className="flex items-center">
         <Checkbox
           onCheckedChange={() => setIsChecked((isChecked) => !isChecked)}
         />
@@ -31,7 +31,7 @@ export default function Task({ task }: TaskProps) {
 
       <TaskAlertDialog taskId={task.id}>
         <Button variant="ghost" size="icon" disabled={!isChecked}>
-          <Trash2 className="h-4 w-4" />
+          <Trash2 />
         </Button>
       </TaskAlertDialog>
     </li>

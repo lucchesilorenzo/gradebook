@@ -1,3 +1,5 @@
+import { Textarea } from "@/components/ui/textarea";
+import { useCreateTask } from "@/hooks/mutations/tasks/useCreateTask";
 import {
   taskFormSchema,
   TTaskFormSchema,
@@ -13,8 +15,6 @@ import {
   FormItem,
   FormMessage,
 } from "../../ui/form";
-import { Input } from "../../ui/input";
-import { useCreateTask } from "@/hooks/mutations/tasks/useCreateTask";
 
 export default function TaskForm() {
   const { mutateAsync: createTask } = useCreateTask();
@@ -32,21 +32,27 @@ export default function TaskForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex gap-2">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-2">
+        <div className="flex-1">
           <FormField
             control={form.control}
             name="title"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Add a new task" {...field} />
+                  <Textarea
+                    placeholder="Add a new task"
+                    className="resize-none"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+        </div>
 
+        <div className="flex items-center">
           <LoadingButton type="submit" isLoading={form.formState.isSubmitting}>
             <Plus />
           </LoadingButton>

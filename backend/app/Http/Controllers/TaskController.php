@@ -16,7 +16,7 @@ class TaskController extends Controller
     public function getTasks(): JsonResponse
     {
         try {
-            $tasks = auth()->user()->tasks()->get();
+            $tasks = auth()->user()->tasks()->paginate(4);
             return response()->json($tasks);
         } catch (\Throwable $e) {
             return response()->json([
@@ -33,6 +33,7 @@ class TaskController extends Controller
      */
     public function createTask(CreateTaskRequest $request): JsonResponse
     {
+        // Validation
         $validatedData = $request->validated();
 
         try {
