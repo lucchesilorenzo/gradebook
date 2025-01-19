@@ -242,7 +242,10 @@ class AttendanceController extends Controller
 
             // -- Early departure -- 
             if ($validatedData['attendance_type'] === 'early_departure') {
-                if ($attendance->end_time !== null || $attendance->status === 'ABSENT' || $validatedData['time'] < $attendance->start_time) {
+                if (
+                    $attendance->end_time !== null || $attendance->status === 'ABSENT' ||
+                    $validatedData['time'] < $attendance->start_time
+                ) {
                     return response()->json([
                         'message' => 'Student is already marked as absent or lesson has already ended.'
                     ], 400);

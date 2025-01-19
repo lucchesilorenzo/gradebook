@@ -31,11 +31,21 @@ class DatabaseSeeder extends Seeder
         // Create 20 Students (not associated yet with courses)
         Student::factory(20)->create();
 
+        // Create 5 Users 
+        $users = User::factory(5)->create();
+
+        // Create 5 Course Units
+        $units = CourseUnit::factory(5)->configure()->create();
+
         // Create 5 Users and attach them to the 5 created courses (via pivot table)
-        User::factory(5)->hasAttached($courses)->create();
+        $users->each(function ($user) use ($courses) {
+            $user->courses()->attach($courses);
+        });
 
         // Create 5 CourseUnits with custom configuration and attach them to the created courses (via pivot table)
-        CourseUnit::factory(5)->configure()->hasAttached($courses)->create();
+        $units->each(function ($unit) use ($courses) {
+            $unit->courses()->attach($courses);
+        });
 
         // Create 200 CourseUnitSchedules
         CourseUnitSchedule::factory(200)->create();

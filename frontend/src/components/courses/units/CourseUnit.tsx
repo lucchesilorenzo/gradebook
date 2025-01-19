@@ -46,7 +46,7 @@ export default function CourseUnit({
   }, 0);
 
   const courseUnitProgress =
-    totalHours > 0 ? (elapsedHours / totalHours) * 100 : 0;
+    totalHours > 0 ? Number((elapsedHours / totalHours).toFixed(3)) * 100 : 0;
 
   return (
     <Card>

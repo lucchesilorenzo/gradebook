@@ -7,7 +7,7 @@ type LoadingProps = {
 export default function Loading({ size = "lg" }: LoadingProps) {
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <Spinner size={size} className="bg-black dark:bg-white" />
+      <Spinner size={size} />
     </div>
   );
 }

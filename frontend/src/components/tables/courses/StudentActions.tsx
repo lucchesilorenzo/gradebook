@@ -31,7 +31,6 @@ export default function StudentActions({ student }: StudentActionsProps) {
         <DropdownMenuContent>
           <DropdownMenuLabel>Student</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Profile</DropdownMenuItem>
           <DropdownMenuItem onSelect={() => setIsOpen(!isOpen)}>
             Attendance
           </DropdownMenuItem>
