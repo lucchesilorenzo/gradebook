@@ -13,6 +13,7 @@ import CoursesPage from "./pages/app/courses/CoursesPage.tsx";
 import CoursePage from "./pages/app/courses/CoursePage.tsx";
 import CourseUnitPage from "./pages/app/courses/CourseUnitPage.tsx";
 import CalendarPage from "./pages/app/CalendarPage.tsx";
+import ProfilePage from "./pages/app/ProfilePage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,10 @@ createRoot(document.getElementById("root")!).render(
               </Route>
             </Route>
             <Route path="calendar" element={<CalendarPage />} />
+            <Route path="teacher">
+              <Route index element={<Navigate to="profile" />} />
+              <Route path="profile" element={<ProfilePage />} />
+            </Route>
           </Route>
 
           <Route path="*" element={<NotFoundPage />} />

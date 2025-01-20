@@ -1,4 +1,3 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,12 +7,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useLogOut } from "@/hooks/mutations/auth/useLogOut";
+import ProfilePicture from "./ProfilePicture";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-type ProfileProps = {
+type ProfileDropdownMenuProps = {
   type: "desktop" | "mobile";
 };
 
-export default function Profile({ type }: ProfileProps) {
+export default function ProfileDropdownMenu({
+  type,
+}: ProfileDropdownMenuProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const { mutateAsync: logOut } = useLogOut();
 
   async function handleLogOut() {
@@ -21,17 +26,16 @@ export default function Profile({ type }: ProfileProps) {
   }
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger>
-        <Avatar className={`${type === "mobile" ? "h-8 w-8" : ""}`}>
-          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+        <ProfilePicture className={`${type === "mobile" ? "h-8 w-8" : ""}`} />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/teacher/profile">Profile</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem onSelect={handleLogOut}>Log out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
