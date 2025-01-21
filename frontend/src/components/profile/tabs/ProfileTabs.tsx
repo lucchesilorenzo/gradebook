@@ -1,4 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs";
+import ProfileEditTab from "./edit/ProfileEditTab";
 import ProfileInfoTab from "./info/ProfileInfoTab";
 
 export default function ProfileTabs() {
@@ -13,7 +14,9 @@ export default function ProfileTabs() {
         <ProfileInfoTab />
       </TabsContent>
 
-      <TabsContent value="edit">Edit</TabsContent>
+      <TabsContent value="edit">
+        <ProfileEditTab />
+      </TabsContent>
     </Tabs>
   );
 }
