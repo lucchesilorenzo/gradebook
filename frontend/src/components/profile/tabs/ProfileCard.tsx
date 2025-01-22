@@ -1,5 +1,6 @@
 import { UserSettings } from "@/lib/types/user-types";
 import { Card, CardHeader, CardTitle } from "../../ui/card";
+import ProfileUploadImageForm from "../ProfileUploadImageForm";
 import ProfilePicture from "../ProfilePicture";
 
 type ProfileCardProps = {
@@ -11,7 +12,10 @@ export default function ProfileCard({ userSettings }: ProfileCardProps) {
     <Card className="mb-6">
       <CardHeader>
         <div className="flex items-center space-x-4">
-          <ProfilePicture className="h-24 w-24" />
+          <div>
+            <ProfilePicture />
+            <ProfileUploadImageForm />
+          </div>
           <div>
             <CardTitle className="text-2xl">
               {userSettings.first_name} {userSettings.last_name}

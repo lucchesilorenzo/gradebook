@@ -8,4 +8,12 @@ export const profileFormSchema = z.object({
   address: z.string().trim().max(100, "Address is too long."),
 });
 
+export const profileUploadImageFormSchema = z.object({
+  image: z.any().optional(),
+});
+
+// Types
 export type TProfileFormSchema = z.infer<typeof profileFormSchema>;
+export type TProfileUploadImageFormSchema = z.infer<
+  typeof profileUploadImageFormSchema
+>;
