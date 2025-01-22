@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useUser } from "@/hooks/useUser";
 import { Mail, Phone } from "lucide-react";
+import { formatPhoneNumberIntl } from "react-phone-number-input";
 
 export default function ProfileContacts() {
   const { userSettings } = useUser();
@@ -17,7 +18,7 @@ export default function ProfileContacts() {
         <div className="flex items-center space-x-2">
           <Phone className="h-5 w-5 text-muted-foreground" />
           <span className="font-medium">Phone:</span>
-          <span>{userSettings.phone_number}</span>
+          <span>{formatPhoneNumberIntl(userSettings.phone_number)}</span>
         </div>
       </CardContent>
     </Card>

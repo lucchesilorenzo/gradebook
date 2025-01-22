@@ -8,30 +8,36 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useUser } from "@/hooks/useUser";
 import {
   profileFormSchema,
   TProfileFormSchema,
 } from "@/lib/validations/profile-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { capitalize } from "@/lib/utils";
+import { format } from "date-fns";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { useUpdateUserSettings } from "@/hooks/mutations/useUpdateUserSettings";
 
 export default function ProfileEditForm() {
+  const { userSettings } = useUser();
+  const { mutateAsync: updateUserSettings } = useUpdateUserSettings();
   const form = useForm({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
-      first_name: "",
-      last_name: "",
-      email: "",
-      phone_number: "",
-      gender: "",
-      date_of_birth: "",
-      address: "",
+      first_name: userSettings.first_name,
+      last_name: userSettings.last_name,
+      email: userSettings.email,
+      phone_number: userSettings.phone_number,
+      gender: capitalize(userSettings.gender),
+      date_of_birth: format(new Date(userSettings.date_of_birth), "dd/MM/yyyy"),
+      address: userSettings.address,
     },
   });
 
   async function onSubmit(data: TProfileFormSchema) {
-    console.log(data);
-    form.reset();
+    await updateUserSettings(data);
   }
 
   return (
@@ -87,7 +93,11 @@ export default function ProfileEditForm() {
               <FormItem>
                 <FormLabel>Phone Number</FormLabel>
                 <FormControl>
-                  <Input placeholder="+39 322123456" {...field} />
+                  <PhoneInput
+                    defaultCountry="IT"
+                    placeholder="+39 322123456"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -115,7 +125,7 @@ export default function ProfileEditForm() {
               <FormItem>
                 <FormLabel>Date of Birth</FormLabel>
                 <FormControl>
-                  <Input type="date" disabled {...field} />
+                  <Input disabled {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
