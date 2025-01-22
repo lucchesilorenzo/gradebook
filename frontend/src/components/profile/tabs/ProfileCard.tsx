@@ -11,11 +11,12 @@ export default function ProfileCard({ userSettings }: ProfileCardProps) {
   return (
     <Card className="mb-6">
       <CardHeader>
-        <div className="flex items-center space-x-4">
-          <div>
-            <ProfilePicture />
+        <div className="flex flex-col gap-10 sm:flex-row sm:items-center sm:gap-20">
+          <div className="flex items-center space-x-4">
+            <ProfilePicture className="h-24 w-24" />
             <ProfileUploadImageForm />
           </div>
+
           <div>
             <CardTitle className="text-2xl">
               {userSettings.first_name} {userSettings.last_name}

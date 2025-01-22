@@ -9,7 +9,7 @@ export const profileFormSchema = z.object({
 });
 
 export const profileUploadImageFormSchema = z.object({
-  image: z.any().optional(),
+  image: z.union([z.instanceof(File), z.string()]).nullable(),
 });
 
 // Types
