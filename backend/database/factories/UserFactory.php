@@ -33,7 +33,7 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('test'),
             'tax_id' => $faker->unique()->taxId(),
             'phone_number' => fake()->unique()->e164PhoneNumber(),
-            'address' => fake()->streetAddress(),
+            'address' => fake()->address(),
             'date_of_birth' => fake()->dateTimeBetween('1950-01-01', '1990-01-01'),
             'gender' => fake()->randomElement(['MALE', 'FEMALE']),
             'image' => null,
