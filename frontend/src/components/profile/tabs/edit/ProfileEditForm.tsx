@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form";
 import { capitalize } from "@/lib/utils";
 import { format } from "date-fns";
 import { PhoneInput } from "@/components/ui/phone-input";
-import { useUpdateUserSettings } from "@/hooks/mutations/useUpdateUserSettings";
+import { useUpdateUserSettings } from "@/hooks/mutations/users/useUpdateUserSettings";
 
 export default function ProfileEditForm() {
   const { userSettings } = useUser();

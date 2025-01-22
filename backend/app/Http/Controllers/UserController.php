@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateUserSettingsRequest;
+use App\Http\Requests\UploadUserImageRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -19,6 +21,42 @@ class UserController extends Controller
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not get user settings.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Upload user image.
+     *
+     * @return JsonResponse
+     */
+    public function uploadUserImage(UploadUserImageRequest $request): JsonResponse
+    {
+        // Validation
+        $validatedData = $request->validated();
+
+        try {
+            $user = auth()->user();
+
+            // Delete old image
+            if ($user->image && Storage::disk('public')->exists($user->image)) {
+                Storage::disk('public')->delete($user->image);
+            }
+
+            // Upload new image
+            $path = $request->file('image')->store('users/images', 'public');
+            $validatedData['image'] = $path;
+
+            // Update user image
+            $user->update($validatedData);
+
+            return response()->json([
+                'message' => 'User image uploaded successfully.',
+            ], 201);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not upload user image.',
                 'error' => $e->getMessage(),
             ], 500);
         }

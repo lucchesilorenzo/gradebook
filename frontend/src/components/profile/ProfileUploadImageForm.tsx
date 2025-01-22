@@ -1,4 +1,4 @@
-import { useUser } from "@/hooks/useUser";
+import { useUploadUserImage } from "@/hooks/mutations/users/useUploadUserImage";
 import {
   profileUploadImageFormSchema,
   TProfileUploadImageFormSchema,
@@ -8,20 +8,18 @@ import { useForm } from "react-hook-form";
 import { LoadingButton } from "../common/LoadingButton";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { Input } from "../ui/input";
-import { useUploadUserImage } from "@/hooks/mutations/users/useUploadUserImage";
 
 export default function ProfileUploadImageForm() {
-  const { userSettings } = useUser();
   const { mutateAsync: uploadUserImage } = useUploadUserImage();
   const form = useForm({
     resolver: zodResolver(profileUploadImageFormSchema),
-    defaultValues: {
-      image: userSettings.image,
-    },
   });
 
   async function onSubmit(data: TProfileUploadImageFormSchema) {
-    await uploadUserImage(data);
+    const formData = new FormData();
+
+    if (data.image) formData.append("image", data.image);
+    await uploadUserImage(formData);
   }
 
   return (

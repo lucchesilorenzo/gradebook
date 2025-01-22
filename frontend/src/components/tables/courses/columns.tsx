@@ -110,7 +110,6 @@ export const columns: ColumnDef<StudentRegisterData>[] = [
     id: "actions",
     header: "Actions",
     cell: ({ row }) => {
-      // TODO: Create actions for early departures / late arrivals
       const student = row.original;
 
       return <StudentActions student={student} />;
