@@ -37,7 +37,7 @@ class Course extends Model
      */
     public function teachers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'course_user');
     }
 
     /**
@@ -57,7 +57,7 @@ class Course extends Model
      */
     public function units(): BelongsToMany
     {
-        return $this->belongsToMany(CourseUnit::class);
+        return $this->belongsToMany(CourseUnit::class, 'course_unit_user');
     }
 
     /**

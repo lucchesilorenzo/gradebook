@@ -11,6 +11,7 @@ use App\Models\Tutor;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -37,14 +38,26 @@ class DatabaseSeeder extends Seeder
         // Create 5 Course Units
         $units = CourseUnit::factory(5)->configure()->create();
 
-        // Create 5 Users and attach them to the 5 created courses (via pivot table)
+        // Attach courses to users
         $users->each(function ($user) use ($courses) {
-            $user->courses()->attach($courses);
+            $user->courses()->attach($courses->random(rand(3, $courses->count())));
         });
 
-        // Create 5 CourseUnits with custom configuration and attach them to the created courses (via pivot table)
-        $units->each(function ($unit) use ($courses) {
-            $unit->courses()->attach($courses);
+        // Attach units to courses and users via pivot table course_unit_user
+        $users->each(function ($user) use ($courses, $units) {
+            $randomCourses = $courses->random(rand(3, $courses->count()));
+
+            $randomCourses->each(function ($course) use ($user, $units) {
+                $randomUnits = $units->random(rand(3, $units->count()));
+
+                $randomUnits->each(function ($unit) use ($course, $user) {
+                    DB::table('course_unit_user')->insert([
+                        'course_id' => $course->id,
+                        'course_unit_id' => $unit->id,
+                        'user_id' => $user->id,
+                    ]);
+                });
+            });
         });
 
         // Create 200 CourseUnitSchedules

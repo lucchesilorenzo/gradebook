@@ -23,7 +23,7 @@ export default function ProfileCard({ userSettings }: ProfileCardProps) {
             </CardTitle>
             {/* TODO: Display teacher info */}
             <p className="text-muted-foreground">Teacher</p>
-            <p className="text-muted-foreground">Some other info</p>
+            <p className="text-muted-foreground">IT Department</p>
           </div>
         </div>
       </CardHeader>

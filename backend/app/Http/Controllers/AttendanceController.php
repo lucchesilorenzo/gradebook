@@ -14,6 +14,13 @@ use Illuminate\Http\JsonResponse;
 
 class AttendanceController extends Controller
 {
+    /**
+     * Get course unit attendances.
+     *
+     * @param string $courseSlug
+     * @param string $courseUnitSlug
+     * @return JsonResponse
+     */
     public function getCourseUnitAttendances(
         string $courseSlug,
         string $courseUnitSlug
@@ -40,6 +47,7 @@ class AttendanceController extends Controller
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not get course unit attendances.',
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -103,7 +111,7 @@ class AttendanceController extends Controller
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not create attendances.',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -187,7 +195,7 @@ class AttendanceController extends Controller
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not update attendance end time.',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -281,7 +289,7 @@ class AttendanceController extends Controller
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not update attendance.',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }

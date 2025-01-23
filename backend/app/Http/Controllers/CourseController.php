@@ -15,8 +15,15 @@ class CourseController extends Controller
     {
         try {
             $teacherCourses = auth()->user()->courses()
-                ->with(['students', 'units.schedules', 'tutor'])
+                ->with(['students', 'tutor'])
                 ->get();
+
+            $teacherCourses->each(function ($course) {
+                $course->units = auth()->user()->units()
+                    ->wherePivot('course_id', $course->id)
+                    ->with(['schedules'])
+                    ->get();
+            });
 
             return response()->json($teacherCourses);
         } catch (\Throwable $e) {
@@ -38,8 +45,15 @@ class CourseController extends Controller
         try {
             $teacherCourse = auth()->user()->courses()
                 ->where('slug', $courseSlug)
-                ->with(['students', 'units.schedules', 'tutor'])
+                ->with(['students', 'tutor'])
                 ->firstOrFail();
+
+            $units = auth()->user()->units()
+                ->wherePivot('course_id', $teacherCourse->id)
+                ->with(['schedules'])
+                ->get();
+
+            $teacherCourse->units = $units;
 
             return response()->json($teacherCourse);
         } catch (\Throwable $e) {

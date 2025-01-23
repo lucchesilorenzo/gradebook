@@ -65,7 +65,7 @@ class User extends Authenticatable
      */
     public function courses(): BelongsToMany
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class, 'course_user');
     }
 
     /**
@@ -86,5 +86,15 @@ class User extends Authenticatable
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
+    }
+
+    /**
+     * Get all the course units the teacher teaches.
+     *
+     * @return BelongsToMany
+     */
+    public function units(): BelongsToMany
+    {
+        return $this->belongsToMany(CourseUnit::class, 'course_unit_user');
     }
 }

@@ -30,7 +30,7 @@ class CourseUnit extends Model
      */
     public function courses(): BelongsToMany
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class, 'course_unit_user');
     }
 
     /**
@@ -61,5 +61,15 @@ class CourseUnit extends Model
     public function materials(): HasMany
     {
         return $this->hasMany(CourseUnitMaterial::class);
+    }
+
+    /**
+     * Get all the teachers for this course unit.
+     *
+     * @return BelongsToMany
+     */
+    public function teachers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'course_unit_user');
     }
 }
