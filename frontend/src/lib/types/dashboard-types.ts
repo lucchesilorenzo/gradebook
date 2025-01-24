@@ -11,6 +11,10 @@ export type DashboardSummary = {
   next_lesson: {
     start_datetime: string;
     course_unit_id: string;
+    course: {
+      id: string;
+      name: string;
+    };
     course_unit: {
       id: string;
       name: string;

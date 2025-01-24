@@ -31,8 +31,15 @@ class DashboardController extends Controller
 
             // Get next lesson
             $nextLesson = $user->schedules()
-                ->with('courseUnit', fn($query) => $query->select('id', 'name'))
-                ->select('start_datetime', 'course_unit_id')
+                ->with([
+                    'courseUnit' => function ($query) {
+                        $query->select('id', 'name');
+                    },
+                    'course' => function ($query) {
+                        $query->select('id', 'name');
+                    }
+                ])
+                ->select('start_datetime', 'course_id', 'course_unit_id')
                 ->where('start_datetime', '>=', $today)
                 ->orderBy('start_datetime', 'asc')
                 ->firstOrFail();
