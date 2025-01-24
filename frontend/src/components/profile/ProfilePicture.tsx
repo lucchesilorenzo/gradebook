@@ -18,7 +18,7 @@ export default function ProfilePicture({ className }: ProfilePictureProps) {
         alt={`${userSettings.first_name}'s profile picture`}
       />
       <AvatarFallback>
-        <User />
+        <User className="h-5 w-5" />
       </AvatarFallback>
     </Avatar>
   );
