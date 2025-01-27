@@ -26,6 +26,26 @@ class UserController extends Controller
         }
     }
 
+
+    /**
+     * Get user notifications.
+     *
+     * @return JsonResponse
+     */
+    public function getUserNotifications(): JsonResponse
+    {
+        try {
+            $notifications = auth()->user()->unreadNotifications->count();
+
+            return response()->json($notifications);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not get user notifications.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
     /**
      * Upload user image.
      *

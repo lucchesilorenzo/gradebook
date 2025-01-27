@@ -1,3 +1,4 @@
+import { useUserNotifications } from "@/hooks/queries/useUserNotifications";
 import { getPrivateEcho } from "@/lib/echo";
 import { UserSettings } from "@/lib/types";
 import React, { createContext, useEffect } from "react";
@@ -6,10 +7,7 @@ import { toast } from "sonner";
 type Notification = {
   id: string;
   type: string;
-  course_name: string;
-  schedule_id: string;
   message: string;
-  start_datetime: string;
 };
 
 type UserProviderProps = {
@@ -19,6 +17,7 @@ type UserProviderProps = {
 
 type UserContext = {
   userSettings: UserSettings;
+  notifications?: number;
 };
 
 export const UserContext = createContext<UserContext | null>(null);
@@ -27,6 +26,8 @@ export default function UserProvider({
   children,
   userSettings,
 }: UserProviderProps) {
+  const { data: notifications, refetch } = useUserNotifications();
+
   useEffect(() => {
     const privateEcho = getPrivateEcho();
 
@@ -34,16 +35,16 @@ export default function UserProvider({
 
     channel.notification((data: Notification) => {
       toast.warning(data.message);
-      console.log(data);
+      refetch();
     });
 
     return () => {
       privateEcho.leave(`App.Models.User.${userSettings.id}`);
     };
-  }, [userSettings.id]);
+  }, [userSettings.id, refetch]);
 
   return (
-    <UserContext.Provider value={{ userSettings }}>
+    <UserContext.Provider value={{ userSettings, notifications }}>
       {children}
     </UserContext.Provider>
   );

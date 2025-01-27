@@ -1,11 +1,8 @@
-import { Bell } from "lucide-react";
 import ProfileDropdownMenu from "../profile/ProfileDropdownMenu";
-import { Button } from "../ui/button";
-import { NotificationBadge } from "../ui/notification-badge";
 import Logo from "./Logo";
 import MobileNavigation from "./MobileNavigation";
 import Navigation from "./Navigation";
-import { Link } from "react-router-dom";
+import Notification from "./Notification";
 
 export default function Header() {
   return (
@@ -14,14 +11,7 @@ export default function Header() {
         <MobileNavigation />
 
         <div className="flex items-center gap-2">
-          {/* TODO: Add a notification count */}
-          <NotificationBadge label="0" variant="destructive">
-            <Button type="button" variant="ghost" asChild>
-              <Link to="/teacher/notifications">
-                <Bell className="h-5 w-5" />
-              </Link>
-            </Button>
-          </NotificationBadge>
+          <Notification />
           <ProfileDropdownMenu type="mobile" />
         </div>
       </div>
@@ -31,13 +21,7 @@ export default function Header() {
         <Navigation />
 
         <div className="flex items-center gap-2">
-          <NotificationBadge label="0" variant="destructive">
-            <Button type="button" variant="ghost" asChild>
-              <Link to="/teacher/notifications">
-                <Bell className="h-5 w-5" />
-              </Link>
-            </Button>
-          </NotificationBadge>
+          <Notification />
           <ProfileDropdownMenu type="desktop" />
         </div>
       </div>

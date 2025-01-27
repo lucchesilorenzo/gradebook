@@ -56,9 +56,6 @@ class ScheduleNotification extends Notification
     {
         return new BroadcastMessage([
             'message' => 'Your next lesson starts in 10 minutes!',
-            'schedule_id' => $this->schedule->id,
-            'course_name' => $this->schedule->course->name,
-            'start_datetime' => $this->schedule->start_datetime,
         ]);
     }
 }
