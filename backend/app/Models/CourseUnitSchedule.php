@@ -22,6 +22,7 @@ class CourseUnitSchedule extends Model
         'course_unit_id',
         'start_datetime',
         'end_datetime',
+        'notified_at',
     ];
 
     /**
@@ -51,6 +52,6 @@ class CourseUnitSchedule extends Model
      */
     public function teacher(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

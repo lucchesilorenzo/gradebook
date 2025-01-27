@@ -1,7 +1,7 @@
-import { Bell, BookOpen, Clock, UsersIcon } from "lucide-react";
-import DashboardCard from "./DashboardCard";
 import { useDashboard } from "@/hooks/queries/useDashboard";
 import { format } from "date-fns";
+import { Bell, BookOpen, Clock, UsersIcon } from "lucide-react";
+import DashboardCard from "./DashboardCard";
 
 export default function DashboardSummary() {
   const {

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignUuid('course_unit_id')->constrained()->onDelete('cascade');
             $table->dateTime('start_datetime');
             $table->dateTime('end_datetime');
+            $table->timestamp('notified_at')->nullable();
             $table->timestamps();
         });
     }

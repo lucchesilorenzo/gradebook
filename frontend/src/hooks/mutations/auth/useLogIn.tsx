@@ -12,7 +12,7 @@ export function useLogIn() {
     mutationFn: (data: TLogInSchema) => postData("/auth/login", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["auth"] });
-      navigate("/");
+      navigate("/dashboard");
     },
     onError: (error) => {
       toast.error(error.message);

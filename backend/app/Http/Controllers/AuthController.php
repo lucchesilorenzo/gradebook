@@ -31,9 +31,12 @@ class AuthController extends Controller
             // Generate Sanctum token
             $token = $user->createToken('auth_token')->plainTextToken;
 
-            return response()->json(['token' => $token], 200);
+            return response()->json(['token' => $token]);
         } catch (\Throwable $e) {
-            return response()->json(['message' => 'Could not login user.', 'error' => $e->getMessage()], 500);
+            return response()->json([
+                'message' => 'Could not login user.',
+                'error' => $e->getMessage(),
+            ], 500);
         }
     }
 
@@ -46,6 +49,6 @@ class AuthController extends Controller
     {
         auth()->user()->tokens()->delete();
 
-        return response()->json(['message' => 'Logged out.'], 200);
+        return response()->json(['message' => 'Logged out.']);
     }
 }

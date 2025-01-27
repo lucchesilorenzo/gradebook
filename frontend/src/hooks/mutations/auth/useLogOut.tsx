@@ -10,6 +10,7 @@ export function useLogOut() {
     mutationFn: () => postData("/auth/logout"),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["auth"] });
+      localStorage.removeItem("token");
       navigate("/auth/login");
     },
   });

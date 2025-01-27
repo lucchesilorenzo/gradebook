@@ -55,7 +55,7 @@ createRoot(document.getElementById("root")!).render(
       </BrowserRouter>
 
       <Toaster
-        duration={4000}
+        duration={6000}
         visibleToasts={1}
         position="top-right"
         richColors
