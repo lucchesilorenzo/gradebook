@@ -39,9 +39,9 @@ class ScheduleNotification extends Notification
     public function toDatabase(object $notifiable): array
     {
         return [
-            'message' => 'Your next lesson starts in 10 minutes!',
             'schedule_id' => $this->schedule->id,
-            'course_name' => $this->schedule->course->name,
+            'course' => $this->schedule->course->name,
+            'course_unit' => $this->schedule->courseUnit->name,
             'start_datetime' => $this->schedule->start_datetime,
         ];
     }

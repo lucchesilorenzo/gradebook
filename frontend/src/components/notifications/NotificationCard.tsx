@@ -1,3 +1,5 @@
+import { UserNotification } from "@/lib/types";
+import { format, formatDistanceToNow } from "date-fns";
 import { Bell, MoreHorizontal } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
@@ -18,14 +20,23 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
-export default function NotificationCard() {
-  const isRead = false;
+type NotificationCardProps = {
+  notification: UserNotification;
+};
+
+export default function NotificationCard({
+  notification,
+}: NotificationCardProps) {
+  const date = format(
+    new Date(notification.data.start_datetime),
+    "dd/MM/yyyy 'at' HH:mm",
+  );
 
   return (
-    <Card className={isRead ? "bg-background" : "bg-muted"}>
+    <Card className={notification.read_at ? "bg-background" : "bg-muted"}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">
-          Lesson X is starting in 5 minutes
+          Lesson "{notification.data.course_unit}" is starting in 10 minutes
         </CardTitle>
         <Badge variant="outline">Schedule</Badge>
       </CardHeader>
@@ -35,12 +46,25 @@ export default function NotificationCard() {
             <Bell className="h-5 w-5" />
           </div>
           <div className="min-w-0 flex-grow">
-            <CardDescription className="text-sm">To be defined</CardDescription>
+            <CardDescription className="text-sm">
+              It is reminded that on{" "}
+              <span className="font-semibold">{date}</span> the lesson{" "}
+              <span className="font-semibold">
+                "{notification.data.course_unit}"
+              </span>{" "}
+              of the course{" "}
+              <span className="font-semibold">{notification.data.course}</span>{" "}
+              will begin.
+            </CardDescription>
           </div>
         </div>
       </CardContent>
       <CardFooter className="flex items-center justify-between">
-        <p className="text-xs text-muted-foreground">One day ago</p>
+        <p className="text-xs text-muted-foreground">
+          {formatDistanceToNow(notification.created_at, {
+            addSuffix: true,
+          })}
+        </p>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="sm">
@@ -50,7 +74,9 @@ export default function NotificationCard() {
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            {!isRead && <DropdownMenuItem>Mark as read</DropdownMenuItem>}
+            {!notification.read_at && (
+              <DropdownMenuItem>Mark as read</DropdownMenuItem>
+            )}
             <DropdownMenuItem>Delete</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

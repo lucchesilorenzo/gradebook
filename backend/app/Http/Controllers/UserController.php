@@ -35,9 +35,15 @@ class UserController extends Controller
     public function getUserNotifications(): JsonResponse
     {
         try {
-            $notifications = auth()->user()->unreadNotifications->count();
+            $user = auth()->user();
 
-            return response()->json($notifications);
+            $notifications = $user->notifications;
+            $unreadNotifications = $user->unreadNotifications->count();
+
+            return response()->json([
+                'notifications' => $notifications,
+                'unread_notifications' => $unreadNotifications,
+            ]);
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not get user notifications.',

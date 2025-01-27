@@ -1,10 +1,10 @@
 import CourseProvider from "@/contexts/CourseProvider";
-import { useCourses } from "@/hooks/queries/useCourses";
+import { useCourses } from "@/hooks/queries/courses/useCourses";
 import { Outlet } from "react-router-dom";
 import AuthGuard from "../common/AuthGuard";
 import Header from "../common/Header";
 import Loading from "../common/Loading";
-import { useUserSettings } from "@/hooks/queries/useUserSettings";
+import { useUserSettings } from "@/hooks/queries/users/useUserSettings";
 import UserProvider from "@/contexts/UserProvider";
 
 export default function AppLayout() {

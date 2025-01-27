@@ -17,6 +17,7 @@ class TaskController extends Controller
     {
         try {
             $tasks = auth()->user()->tasks()->paginate(4);
+
             return response()->json($tasks);
         } catch (\Throwable $e) {
             return response()->json([

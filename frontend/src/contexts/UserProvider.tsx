@@ -1,4 +1,4 @@
-import { useUserNotifications } from "@/hooks/queries/useUserNotifications";
+import { useUserNotifications } from "@/hooks/queries/users/useUserNotifications";
 import { getPrivateEcho } from "@/lib/echo";
 import { UserSettings } from "@/lib/types";
 import React, { createContext, useEffect } from "react";
@@ -26,7 +26,7 @@ export default function UserProvider({
   children,
   userSettings,
 }: UserProviderProps) {
-  const { data: notifications, refetch } = useUserNotifications();
+  const { data, refetch } = useUserNotifications();
 
   useEffect(() => {
     const privateEcho = getPrivateEcho();
@@ -44,7 +44,12 @@ export default function UserProvider({
   }, [userSettings.id, refetch]);
 
   return (
-    <UserContext.Provider value={{ userSettings, notifications }}>
+    <UserContext.Provider
+      value={{
+        userSettings,
+        notifications: data?.unread_notifications,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

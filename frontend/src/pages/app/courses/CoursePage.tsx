@@ -3,7 +3,7 @@ import Loading from "@/components/common/Loading";
 import CourseDetailCard from "@/components/courses/CourseDetailCard";
 import CourseUnitsList from "@/components/courses/units/CourseUnitsList";
 import { Badge } from "@/components/ui/badge";
-import { useCourseBySlug } from "@/hooks/queries/useCourseBySlug";
+import { useCourseBySlug } from "@/hooks/queries/courses/useCourseBySlug";
 import env from "@/lib/env";
 import { capitalize } from "@/lib/utils";
 import { useEffect } from "react";

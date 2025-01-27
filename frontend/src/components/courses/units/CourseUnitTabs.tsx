@@ -1,6 +1,6 @@
 import { columns } from "@/components/tables/courses/columns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useCourseUnitMaterials } from "@/hooks/queries/useCourseUnitMaterials";
+import { useCourseUnitMaterials } from "@/hooks/queries/courses/useCourseUnitMaterials";
 import env from "@/lib/env";
 import { CourseUnit, TeacherCourse } from "@/lib/types";
 import { Attendance } from "@/lib/types/attendance-types";

@@ -2,7 +2,7 @@ import H1 from "@/components/common/H1";
 import Loading from "@/components/common/Loading";
 import CourseUnitTabs from "@/components/courses/units/CourseUnitTabs";
 import { useAttendances } from "@/hooks/queries/useAttendances";
-import { useCourseBySlug } from "@/hooks/queries/useCourseBySlug";
+import { useCourseBySlug } from "@/hooks/queries/courses/useCourseBySlug";
 import { Navigate, useParams } from "react-router-dom";
 
 export default function CourseUnitPage() {
