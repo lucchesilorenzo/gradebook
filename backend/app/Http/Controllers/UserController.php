@@ -133,4 +133,27 @@ class UserController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Delete user notification.
+     *
+     * @param string $notificationId
+     * @return JsonResponse
+     */
+    public function deleteUserNotification(string $notificationId): JsonResponse
+    {
+        try {
+            $notification = auth()->user()->notifications()->findOrFail($notificationId);
+            $notification->delete();
+
+            return response()->json([
+                'message' => 'User notification deleted successfully.',
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not delete user notification.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

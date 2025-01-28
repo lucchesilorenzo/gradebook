@@ -20,6 +20,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { useMarkUserNotificationAsRead } from "@/hooks/mutations/users/useMarkUserNotificationAsRead";
+import { useDeleteUserNotification } from "@/hooks/mutations/users/useDeleteUserNotification";
 
 type NotificationCardProps = {
   notification: UserNotification;
@@ -30,6 +31,7 @@ export default function NotificationCard({
 }: NotificationCardProps) {
   const { mutateAsync: markUserNotificationAsRead } =
     useMarkUserNotificationAsRead();
+  const { mutateAsync: deleteUserNotification } = useDeleteUserNotification();
 
   const date = format(
     new Date(notification.data.start_datetime),
@@ -38,6 +40,10 @@ export default function NotificationCard({
 
   async function handleMarkUserNotificationAsRead() {
     await markUserNotificationAsRead(notification.id);
+  }
+
+  async function handleDeleteUserNotification() {
+    await deleteUserNotification(notification.id);
   }
 
   return (
@@ -87,7 +93,9 @@ export default function NotificationCard({
                 Mark as read
               </DropdownMenuItem>
             )}
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem onSelect={handleDeleteUserNotification}>
+              Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </CardFooter>
