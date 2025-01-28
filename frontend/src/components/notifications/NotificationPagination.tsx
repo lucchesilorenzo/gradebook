@@ -1,7 +1,6 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -12,39 +11,57 @@ import { Button } from "../ui/button";
 type NotificationPaginationProps = {
   page: number;
   lastPage: string | null;
-  onNext: () => void;
-  onPrev: () => void;
+  totalPages: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export default function NotificationPagination({
   page,
   lastPage,
-  onNext,
-  onPrev,
+  totalPages,
+  setPage,
 }: NotificationPaginationProps) {
+  function handleNextPage() {
+    setPage((prev) => prev + 1);
+  }
+
+  function handlePrevPage() {
+    setPage((prev) => prev - 1);
+  }
+
+  function handlePageChange(page: number) {
+    setPage(page);
+  }
+
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <Button variant="ghost" disabled={page === 1}>
+          <Button
+            variant="ghost"
+            onClick={handlePrevPage}
+            disabled={page === 1}
+          >
             <PaginationPrevious
-              to={`/notifications?page=${page - 1}`}
-              onClick={onPrev}
+              to={`/teacher/notifications?page=${page - 1}`}
             />
           </Button>
         </PaginationItem>
+
+        {Array.from({ length: totalPages }, (_, index) => (
+          <PaginationItem
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            <PaginationLink to={`/teacher/notifications?page=${index + 1}`}>
+              {index + 1}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+
         <PaginationItem>
-          <PaginationLink to="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <Button variant="ghost" disabled={!lastPage}>
-            <PaginationNext
-              to={`/notifications?page=${page + 1}`}
-              onClick={onNext}
-            />
+          <Button variant="ghost" onClick={handleNextPage} disabled={!lastPage}>
+            <PaginationNext to={`/teacher/notifications?page=${page + 1}`} />
           </Button>
         </PaginationItem>
       </PaginationContent>

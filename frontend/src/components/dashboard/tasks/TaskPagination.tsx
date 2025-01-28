@@ -24,20 +24,14 @@ export default function TaskPagination({
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <Button variant="ghost" disabled={page === 1}>
-            <PaginationPrevious
-              to={`/dashboard?page=${page - 1}`}
-              onClick={onPrev}
-            />
+          <Button variant="ghost" onClick={onPrev} disabled={page === 1}>
+            <PaginationPrevious to={`/dashboard?page=${page - 1}`} />
           </Button>
         </PaginationItem>
 
         <PaginationItem>
-          <Button variant="ghost" disabled={!lastPage}>
-            <PaginationNext
-              to={`/dashboard?page=${page + 1}`}
-              onClick={onNext}
-            />
+          <Button variant="ghost" onClick={onNext} disabled={!lastPage}>
+            <PaginationNext to={`/dashboard?page=${page + 1}`} />
           </Button>
         </PaginationItem>
       </PaginationContent>

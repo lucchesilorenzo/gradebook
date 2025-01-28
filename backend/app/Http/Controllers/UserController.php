@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
     /**
-     * Get user settings
+     * Get user settings.
      *
      * @return JsonResponse
      */
@@ -37,7 +37,10 @@ class UserController extends Controller
         try {
             $user = auth()->user();
 
-            $notifications = $user->notifications;
+            $notifications = $user->notifications()
+                ->orderBy('updated_at', 'desc')
+                ->paginate(3);
+
             $unreadNotifications = $user->unreadNotifications->count();
 
             return response()->json([
