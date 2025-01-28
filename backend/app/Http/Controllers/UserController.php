@@ -110,4 +110,27 @@ class UserController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Mark notification as read.
+     *
+     * @param string $notificationId
+     * @return JsonResponse
+     */
+    public function markNotificationAsRead(string $notificationId): JsonResponse
+    {
+        try {
+            $notification = auth()->user()->notifications()->findOrFail($notificationId);
+            $notification->markAsRead();
+
+            return response()->json([
+                'message' => 'Notification marked as read successfully.',
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not mark notification as read.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

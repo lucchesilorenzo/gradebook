@@ -19,6 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { useMarkUserNotificationAsRead } from "@/hooks/mutations/users/useMarkUserNotificationAsRead";
 
 type NotificationCardProps = {
   notification: UserNotification;
@@ -27,10 +28,17 @@ type NotificationCardProps = {
 export default function NotificationCard({
   notification,
 }: NotificationCardProps) {
+  const { mutateAsync: markUserNotificationAsRead } =
+    useMarkUserNotificationAsRead();
+
   const date = format(
     new Date(notification.data.start_datetime),
     "dd/MM/yyyy 'at' HH:mm",
   );
+
+  async function handleMarkUserNotificationAsRead() {
+    await markUserNotificationAsRead(notification.id);
+  }
 
   return (
     <Card className={notification.read_at ? "bg-background" : "bg-muted"}>
@@ -75,7 +83,9 @@ export default function NotificationCard({
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
             {!notification.read_at && (
-              <DropdownMenuItem>Mark as read</DropdownMenuItem>
+              <DropdownMenuItem onSelect={handleMarkUserNotificationAsRead}>
+                Mark as read
+              </DropdownMenuItem>
             )}
             <DropdownMenuItem>Delete</DropdownMenuItem>
           </DropdownMenuContent>
