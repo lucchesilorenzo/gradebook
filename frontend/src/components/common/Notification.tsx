@@ -3,8 +3,14 @@ import { Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { NotificationBadge } from "../ui/notification-badge";
+import { useEffect } from "react";
+import env from "@/lib/env";
 
 export default function Notification() {
+  useEffect(() => {
+    document.title = `Notifications | ${env.VITE_APP_NAME}`;
+  }, []);
+
   const { notifications } = useUser();
 
   return (

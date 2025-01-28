@@ -7,6 +7,7 @@ import { Navigate, useParams } from "react-router-dom";
 
 export default function CourseUnitPage() {
   const { courseSlug, courseUnitSlug } = useParams();
+
   const { data: course, isLoading: isCourseLoading } =
     useCourseBySlug(courseSlug);
   const { data: attendances, isLoading: isAttendancesLoading } = useAttendances(

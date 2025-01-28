@@ -52,11 +52,9 @@ export default function TaskForm() {
           />
         </div>
 
-        <div className="flex items-center">
-          <LoadingButton type="submit" isLoading={form.formState.isSubmitting}>
-            <Plus />
-          </LoadingButton>
-        </div>
+        <LoadingButton type="submit" isLoading={form.formState.isSubmitting}>
+          <Plus />
+        </LoadingButton>
       </form>
     </Form>
   );
