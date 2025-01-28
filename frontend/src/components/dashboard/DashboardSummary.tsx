@@ -17,6 +17,10 @@ export default function DashboardSummary() {
           name: "N/A",
         },
       },
+      notifications: {
+        read_notifications: 0,
+        unread_notifications: 0,
+      },
     },
     isLoading,
   } = useDashboard();
@@ -46,8 +50,10 @@ export default function DashboardSummary() {
     },
     {
       title: "Notifications",
-      value: 0,
-      description: "2 new, 1 unread",
+      value:
+        data.notifications.unread_notifications +
+        data.notifications.read_notifications,
+      description: `${data.notifications.read_notifications} new, ${data.notifications.unread_notifications} unread`,
       icon: Bell,
     },
   ];

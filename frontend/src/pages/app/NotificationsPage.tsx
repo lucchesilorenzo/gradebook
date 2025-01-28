@@ -21,12 +21,14 @@ export default function NotificationsPage() {
         <div className="container mx-auto mt-6 space-y-6">
           <NotificationList notifications={data.notifications.data} />
 
-          <NotificationPagination
-            page={data.notifications.current_page}
-            lastPage={data.notifications.next_page_url}
-            totalPages={data.notifications.last_page}
-            setPage={setPage}
-          />
+          {data.notifications.data.length > 0 && (
+            <NotificationPagination
+              page={data.notifications.current_page}
+              lastPage={data.notifications.next_page_url}
+              totalPages={data.notifications.last_page}
+              setPage={setPage}
+            />
+          )}
         </div>
       )}
     </main>

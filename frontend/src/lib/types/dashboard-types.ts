@@ -20,4 +20,8 @@ export type DashboardSummary = {
       name: string;
     };
   };
+  notifications: {
+    read_notifications: number;
+    unread_notifications: number;
+  };
 };

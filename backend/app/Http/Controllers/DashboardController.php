@@ -44,10 +44,17 @@ class DashboardController extends Controller
                 ->orderBy('start_datetime', 'asc')
                 ->firstOrFail();
 
+            // Get notifications
+            $notifications = [
+                'read_notifications' => $user->readNotifications->count(),
+                'unread_notifications' => $user->unreadNotifications->count(),
+            ];
+
             return response()->json([
                 'courses_count' => $coursesCount,
                 'total_students' => $totalStudents,
                 'next_lesson' => $nextLesson,
+                'notifications' => $notifications,
             ]);
         } catch (\Throwable $e) {
             return response()->json([
