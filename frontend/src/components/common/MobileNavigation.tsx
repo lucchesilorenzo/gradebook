@@ -11,7 +11,7 @@ import {
 import { routes } from "@/lib/data";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Link } from "react-router-dom";
-import Logo from "./Logo";
+import AppLogo from "./AppLogo";
 import { Menu } from "lucide-react";
 import { useState } from "react";
 
@@ -28,7 +28,7 @@ export default function MobileNavigation() {
       <SheetContent side="left" className="bg-zinc-100">
         <SheetHeader>
           <SheetTitle>
-            <Logo onOpenChange={() => setIsSheetOpen(!isSheetOpen)} />
+            <AppLogo onOpenChange={() => setIsSheetOpen(!isSheetOpen)} />
           </SheetTitle>
           <VisuallyHidden>
             <SheetDescription>Navigation menu</SheetDescription>

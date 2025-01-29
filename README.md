@@ -1,8 +1,12 @@
-# GradeBook
+<h1 align="center">
+  <br />
+   <img src="screenshots/gradebook-logo.png" alt="GradeBook Logo" width="300" />
+  <br />
+   GradeBook
+  <br />
+</h1>
 
-![GradeBook Logo](screenshots/gradebook-logo.png)
-
-**A digital school register designed to help teachers manage courses, schedules, student attendance, and educational materials.**
+<h4 align="center">A digital school register designed to help teachers manage courses, schedules, student attendance, and educational materials.</h4>
 
 ---
 
@@ -144,56 +148,56 @@ Ensure you have the following installed:
    cd ../backend
    ```
 
-Create a `.env` file at the root of the backend project and copy what's in the `.env.example` file. Then, configure your database and Reverb settings:
+   Create a `.env` file at the root of the backend project and copy what's in the `.env.example` file. Then, configure your database and Reverb settings:
 
-```bash
-  DB_CONNECTION=pgsql
-  DB_HOST=127.0.0.1
-  DB_PORT=5432
-  DB_DATABASE=gradebook
-  DB_USERNAME=your_username
-  DB_PASSWORD=your_password
+   ```bash
+   DB_CONNECTION=pgsql
+   DB_HOST=127.0.0.1
+   DB_PORT=5432
+   DB_DATABASE=gradebook
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
 
-  BROADCAST_CONNECTION=reverb
-  REVERB_APP_ID=insert_your_app_id_here
-  REVERB_APP_KEY=insert_your_app_key_here
-  REVERB_APP_SECRET=insert_your_app_secret_here
-  REVERB_HOST="localhost"
-  REVERB_PORT=8080
-  REVERB_SCHEME=http
-```
+   BROADCAST_CONNECTION=reverb
+   REVERB_APP_ID=insert_your_app_id_here
+   REVERB_APP_KEY=insert_your_app_key_here
+   REVERB_APP_SECRET=insert_your_app_secret_here
+   REVERB_HOST="localhost"
+   REVERB_PORT=8080
+   REVERB_SCHEME=http
+   ```
 
-5. **Generate Laravel application key**:
+6. **Generate Laravel application key**:
 
    ```bash
    php artisan key:generate
    ```
 
-6. **Run database migrations and seed data**:
+7. **Run database migrations and seed data**:
 
    ```bash
    php artisan migrate --seed
    ```
 
-7. **Run this command for processing jobs**:
+8. **Run this command for processing jobs**:
 
    ```bash
    php artisan queue:work
    ```
 
-8. **Run this command to execute scheduled tasks**:
+9. **Run this command to execute scheduled tasks**:
 
    ```bash
    php artisan schedule:work
    ```
 
-9. **Run this command to run Reverb server**:
+10. **Run this command to run Reverb server**:
 
-   ```bash
-   php artisan reverb:start
-   ```
+    ```bash
+    php artisan reverb:start
+    ```
 
-10. **Start both the frontend and backend**:
+11. **Start both the frontend and backend**:
 
     ```bash
     cd .. && npm start

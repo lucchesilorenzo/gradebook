@@ -1,5 +1,5 @@
 import ProfileDropdownMenu from "../profile/ProfileDropdownMenu";
-import Logo from "./Logo";
+import AppLogo from "./AppLogo";
 import MobileNavigation from "./MobileNavigation";
 import Navigation from "./Navigation";
 import Notification from "./Notification";
@@ -17,7 +17,7 @@ export default function Header() {
       </div>
 
       <div className="hidden items-center justify-between sm:flex">
-        <Logo />
+        <AppLogo />
         <Navigation />
 
         <div className="flex items-center gap-2">

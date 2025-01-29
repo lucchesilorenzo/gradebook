@@ -28,28 +28,30 @@ export default function CourseDetailCard({ course }: CourseDetailCardProps) {
       </CardContent>
       <CardFooter>
         <div className="flex flex-col gap-2">
-          <p className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <BookOpen className="h-5 w-5 text-muted-foreground" />
             <span className="font-semibold">Tutor:</span>{" "}
             <span>
               {course.tutor.first_name} {course.tutor.last_name}
             </span>
-          </p>
+          </div>
 
-          <p className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <Users className="h-5 w-5 text-muted-foreground" />
             <span className="font-semibold">Total students:</span>{" "}
             <span>{course.students.length}</span>
-          </p>
+          </div>
 
-          <p className="flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-muted-foreground" />
-            <span className="font-semibold">Course duration:</span>{" "}
+          <div className="lg:flex lg:items-center lg:gap-2">
+            <div className="flex items-center gap-2">
+              <Calendar className="h-5 w-5 text-muted-foreground" />
+              <span className="font-semibold">Course duration:</span>{" "}
+            </div>
             <span>
               {start.toLocaleDateString("it-IT")} -{" "}
               {end.toLocaleDateString("it-IT")}
             </span>
-          </p>
+          </div>
         </div>
       </CardFooter>
     </Card>

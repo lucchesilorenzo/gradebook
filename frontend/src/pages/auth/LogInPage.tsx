@@ -1,11 +1,5 @@
-import LogInForm from "@/components/auth/LogInForm";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import BrandLogo from "@/components/common/BrandLogo";
+import LogInCard from "@/components/auth/LogInCard";
 import env from "@/lib/env";
 import { useEffect } from "react";
 
@@ -15,18 +9,14 @@ export default function LogInPage() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-6">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <LogInForm />
-        </CardContent>
-      </Card>
-    </div>
+    <main className="flex min-h-screen justify-center p-6 md:p-10">
+      <div>
+        <BrandLogo />
+
+        <div className="flex flex-col gap-6">
+          <LogInCard />
+        </div>
+      </div>
+    </main>
   );
 }

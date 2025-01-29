@@ -33,7 +33,12 @@ export default function CoursePage() {
       </div>
 
       <CourseDetailCard course={course} />
-      <CourseUnitsList course={course} />
+
+      {!course.units.length ? (
+        <p>No units found for this course.</p>
+      ) : (
+        <CourseUnitsList course={course} />
+      )}
     </main>
   );
 }

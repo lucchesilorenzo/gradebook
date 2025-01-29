@@ -17,7 +17,7 @@ export default function AcademyCard() {
       ) : (
         <>
           <CardHeader>
-            <CardTitle className="text-md flex items-center gap-2 font-bold sm:text-xl">
+            <CardTitle className="flex items-center gap-2 font-bold sm:text-xl">
               <Building2 />
               Academy Information
             </CardTitle>

@@ -5,7 +5,6 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 import AppLayout from "./components/layouts/AppLayout.tsx";
-import AuthLayout from "./components/layouts/AuthLayout.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 import CalendarPage from "./pages/app/CalendarPage.tsx";
 import DashboardPage from "./pages/app/DashboardPage.tsx";
@@ -25,7 +24,7 @@ createRoot(document.getElementById("root")!).render(
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
         <Routes>
-          <Route path="auth" element={<AuthLayout />}>
+          <Route path="auth">
             <Route index element={<Navigate to="login" />} />
             <Route path="login" element={<LogInPage />} />
           </Route>
