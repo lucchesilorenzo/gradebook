@@ -19,7 +19,7 @@ export default function CourseDetailCard({ course }: CourseDetailCardProps) {
   return (
     <Card className="max-w-[800px]">
       <CardHeader>
-        <CardTitle className="text-md font-bold sm:text-2xl">
+        <CardTitle className="font-bold sm:text-2xl">
           Course Description
         </CardTitle>
       </CardHeader>
@@ -42,7 +42,7 @@ export default function CourseDetailCard({ course }: CourseDetailCardProps) {
             <span>{course.students.length}</span>
           </div>
 
-          <div className="lg:flex lg:items-center lg:gap-2">
+          <div className="sm:flex sm:items-center sm:gap-2">
             <div className="flex items-center gap-2">
               <Calendar className="h-5 w-5 text-muted-foreground" />
               <span className="font-semibold">Course duration:</span>{" "}

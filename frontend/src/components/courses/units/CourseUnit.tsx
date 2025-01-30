@@ -52,7 +52,7 @@ export default function CourseUnit({
     <Card>
       <CardHeader>
         <div className="mb-2 flex items-center justify-between">
-          <CardTitle className="text-md font-bold sm:text-xl">
+          <CardTitle className="font-bold sm:text-xl">
             {courseUnit.name}
           </CardTitle>
           <Badge className="py-1">{courseUnitProgress}% Complete</Badge>

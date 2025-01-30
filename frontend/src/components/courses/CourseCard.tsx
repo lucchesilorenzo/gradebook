@@ -35,9 +35,7 @@ export default function CourseCard({ course }: CourseCardProps) {
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="text-md font-bold sm:text-xl">
-            {course.name}
-          </CardTitle>
+          <CardTitle className="font-bold sm:text-xl">{course.name}</CardTitle>
           <Badge>{capitalize(course.type)}</Badge>
         </div>
         <CardDescription>{course.course_code}</CardDescription>

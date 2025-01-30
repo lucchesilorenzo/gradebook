@@ -5,9 +5,7 @@ export default function ProfileEditTab() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-md font-bold sm:text-xl">
-          Edit Information
-        </CardTitle>
+        <CardTitle className="font-bold sm:text-xl">Edit Information</CardTitle>
       </CardHeader>
       <CardContent>
         <ProfileEditForm />

@@ -22,7 +22,7 @@ export default function CourseUnitMaterials({
     <Card className="max-w-6xl">
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="text-md font-bold sm:text-xl">
+          <CardTitle className="font-bold sm:text-xl">
             Course Materials
           </CardTitle>
 

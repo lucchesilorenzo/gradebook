@@ -33,7 +33,7 @@ class AttendanceController extends Controller
             $courseUnit = $course->units()->where('slug', $courseUnitSlug)->firstOrFail();
 
             // Get today's date
-            $today = Carbon::now();
+            $today = now();
 
             // Get attendances 
             // TODO: When a lesson ends, the status column must be updated to N/A
@@ -64,7 +64,7 @@ class AttendanceController extends Controller
 
         try {
             // Get today's date
-            $today = Carbon::now();
+            $today = now();
 
             // Check if attendance was already created
             $attendance = Attendance::where('course_unit_id', $validatedAttendances[0]['course_unit_id'])
@@ -142,7 +142,7 @@ class AttendanceController extends Controller
             $courseUnit = $course->units()->where('slug', $courseUnitSlug)->firstOrFail();
 
             // Get today's date
-            $today = Carbon::now();
+            $today = now();
 
             // Check if schedule is valid
             $schedule = $courseUnit->schedules()
@@ -155,7 +155,7 @@ class AttendanceController extends Controller
                 $time = Carbon::parse($schedule->end_datetime)->format('H:i');
 
                 return response()->json([
-                    'message' => 'You can end the lesson after ' . $time . '.',
+                    'message' => "You can end the lesson after {$time}.",
                 ], 400);
             }
 
@@ -220,7 +220,7 @@ class AttendanceController extends Controller
 
         try {
             // Get today's date
-            $today = Carbon::now();
+            $today = now();
 
             // Check if attendance exists
             $attendance = Attendance::where('student_id', $student->id)
