@@ -96,6 +96,7 @@ class AttendanceController extends Controller
             // Create attendances
             foreach ($validatedAttendances as $attendance) {
                 Attendance::create([
+                    'user_id' => auth()->id(),
                     'student_id' => $attendance['id'],
                     'course_id' => $attendance['course_id'],
                     'course_unit_id' => $attendance['course_unit_id'],
@@ -129,8 +130,6 @@ class AttendanceController extends Controller
         string $courseSlug,
         string $courseUnitSlug
     ): JsonResponse {
-        // IDEA: Check end time within a period of time (1-2 hours) if forgotten
-
         // Validation
         $validatedData = $request->validated();
 

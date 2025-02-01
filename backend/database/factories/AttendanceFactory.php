@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Course;
 use App\Models\CourseUnit;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +21,7 @@ class AttendanceFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::inRandomOrder()->first()->id,
             'student_id' => Student::inRandomOrder()->first()->id,
             'course_id' => Course::inRandomOrder()->first()->id,
             'course_unit_id' => CourseUnit::inRandomOrder()->first()->id,

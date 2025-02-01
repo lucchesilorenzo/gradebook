@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
 
         // Create 5 Courses with custom configuration
         $courses = Course::factory(5)->configure()->create();
+        $randomCourses = $courses->random(rand(3, $courses->count()));
 
         // Create 20 Students (not associated yet with courses)
         Student::factory(20)->create();
@@ -39,14 +40,12 @@ class DatabaseSeeder extends Seeder
         $units = CourseUnit::factory(5)->configure()->create();
 
         // Attach courses to users
-        $users->each(function ($user) use ($courses) {
-            $user->courses()->attach($courses->random(rand(3, $courses->count())));
+        $users->each(function ($user) use ($randomCourses) {
+            $user->courses()->attach($randomCourses);
         });
 
         // Attach units to courses and users via pivot table course_unit_user
-        $users->each(function ($user) use ($courses, $units) {
-            $randomCourses = $courses->random(rand(3, $courses->count()));
-
+        $users->each(function ($user) use ($randomCourses, $units) {
             $randomCourses->each(function ($course) use ($user, $units) {
                 $randomUnits = $units->random(rand(3, $units->count()));
 

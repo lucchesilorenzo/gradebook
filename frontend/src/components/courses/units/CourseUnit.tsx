@@ -57,7 +57,9 @@ export default function CourseUnit({
           </CardTitle>
           <Badge className="py-1">{courseUnitProgress}% Complete</Badge>
         </div>
-        <CardDescription>{courseUnit.description}</CardDescription>
+        <CardDescription className="text-balance">
+          {courseUnit.description}
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-2">
         <Progress value={courseUnitProgress} />

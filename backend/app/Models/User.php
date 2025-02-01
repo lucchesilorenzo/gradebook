@@ -97,4 +97,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(CourseUnit::class, 'course_unit_user');
     }
+
+    /**
+     * Get all the attendances the teacher has.
+     *
+     * @return HasMany
+     */
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class);
+    }
 }

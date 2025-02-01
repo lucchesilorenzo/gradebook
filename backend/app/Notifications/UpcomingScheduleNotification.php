@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 
-class ScheduleNotification extends Notification
+class UpcomingScheduleNotification extends Notification
 {
     use Queueable;
 
@@ -40,6 +40,7 @@ class ScheduleNotification extends Notification
     {
         return [
             'schedule_id' => $this->schedule->id,
+            'title' => 'Lesson "' . $this->schedule->courseUnit->name . '" is starting in 10 minutes',
             'course' => $this->schedule->course->name,
             'course_unit' => $this->schedule->courseUnit->name,
             'start_datetime' => $this->schedule->start_datetime,

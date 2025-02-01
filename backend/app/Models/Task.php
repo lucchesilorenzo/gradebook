@@ -25,6 +25,6 @@ class Task extends Model
      */
     public function teacher(): BelongsTo
     {
-        return $this->belongsTo(Teacher::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

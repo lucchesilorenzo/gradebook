@@ -17,7 +17,7 @@ import {
 } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TablePagination from "../ui/TablePagination";
 
 type StudentRegisterTableProps<TData, TValue> = {
@@ -34,6 +34,12 @@ export default function StudentRegisterTable<TData, TValue>({
   courseUnitSlug,
 }: StudentRegisterTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({});
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
+    return () => clearInterval(timer);
+  }, []);
 
   const table = useReactTable({
     data,
@@ -50,27 +56,35 @@ export default function StudentRegisterTable<TData, TValue>({
   const attendanceStart = table.getCoreRowModel().rows.map((row) => ({
     ...row.original, // Taking ID only
     status: row.getIsSelected(),
-    date: format(new Date(), "yyyy-MM-dd"),
-    start_time: format(new Date(), "HH:mm"),
+    date: format(currentTime, "yyyy-MM-dd"),
+    start_time: format(currentTime, "HH:mm"),
   }));
 
   // End lesson
   const attendanceEnd = {
     course_slug: courseSlug,
     course_unit_slug: courseUnitSlug,
-    end_time: format(new Date(), "HH:mm"),
+    end_time: format(currentTime, "HH:mm"),
   };
 
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
-        <MainAlertDialog attendanceStart={attendanceStart} type="start">
+        <MainAlertDialog
+          type="start"
+          attendanceStart={attendanceStart}
+          currentTime={currentTime}
+        >
           <Button size="responsive">
             <Plus /> Confirm start lesson
           </Button>
         </MainAlertDialog>
 
-        <MainAlertDialog attendanceEnd={attendanceEnd} type="end">
+        <MainAlertDialog
+          type="end"
+          attendanceEnd={attendanceEnd}
+          currentTime={currentTime}
+        >
           <Button size="responsive">
             <Plus /> Confirm end lesson
           </Button>

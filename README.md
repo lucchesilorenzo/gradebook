@@ -209,7 +209,7 @@ Ensure you have the following installed:
 
 ## Database Schema
 
-Here’s a basic overview of the core models:
+Here's a basic overview of the core models:
 
 ![Eloquent ER Diagram](./screenshots/database-schema.png)
 

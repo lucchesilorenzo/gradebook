@@ -24,9 +24,11 @@ export type UserNotification = {
   notifiable_type: string;
   data: {
     schedule_id: string;
+    title: string;
     course: string;
     course_unit: string;
-    start_datetime: string;
+    start_datetime?: string;
+    end_datetime?: string;
   };
 };
 

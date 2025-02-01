@@ -33,10 +33,36 @@ export default function NotificationCard({
     useMarkUserNotificationAsRead();
   const { mutateAsync: deleteUserNotification } = useDeleteUserNotification();
 
-  const date = format(
-    new Date(notification.data.start_datetime),
-    "dd/MM/yyyy 'at' HH:mm",
-  );
+  const startDate =
+    notification.data.start_datetime &&
+    format(new Date(notification.data.start_datetime), "dd/MM/yyyy 'at' HH:mm");
+
+  const endDate =
+    notification.data.end_datetime &&
+    format(new Date(notification.data.end_datetime), "dd/MM/yyyy 'at' HH:mm");
+
+  const notificationMapping: Record<string, () => JSX.Element> = {
+    "App\\Notifications\\ScheduleNotification": () => (
+      <>
+        It is reminded that on{" "}
+        <span className="font-semibold">{startDate}</span> the lesson{" "}
+        <span className="font-semibold">"{notification.data.course_unit}"</span>{" "}
+        of the course{" "}
+        <span className="font-semibold">{notification.data.course}</span> will
+        begin.
+      </>
+    ),
+    "App\\Notifications\\UnfinishedScheduleNotification": () => (
+      <>
+        The lesson{" "}
+        <span className="font-semibold">"{notification.data.course_unit}"</span>{" "}
+        that ended on <span className="font-semibold">{endDate}</span> of the
+        course <span className="font-semibold">{notification.data.course}</span>{" "}
+        has not been marked as finished. Please update the attendance if
+        necessary.
+      </>
+    ),
+  };
 
   async function handleMarkUserNotificationAsRead() {
     await markUserNotificationAsRead(notification.id);
@@ -50,7 +76,7 @@ export default function NotificationCard({
     <Card className={notification.read_at ? "bg-background" : "bg-muted"}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">
-          Lesson "{notification.data.course_unit}" is starting in 10 minutes
+          {notification.data.title}
         </CardTitle>
         <Badge variant="outline">Schedule</Badge>
       </CardHeader>
@@ -61,14 +87,7 @@ export default function NotificationCard({
           </div>
           <div className="min-w-0 flex-grow">
             <CardDescription className="text-sm">
-              It is reminded that on{" "}
-              <span className="font-semibold">{date}</span> the lesson{" "}
-              <span className="font-semibold">
-                "{notification.data.course_unit}"
-              </span>{" "}
-              of the course{" "}
-              <span className="font-semibold">{notification.data.course}</span>{" "}
-              will begin.
+              {notificationMapping[notification.type]?.()}
             </CardDescription>
           </div>
         </div>

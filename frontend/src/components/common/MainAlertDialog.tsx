@@ -13,7 +13,6 @@ import { useCreateAttendances } from "@/hooks/mutations/attendances/useCreateAtt
 import { useUpdateEndTime } from "@/hooks/mutations/attendances/useUpdateEndTime";
 import { format } from "date-fns";
 import { Clock } from "lucide-react";
-import { useEffect, useState } from "react";
 import { Badge } from "../ui/badge";
 
 type MainAlertDialogProps<T> = {
@@ -25,6 +24,7 @@ type MainAlertDialogProps<T> = {
     end_time: string;
   };
   type: "start" | "end";
+  currentTime: Date;
 };
 
 export default function MainAlertDialog<T>({
@@ -32,15 +32,10 @@ export default function MainAlertDialog<T>({
   attendanceStart,
   attendanceEnd,
   type,
+  currentTime,
 }: MainAlertDialogProps<T>) {
   const { mutateAsync: createAttendances } = useCreateAttendances();
   const { mutateAsync: updateEndTime } = useUpdateEndTime();
-  const [currentTime, setCurrentTime] = useState(new Date());
-
-  useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
-    return () => clearInterval(timer);
-  }, []);
 
   async function handleAttendances() {
     if (type === "start" && attendanceStart) {

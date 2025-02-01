@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\CourseUnitSchedule;
-use App\Notifications\ScheduleNotification;
+use App\Notifications\UpcomingScheduleNotification;
 use Illuminate\Console\Command;
 
 class NotifyUpcomingSchedules extends Command
@@ -40,7 +40,7 @@ class NotifyUpcomingSchedules extends Command
             // Send notifications to teachers
             foreach ($schedules as $schedule) {
                 $user = $schedule->teacher;
-                $user->notify(new ScheduleNotification($schedule));
+                $user->notify(new UpcomingScheduleNotification($schedule));
 
                 $schedule->update(['notified_at' => $now]);
 

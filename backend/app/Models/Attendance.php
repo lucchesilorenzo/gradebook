@@ -17,6 +17,7 @@ class Attendance extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'student_id',
         'course_id',
         'course_unit_id',
@@ -74,5 +75,15 @@ class Attendance extends Model
     public function courseUnit(): BelongsTo
     {
         return $this->belongsTo(CourseUnit::class);
+    }
+
+    /**
+     * Get the teacher that owns the attendance.
+     *
+     * @return BelongsTo
+     */
+    public function teacher(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
