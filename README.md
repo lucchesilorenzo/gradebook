@@ -135,15 +135,14 @@ Ensure you have the following installed:
    cd frontend
    ```
 
-   Create a `.env` file at the root of the frontend project with the following values:
+   Create a `.env` file at the root of the frontend project and copy what's in the `.env.example` file:
 
    ```bash
    VITE_APP_NAME="GradeBook"
    VITE_APP_DESCRIPTION="GradeBook is a streamlined software for managing courses, students, and academic records in a single tertiary education institution, offering an intuitive interface for teachers."
    VITE_BASE_URL="http://localhost:8000"
 
-   VITE_REVERB_APP_KEY=insert_your_app_key_here
-   VITE_REVERB_APP_SECRET=insert_your_app_secret_here
+   VITE_REVERB_APP_KEY=a49a01c63ef82d93394eb993a55284dcaa37071daa436fa04107f37342873932
    VITE_REVERB_HOST="localhost"
    VITE_REVERB_PORT=8080
    VITE_REVERB_SCHEME=http
@@ -168,9 +167,9 @@ Ensure you have the following installed:
    DB_PASSWORD=your_password
 
    BROADCAST_CONNECTION=reverb
-   REVERB_APP_ID=insert_your_app_id_here
-   REVERB_APP_KEY=insert_your_app_key_here
-   REVERB_APP_SECRET=insert_your_app_secret_here
+   REVERB_APP_ID=89118a2cfcc1da97f83474f4346a02eb4b31169d39a1cfaf02b9e221b86de72a
+   REVERB_APP_KEY=a49a01c63ef82d93394eb993a55284dcaa37071daa436fa04107f37342873932
+   REVERB_APP_SECRET=ce8ed9ec630e15806a9801636f4a57b07451f2e7fa6a92389027ca9ba0c94a21
    REVERB_HOST="localhost"
    REVERB_PORT=8080
    REVERB_SCHEME=http
