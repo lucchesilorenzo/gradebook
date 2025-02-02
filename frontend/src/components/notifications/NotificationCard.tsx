@@ -42,7 +42,7 @@ export default function NotificationCard({
     format(new Date(notification.data.end_datetime), "dd/MM/yyyy 'at' HH:mm");
 
   const notificationMapping: Record<string, () => JSX.Element> = {
-    "App\\Notifications\\ScheduleNotification": () => (
+    "App\\Notifications\\UpcomingScheduleNotification": () => (
       <>
         It is reminded that on{" "}
         <span className="font-semibold">{startDate}</span> the lesson{" "}
