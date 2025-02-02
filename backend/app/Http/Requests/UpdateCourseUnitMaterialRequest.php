@@ -23,7 +23,7 @@ class UpdateCourseUnitMaterialRequest extends FormRequest
     {
         return [
             'title' => 'nullable|string|max:20',
-            'description' => 'nullable|string|max:40',
+            'description' => 'nullable|string|max:200',
             'file' => 'nullable|mimes:pdf|max:10000',
             'url' => 'nullable|url',
         ];

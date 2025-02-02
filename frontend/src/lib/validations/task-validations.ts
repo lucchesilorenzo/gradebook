@@ -5,7 +5,7 @@ export const taskFormSchema = z.object({
     .string()
     .trim()
     .min(1, "Title is required.")
-    .max(20, "Title is too long."),
+    .max(40, "Title is too long."),
 });
 
 export type TTaskFormSchema = z.infer<typeof taskFormSchema>;

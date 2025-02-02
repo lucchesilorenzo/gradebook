@@ -12,6 +12,13 @@
 
 ## Features
 
+### Login
+
+- Teachers can log in securely to access their dashboard and courses.
+- Ensures data privacy and security.
+
+![Login Screenshot](screenshots/gradebook-1.png)
+
 ### Dashboard
 
 - View total courses and students assigned to the logged-in teacher.
@@ -20,7 +27,7 @@
 - Manage tasks: create and delete tasks.
 - View academy-related statistics, personalized for each teacher.
 
-![Dashboard Screenshot](screenshots/dashboard.png)
+![Dashboard Screenshot](screenshots/gradebook-2.png)
 
 ### Courses
 
@@ -30,14 +37,29 @@
   - **Attendance tracking**: Register lesson start and end times, record early exits and late arrivals.
   - **Material management**: Upload and organize teaching materials (links, videos, PDFs).
 
-![Courses Screenshot](screenshots/courses.png)
+![Courses Screenshot](screenshots/gradebook-2.png)
+![Courses Screenshot](screenshots/gradebook-3.png)
+![Courses Screenshot](screenshots/gradebook-4.png)
+![Courses Screenshot](screenshots/gradebook-5.png)
+![Courses Screenshot](screenshots/gradebook-6.png)
 
 ### Calendar
 
 - Displays all scheduled lessons for the teacher.
 - Clear and user-friendly calendar view for easy lesson tracking.
 
-![Calendar Screenshot](screenshots/calendar.png)
+![Calendar Screenshot](screenshots/gradebook-7.png)
+
+### Notifications
+
+- Real-time notifications:
+
+  - **10 minutes before** each scheduled lesson as a reminder.
+  - **10 minutes after** each lesson officially ends, notifying the teacher if the lesson hasn't been marked as completed.
+
+- Notifications are stored in the system for later reference.
+
+![Profile Screenshot](screenshots/gradebook-8.png)
 
 ### Profile
 
@@ -45,21 +67,8 @@
 - Edit profile information.
 - Upload a profile picture.
 
-![Profile Screenshot](screenshots/profile.png)
-
-### Notifications
-
-- Real-time notifications sent **10 minutes before** each scheduled lesson.
-- Notifications are stored in the system for later reference.
-
-![Notifications Screenshot](screenshots/notifications.png)
-
-### Secure Authentication
-
-- Teachers can log in securely to access their dashboard and courses.
-- Ensures data privacy and security.
-
-![Login Screenshot](screenshots/login.png)
+![Profile Screenshot](screenshots/gradebook-9.png)
+![Profile Screenshot](screenshots/gradebook-10.png)
 
 ---
 
@@ -211,7 +220,7 @@ Ensure you have the following installed:
 
 Here's a basic overview of the core models:
 
-![Eloquent ER Diagram](./screenshots/database-schema.png)
+![Eloquent ER Diagram](./screenshots/gradebook-schema.png)
 
 ---
 

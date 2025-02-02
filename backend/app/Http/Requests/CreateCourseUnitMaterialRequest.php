@@ -23,7 +23,7 @@ class CreateCourseUnitMaterialRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:30',
-            'description' => 'nullable|string|max:40',
+            'description' => 'nullable|string|max:200',
             'type' => 'required|string|in:PDF,VIDEO,LINK',
             'file' => 'required_if:type,PDF|mimes:pdf|max:10000',
             'url' => 'required_if:type,LINK,VIDEO|url',

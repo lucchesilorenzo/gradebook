@@ -53,7 +53,7 @@ export default function DashboardSummary() {
       value:
         data.notifications.unread_notifications +
         data.notifications.read_notifications,
-      description: `${data.notifications.read_notifications} new, ${data.notifications.unread_notifications} unread`,
+      description: `${data.notifications.read_notifications} read, ${data.notifications.unread_notifications} unread`,
       icon: Bell,
     },
   ];

@@ -7,7 +7,7 @@ export const courseUnitMaterialsFormSchema = z
       .trim()
       .min(1, "Title is required.")
       .max(20, "Title is too long."),
-    description: z.string().trim().max(40, "Description is too long."),
+    description: z.string().trim().max(200, "Description is too long."),
     type: z.string().min(1, "Type is required."),
     file: z.instanceof(File).optional(),
     url: z.string().trim().optional(),
@@ -26,7 +26,7 @@ export const courseUnitMaterialsFormSchema = z
 
 export const courseUnitMaterialsEditFormSchema = z.object({
   title: z.string().trim().max(20, "Title is too long."),
-  description: z.string().trim().max(40, "Description is too long."),
+  description: z.string().trim().max(200, "Description is too long."),
   file: z.instanceof(File).optional(),
   url: z.string().trim(),
 });
