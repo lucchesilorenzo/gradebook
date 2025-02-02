@@ -4,6 +4,7 @@ export type Academy = {
   email: string;
   phone_number: string;
   address: string;
+  website: string | null;
   created_at: string;
   updated_at: string;
 };

@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAcademy } from "@/hooks/queries/useAcademy";
-import { Building2, Mail, MapPin, Phone } from "lucide-react";
+import { Building2, Globe, Mail, MapPin, Phone } from "lucide-react";
 import { Spinner } from "../ui/spinner";
+import { Link } from "react-router-dom";
 
 export default function AcademyCard() {
   const { data: academy, isLoading } = useAcademy();
@@ -41,6 +42,19 @@ export default function AcademyCard() {
                   <MapPin className="h-4 w-4 text-muted-foreground" />
                   <span>{academy.address}</span>
                 </div>
+
+                {academy.website && (
+                  <div className="flex items-center gap-2">
+                    <Globe className="h-4 w-4 text-muted-foreground" />
+                    <Link
+                      to={academy.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {academy.website}
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </CardContent>

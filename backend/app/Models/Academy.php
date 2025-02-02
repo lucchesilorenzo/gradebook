@@ -22,5 +22,6 @@ class Academy extends Model
         'email',
         'phone_number',
         'address',
+        'website',
     ];
 }
