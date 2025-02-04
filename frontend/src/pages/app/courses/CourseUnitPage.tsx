@@ -4,6 +4,7 @@ import CourseUnitTabs from "@/components/courses/units/CourseUnitTabs";
 import { useAttendances } from "@/hooks/queries/useAttendances";
 import { useCourseBySlug } from "@/hooks/queries/courses/useCourseBySlug";
 import { Navigate, useParams } from "react-router-dom";
+import CourseUnitBreadcrumb from "@/components/courses/units/CourseUnitBreadcrumb";
 
 export default function CourseUnitPage() {
   const { courseSlug, courseUnitSlug } = useParams();
@@ -24,6 +25,8 @@ export default function CourseUnitPage() {
 
   return (
     <main className="space-y-2">
+      <CourseUnitBreadcrumb course={course} courseUnit={courseUnit.name} />
+
       <H1>{courseUnit.name}</H1>
       <h2>{courseUnit.description}</h2>
 

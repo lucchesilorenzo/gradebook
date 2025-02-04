@@ -1,5 +1,6 @@
 import H1 from "@/components/common/H1";
 import Loading from "@/components/common/Loading";
+import CourseBreadcrumb from "@/components/courses/CourseBreadcrumb";
 import CourseDetailCard from "@/components/courses/CourseDetailCard";
 import CourseUnitsList from "@/components/courses/units/CourseUnitsList";
 import { Badge } from "@/components/ui/badge";
@@ -24,6 +25,8 @@ export default function CoursePage() {
 
   return (
     <main className="space-y-4">
+      <CourseBreadcrumb course={course.name} />
+
       <div>
         <div className="flex items-center gap-4">
           <H1>{course.name}</H1>
