@@ -3,9 +3,14 @@ import Loading from "@/components/common/Loading";
 import NotificationList from "@/components/notifications/NotificationList";
 import NotificationPagination from "@/components/notifications/NotificationPagination";
 import { useUserNotificationsForPagination } from "@/hooks/queries/users/useUserNotificationsForPagination";
-import { useState } from "react";
+import env from "@/lib/env";
+import { useEffect, useState } from "react";
 
 export default function NotificationsPage() {
+  useEffect(() => {
+    document.title = `Notifications | ${env.VITE_APP_NAME}`;
+  }, []);
+
   const [page, setPage] = useState(1);
   const { data, isLoading } = useUserNotificationsForPagination(page);
 

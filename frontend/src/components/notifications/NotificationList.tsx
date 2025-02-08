@@ -8,7 +8,6 @@ type NotificationListProps = {
 export default function NotificationList({
   notifications,
 }: NotificationListProps) {
-  console.log(notifications);
   return (
     <>
       {!notifications.length ? (

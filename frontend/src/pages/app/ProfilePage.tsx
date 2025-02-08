@@ -5,11 +5,11 @@ import env from "@/lib/env";
 import { useEffect } from "react";
 
 export default function ProfilePage() {
-  const { userSettings } = useUser();
-
   useEffect(() => {
     document.title = `Profile | ${env.VITE_APP_NAME}`;
   }, []);
+
+  const { userSettings } = useUser();
 
   return (
     <main className="container mx-auto">

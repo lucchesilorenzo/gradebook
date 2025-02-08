@@ -7,11 +7,11 @@ import env from "@/lib/env";
 import { useEffect } from "react";
 
 export default function CalendarPage() {
-  const { data: schedules = [], isLoading } = useSchedules();
-
   useEffect(() => {
     document.title = `Calendar | ${env.VITE_APP_NAME}`;
   }, []);
+
+  const { data: schedules = [], isLoading } = useSchedules();
 
   const events: CalendarEvent[] = schedules.map((schedule) => ({
     id: schedule.id,
