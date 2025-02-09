@@ -72,4 +72,14 @@ class CourseUnit extends Model
     {
         return $this->belongsToMany(User::class, 'course_unit_user');
     }
+
+    /**
+     * Get all the assignments for this course unit.
+     *
+     * @return HasMany
+     */
+    public function assignments(): HasMany
+    {
+        return $this->hasMany(Assignment::class);
+    }
 }

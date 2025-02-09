@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import Loading from "../../common/Loading";
 import StudentRegisterTable from "../../tables/courses/StudentRegisterTable";
 import CourseUnitMaterials from "./materials/CourseUnitMaterials";
+import CourseUnitAssignments from "./assignments/CourseUnitAssignments";
 
 type CourseUnitTabsProps = {
   course: TeacherCourse;
@@ -45,7 +46,10 @@ export default function CourseUnitTabs({
           Student Register
         </TabsTrigger>
         <TabsTrigger value="course-materials" className="px-4">
-          Course Materials
+          Materials
+        </TabsTrigger>
+        <TabsTrigger value="course-assignments" className="px-4">
+          Assignments
         </TabsTrigger>
       </TabsList>
 
@@ -59,6 +63,9 @@ export default function CourseUnitTabs({
       </TabsContent>
       <TabsContent value="course-materials" className="my-4">
         <CourseUnitMaterials courseUnitMaterials={courseUnitMaterials} />
+      </TabsContent>
+      <TabsContent value="course-assignments" className="my-4">
+        <CourseUnitAssignments />
       </TabsContent>
     </Tabs>
   );

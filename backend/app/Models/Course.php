@@ -99,4 +99,14 @@ class Course extends Model
     {
         return $this->hasMany(CourseUnitMaterial::class);
     }
+
+    /**
+     * Get all the assignments for the course.
+     *
+     * @return HasMany
+     */
+    public function assignments(): HasMany
+    {
+        return $this->hasMany(Assignment::class);
+    }
 }
