@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('grade')->nullable();
             $table->text('notes')->nullable();
             $table->date('deadline');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

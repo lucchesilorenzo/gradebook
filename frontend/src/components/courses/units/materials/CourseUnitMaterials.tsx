@@ -36,13 +36,14 @@ export default function CourseUnitMaterials({
 
           <FormDialog actionType="add-course-unit-material">
             <Button>
-              <Plus />
-              Add material
+              <Plus /> Add material
             </Button>
           </FormDialog>
         </div>
 
-        <CardDescription>All the materials of this course unit</CardDescription>
+        <CardDescription>
+          All the materials of this course unit.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">

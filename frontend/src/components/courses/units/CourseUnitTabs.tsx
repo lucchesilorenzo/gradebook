@@ -42,13 +42,13 @@ export default function CourseUnitTabs({
   return (
     <Tabs defaultValue="student-register">
       <TabsList>
-        <TabsTrigger value="student-register" className="px-4">
+        <TabsTrigger value="student-register" className="px-3">
           Student Register
         </TabsTrigger>
-        <TabsTrigger value="course-materials" className="px-4">
+        <TabsTrigger value="course-materials" className="px-3">
           Materials
         </TabsTrigger>
-        <TabsTrigger value="course-assignments" className="px-4">
+        <TabsTrigger value="course-assignments" className="px-3">
           Assignments
         </TabsTrigger>
       </TabsList>

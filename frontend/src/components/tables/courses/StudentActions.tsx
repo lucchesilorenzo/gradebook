@@ -32,7 +32,7 @@ export default function StudentActions({ student }: StudentActionsProps) {
           <DropdownMenuLabel>Student</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem onSelect={() => setIsOpen(!isOpen)}>
-            Attendance
+            Attendances
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

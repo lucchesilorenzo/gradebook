@@ -25,6 +25,7 @@ class Assignment extends Model
         'grade',
         'notes',
         'deadline',
+        'is_active',
     ];
 
     /**

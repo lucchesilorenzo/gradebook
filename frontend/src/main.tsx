@@ -14,6 +14,7 @@ import CourseUnitPage from "./pages/app/courses/CourseUnitPage.tsx";
 import CoursesPage from "./pages/app/courses/CoursesPage.tsx";
 import LogInPage from "./pages/auth/LogInPage.tsx";
 import "./styles/globals.css";
+import CourseUnitGradesPage from "./pages/app/courses/CourseUnitGradesPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -35,7 +36,10 @@ createRoot(document.getElementById("root")!).render(
               <Route path=":courseSlug">
                 <Route index element={<CoursePage />} />
                 <Route path="course-units">
-                  <Route path=":courseUnitSlug" element={<CourseUnitPage />} />
+                  <Route path=":courseUnitSlug">
+                    <Route index element={<CourseUnitPage />} />
+                    <Route path="grades" element={<CourseUnitGradesPage />} />
+                  </Route>
                 </Route>
               </Route>
             </Route>
