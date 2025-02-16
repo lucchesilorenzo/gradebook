@@ -7,13 +7,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Plus } from "lucide-react";
-import FormDialog from "../../../common/FormDialog";
-import { Button } from "../../../ui/button";
+import FormDialog from "@/components/common/FormDialog";
+import { Button } from "@/components/ui/button";
 import CourseUnitAssignmentCard from "./CourseUnitAssignmentCard";
 import { useParams } from "react-router-dom";
+import { useAssignments } from "@/hooks/mutations/assignments/useAssignments";
 
 export default function CourseUnitAssignments() {
   const { courseSlug, courseUnitSlug } = useParams();
+  const { data: assignments = [], isLoading } = useAssignments({
+    courseSlug,
+    courseUnitSlug,
+  });
 
   return (
     <Card className="max-w-6xl">
@@ -42,10 +47,15 @@ export default function CourseUnitAssignments() {
           />
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <CourseUnitAssignmentCard
-              courseSlug={courseSlug}
-              courseUnitSlug={courseUnitSlug}
-            />
+            {assignments.map((assignment) => (
+              <CourseUnitAssignmentCard
+                key={assignment.id}
+                courseSlug={courseSlug}
+                courseUnitSlug={courseUnitSlug}
+                assignment={assignment}
+                assignmentsLoading={isLoading}
+              />
+            ))}
           </div>
         </div>
       </CardContent>

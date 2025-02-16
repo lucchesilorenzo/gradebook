@@ -9,12 +9,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useCreateAssignment } from "@/hooks/mutations/assignments/useCreateAssignment";
 import {
   assignmentFormSchema,
   TAssignmentFormSchema,
 } from "@/lib/validations/assignment-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 
 type CourseUnitAssignmentFormProps = {
   onFormSubmit: () => void;
@@ -23,6 +25,12 @@ type CourseUnitAssignmentFormProps = {
 export default function CourseUnitAssignmentForm({
   onFormSubmit,
 }: CourseUnitAssignmentFormProps) {
+  const { courseSlug, courseUnitSlug } = useParams();
+  const { mutateAsync: createAssignment } = useCreateAssignment({
+    courseSlug,
+    courseUnitSlug,
+  });
+
   const form = useForm({
     resolver: zodResolver(assignmentFormSchema),
     defaultValues: {
@@ -33,7 +41,7 @@ export default function CourseUnitAssignmentForm({
   });
 
   async function onSubmit(data: TAssignmentFormSchema) {
-    console.log(data);
+    await createAssignment(data);
     onFormSubmit();
   }
 
@@ -47,7 +55,7 @@ export default function CourseUnitAssignmentForm({
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="Assignment title" {...field} />
+                <Input {...field} placeholder="Assignment title" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -62,9 +70,9 @@ export default function CourseUnitAssignmentForm({
               <FormLabel>Description</FormLabel>
               <FormControl>
                 <Textarea
+                  {...field}
                   placeholder="Assignment description"
                   rows={4}
-                  {...field}
                 />
               </FormControl>
               <FormMessage />
@@ -80,10 +88,10 @@ export default function CourseUnitAssignmentForm({
               <FormLabel>Deadline</FormLabel>
               <FormControl>
                 <Input
+                  {...field}
                   type="datetime-local"
                   placeholder="Assignment deadline"
                   className="w-fit"
-                  {...field}
                 />
               </FormControl>
               <FormMessage />
