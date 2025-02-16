@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\CourseUnit;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Assignment>
@@ -24,6 +25,7 @@ class AssignmentFactory extends Factory
             'course_id' => Course::inRandomOrder()->first()->id,
             'course_unit_id' => CourseUnit::inRandomOrder()->first()->id,
             'title' => fake()->sentence(),
+            'slug' => fn(array $attributes) => Str::slug($attributes['title']),
             'description' => fake()->sentence(),
             'deadline' => fake()->date(),
             'is_active' => true,

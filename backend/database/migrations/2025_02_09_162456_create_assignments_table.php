@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignUuid('course_id')->constrained()->onDelete('cascade');
             $table->foreignUuid('course_unit_id')->constrained()->onDelete('cascade');
             $table->string('title');
+            $table->string('slug')->unique();
             $table->text('description');
             $table->date('deadline');
             $table->boolean('is_active')->default(true);

@@ -22,6 +22,7 @@ class Assignment extends Model
         'course_id',
         'course_unit_id',
         'title',
+        'slug',
         'description',
         'deadline',
         'is_active',
