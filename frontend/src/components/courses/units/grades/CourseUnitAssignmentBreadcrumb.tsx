@@ -6,17 +6,20 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { TeacherCourse } from "@/lib/types";
+import { CourseUnit, TeacherCourse } from "@/lib/types";
+import { Assignment } from "@/lib/types/assignment-types";
 import { Link } from "react-router-dom";
 
 type CourseUnitBreadcrumbProps = {
   course: TeacherCourse;
-  courseUnit: string;
+  courseUnit: CourseUnit;
+  assignment: Assignment;
 };
 
-export default function CourseUnitBreadcrumb({
+export default function CourseUnitAssignmentBreadcrumb({
   course,
   courseUnit,
+  assignment,
 }: CourseUnitBreadcrumbProps) {
   return (
     <Breadcrumb>
@@ -38,7 +41,19 @@ export default function CourseUnitBreadcrumb({
         <BreadcrumbSeparator />
 
         <BreadcrumbItem>
-          <BreadcrumbPage>{courseUnit}</BreadcrumbPage>
+          <BreadcrumbLink asChild>
+            <Link
+              to={`/courses/${course.slug}/course-units/${courseUnit.slug}`}
+            >
+              {courseUnit.name}
+            </Link>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbSeparator />
+
+        <BreadcrumbItem>
+          <BreadcrumbPage>{assignment.title}</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>

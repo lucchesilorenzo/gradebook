@@ -28,7 +28,7 @@ export default function CourseUnitAssignmentCard({
   return (
     <Card>
       {assignmentsLoading ? (
-        <div className="flex h-28 items-center justify-center">
+        <div className="flex h-64 items-center justify-center">
           <Spinner />
         </div>
       ) : (
@@ -62,7 +62,7 @@ export default function CourseUnitAssignmentCard({
           <CardFooter>
             <Button className="w-full" asChild>
               <Link
-                to={`/courses/${courseSlug}/course-units/${courseUnitSlug}/grades`}
+                to={`/courses/${courseSlug}/course-units/${courseUnitSlug}/assignments/${assignment.slug}`}
               >
                 Add grades
               </Link>

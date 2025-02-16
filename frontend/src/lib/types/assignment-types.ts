@@ -4,6 +4,7 @@ export type Assignment = {
   course_id: string;
   course_unit_id: string;
   title: string;
+  slug: string;
   description: string;
   deadline: string;
   is_active: boolean;

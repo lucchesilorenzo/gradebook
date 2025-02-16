@@ -21,7 +21,9 @@ export default function CourseBreadcrumb({ course }: CourseBreadcrumbProps) {
             <Link to="/courses">Courses</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
+
         <BreadcrumbSeparator />
+
         <BreadcrumbItem>
           <BreadcrumbPage>{course}</BreadcrumbPage>
         </BreadcrumbItem>

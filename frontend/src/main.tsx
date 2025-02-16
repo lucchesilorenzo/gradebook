@@ -10,11 +10,11 @@ import DashboardPage from "./pages/app/DashboardPage.tsx";
 import NotificationsPage from "./pages/app/NotificationsPage.tsx";
 import ProfilePage from "./pages/app/ProfilePage.tsx";
 import CoursePage from "./pages/app/courses/CoursePage.tsx";
+import CourseUnitAssignmentPage from "./pages/app/courses/CourseUnitAssignmentPage.tsx";
 import CourseUnitPage from "./pages/app/courses/CourseUnitPage.tsx";
 import CoursesPage from "./pages/app/courses/CoursesPage.tsx";
 import LogInPage from "./pages/auth/LogInPage.tsx";
 import "./styles/globals.css";
-import CourseUnitGradesPage from "./pages/app/courses/CourseUnitGradesPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -38,7 +38,11 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="course-units">
                   <Route path=":courseUnitSlug">
                     <Route index element={<CourseUnitPage />} />
-                    <Route path="grades" element={<CourseUnitGradesPage />} />
+                    <Route path="assignments">
+                      <Route path=":assignmentSlug">
+                        <Route index element={<CourseUnitAssignmentPage />} />
+                      </Route>
+                    </Route>
                   </Route>
                 </Route>
               </Route>

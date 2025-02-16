@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import CourseUnitAssignmentCard from "./CourseUnitAssignmentCard";
 import { useParams } from "react-router-dom";
 import { useAssignments } from "@/hooks/mutations/assignments/useAssignments";
+import { useState } from "react";
 
 export default function CourseUnitAssignments() {
   const { courseSlug, courseUnitSlug } = useParams();
@@ -19,6 +20,11 @@ export default function CourseUnitAssignments() {
     courseSlug,
     courseUnitSlug,
   });
+  const [assigmentSearchTerm, setAssignmentSearchTerm] = useState("");
+
+  const filteredAssignments = assignments.filter((assigment) =>
+    assigment.title.toLowerCase().includes(assigmentSearchTerm.toLowerCase()),
+  );
 
   return (
     <Card className="max-w-6xl">
@@ -43,20 +49,24 @@ export default function CourseUnitAssignments() {
         <div className="space-y-4">
           <SearchInput
             placeholder="Search assignments..."
-            onSearch={() => {}}
+            onSearch={setAssignmentSearchTerm}
           />
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {assignments.map((assignment) => (
-              <CourseUnitAssignmentCard
-                key={assignment.id}
-                courseSlug={courseSlug}
-                courseUnitSlug={courseUnitSlug}
-                assignment={assignment}
-                assignmentsLoading={isLoading}
-              />
-            ))}
-          </div>
+          {!filteredAssignments.length ? (
+            <p>No assignments found.</p>
+          ) : (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {filteredAssignments.map((assignment) => (
+                <CourseUnitAssignmentCard
+                  key={assignment.id}
+                  courseSlug={courseSlug}
+                  courseUnitSlug={courseUnitSlug}
+                  assignment={assignment}
+                  assignmentsLoading={isLoading}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </CardContent>
     </Card>
