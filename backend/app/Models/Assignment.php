@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Assignment extends Model
 {
@@ -20,10 +21,8 @@ class Assignment extends Model
         'user_id',
         'course_id',
         'course_unit_id',
-        'student_id',
         'title',
-        'grade',
-        'notes',
+        'description',
         'deadline',
         'is_active',
     ];
@@ -59,12 +58,12 @@ class Assignment extends Model
     }
 
     /**
-     * Get the student that owns the assignment.
+     * Get all the students for this assignment.
      *
-     * @return BelongsTo
+     * @return BelongsToMany
      */
-    public function student(): BelongsTo
+    public function students(): BelongsToMany
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsToMany(Student::class)->withPivot('grade', 'notes');
     }
 }

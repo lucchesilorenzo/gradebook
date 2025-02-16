@@ -16,11 +16,8 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
             $table->foreignUuid('course_id')->constrained()->onDelete('cascade');
             $table->foreignUuid('course_unit_id')->constrained()->onDelete('cascade');
-            $table->foreignUuid('student_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description');
-            $table->integer('grade')->nullable();
-            $table->text('notes')->nullable();
             $table->date('deadline');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
