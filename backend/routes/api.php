@@ -13,4 +13,5 @@ Route::middleware('auth:sanctum')->group(function () {
   require __DIR__ . '/api/tasks.php';
   require __DIR__ . '/api/users.php';
   require __DIR__ . '/api/academy.php';
+  require __DIR__ . '/api/assignments.php';
 });
