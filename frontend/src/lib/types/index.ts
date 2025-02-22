@@ -5,3 +5,4 @@ export * from "./task-types";
 export * from "./dashboard-types";
 export * from "./user-types";
 export * from "./academy-types";
+export * from "./assignment-types";

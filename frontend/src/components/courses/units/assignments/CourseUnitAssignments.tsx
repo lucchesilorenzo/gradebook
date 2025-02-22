@@ -11,7 +11,7 @@ import FormDialog from "@/components/common/FormDialog";
 import { Button } from "@/components/ui/button";
 import CourseUnitAssignmentCard from "./CourseUnitAssignmentCard";
 import { useParams } from "react-router-dom";
-import { useAssignments } from "@/hooks/mutations/assignments/useAssignments";
+import { useAssignments } from "@/hooks/queries/courses/assignments/useAssignments";
 import { useState } from "react";
 
 export default function CourseUnitAssignments() {
