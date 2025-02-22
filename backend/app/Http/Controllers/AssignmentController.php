@@ -68,7 +68,10 @@ class AssignmentController extends Controller
                 ->where('slug', $assignmentSlug)
                 ->firstOrFail();
 
-            return response()->json($assignment);
+            $assignmentWithStudents = $assignment->toArray();
+            $assignmentWithStudents['assignment_table'] = $assignment->students;
+
+            return response()->json($assignmentWithStudents);
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not get assignment.',
@@ -102,6 +105,7 @@ class AssignmentController extends Controller
                 ->where('slug', $courseUnitSlug)
                 ->firstOrFail();
 
+            // Create assignment
             $assignment = Assignment::create([
                 ...$validatedAssignment,
                 'slug' => Str::slug($validatedAssignment['title'] . '-' . Str::uuid()),
@@ -109,6 +113,11 @@ class AssignmentController extends Controller
                 'course_id' => $course->id,
                 'course_unit_id' => $courseUnit->id,
             ]);
+
+            // Attach students to assignment
+            $course->students->each(function ($student) use ($assignment) {
+                $assignment->students()->attach($student->id);
+            });
 
             return response()->json([
                 'assignment' => $assignment,
