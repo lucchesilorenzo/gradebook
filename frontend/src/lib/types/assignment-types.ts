@@ -1,3 +1,5 @@
+import { Student } from "./course-types";
+
 export type Assignment = {
   id: string;
   user_id: string;
@@ -10,4 +12,17 @@ export type Assignment = {
   is_active: boolean;
   created_at: string;
   updated_at: string;
+};
+
+export type AssignmentTable = Student & {
+  pivot: {
+    assignment_id: string;
+    student_id: string;
+    grade: number | null;
+    notes: string | null;
+  };
+};
+
+export type AssignmentWithStudents = Assignment & {
+  assignment_table: AssignmentTable[];
 };

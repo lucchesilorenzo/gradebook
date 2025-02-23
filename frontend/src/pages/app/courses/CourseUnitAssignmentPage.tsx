@@ -1,7 +1,10 @@
 import H1 from "@/components/common/H1";
+import H2 from "@/components/common/H2";
 import Loading from "@/components/common/Loading";
 import CourseUnitAssignmentBreadcrumb from "@/components/courses/units/grades/CourseUnitAssignmentBreadcrumb";
-import { useAssignment } from "@/hooks/mutations/assignments/useAssignment";
+import AssignmentTable from "@/components/tables/courses/assignments/AssignmentTable";
+import { columns } from "@/components/tables/courses/assignments/columns";
+import { useAssignment } from "@/hooks/queries/courses/assignments/useAssignment";
 import { useCourseBySlug } from "@/hooks/queries/courses/useCourseBySlug";
 import { Navigate, useParams } from "react-router-dom";
 
@@ -40,7 +43,16 @@ export default function CourseUnitAssignmentPage() {
         assignment={assignment}
       />
 
-      <H1>Grades</H1>
+      <H1>{assignment.title}</H1>
+      <H2 className="font-normal text-muted-foreground">
+        {assignment.description}
+      </H2>
+
+      <AssignmentTable
+        data={assignment.assignment_table}
+        columns={columns}
+        assignment={assignment}
+      />
     </main>
   );
 }

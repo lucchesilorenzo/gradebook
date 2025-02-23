@@ -14,4 +14,19 @@ export const assignmentFormSchema = z.object({
   deadline: z.string().min(1, "Deadline is required."),
 });
 
+export const gradeCellFormSchema = z.object({
+  grade: z.coerce
+    .number({
+      invalid_type_error: "Grade must be a number.",
+    })
+    .min(40, "Grade must be between 40 and 100.")
+    .max(100, "Grade must be between 40 and 100."),
+});
+
+export const notesCellFormSchema = z.object({
+  notes: z.string().trim().max(200, "Notes is too long."),
+});
+
 export type TAssignmentFormSchema = z.infer<typeof assignmentFormSchema>;
+export type TAssignmentGradeFormSchema = z.infer<typeof gradeCellFormSchema>;
+export type TAssignmentNotesFormSchema = z.infer<typeof notesCellFormSchema>;
