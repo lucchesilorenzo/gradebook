@@ -7,7 +7,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useLogIn } from "@/hooks/mutations/auth/useLogIn";
-import { LogInSchema, TLogInSchema } from "@/lib/validations/auth-validations";
+import {
+  logInFormSchema,
+  TLogInFormSchema,
+} from "@/lib/validations/auth-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import EmailInput from "../common/EmailInput";
@@ -17,14 +20,14 @@ import PasswordInput from "../common/PasswordInput";
 export default function LogInForm() {
   const { mutateAsync: logIn } = useLogIn();
   const form = useForm({
-    resolver: zodResolver(LogInSchema),
+    resolver: zodResolver(logInFormSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  async function onSubmit(data: TLogInSchema) {
+  async function onSubmit(data: TLogInFormSchema) {
     await logIn(data);
   }
 

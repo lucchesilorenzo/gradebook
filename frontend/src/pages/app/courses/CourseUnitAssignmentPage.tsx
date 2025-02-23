@@ -49,7 +49,7 @@ export default function CourseUnitAssignmentPage() {
       </H2>
 
       <AssignmentTable
-        data={assignment.assignment_table}
+        data={assignment.students}
         columns={columns}
         assignment={assignment}
       />

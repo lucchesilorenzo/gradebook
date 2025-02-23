@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const LogInSchema = z.object({
+export const logInFormSchema = z.object({
   email: z
     .string()
     .trim()
@@ -15,4 +15,4 @@ export const LogInSchema = z.object({
     .max(30, "Password is too long."),
 });
 
-export type TLogInSchema = z.infer<typeof LogInSchema>;
+export type TLogInFormSchema = z.infer<typeof logInFormSchema>;

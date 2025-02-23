@@ -12,6 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useUpdateAssignmentStudentRecord } from "@/hooks/mutations/assignments/updateAssignmentStudentRecord";
 import {
   notesCellFormSchema,
   TAssignmentNotesFormSchema,
@@ -21,10 +22,21 @@ import { useForm } from "react-hook-form";
 
 type NotesCellProps = {
   notes: string | null;
+  assignmentId: string;
   studentId: string;
 };
 
-export default function NotesCell({ notes, studentId }: NotesCellProps) {
+export default function NotesCell({
+  notes,
+  assignmentId,
+  studentId,
+}: NotesCellProps) {
+  const { mutateAsync: updateStudentAssignmentRecord } =
+    useUpdateAssignmentStudentRecord({
+      assignmentId,
+      studentId,
+    });
+
   const form = useForm({
     resolver: zodResolver(notesCellFormSchema),
     defaultValues: {
@@ -33,7 +45,7 @@ export default function NotesCell({ notes, studentId }: NotesCellProps) {
   });
 
   async function onSubmit(data: TAssignmentNotesFormSchema) {
-    console.log(data, studentId);
+    await updateStudentAssignmentRecord(data);
   }
 
   return (

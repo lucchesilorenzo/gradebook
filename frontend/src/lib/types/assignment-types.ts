@@ -12,6 +12,8 @@ export type Assignment = {
   is_active: boolean;
   created_at: string;
   updated_at: string;
+  submission_count: number;
+  students: AssignmentTable[];
 };
 
 export type AssignmentTable = Student & {
@@ -23,6 +25,7 @@ export type AssignmentTable = Student & {
   };
 };
 
-export type AssignmentWithStudents = Assignment & {
-  assignment_table: AssignmentTable[];
-};
+export type AssignmentWithoutSubmissionCount = Omit<
+  Assignment,
+  "submission_count"
+>;

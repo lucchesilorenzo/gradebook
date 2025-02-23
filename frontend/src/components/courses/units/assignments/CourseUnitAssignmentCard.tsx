@@ -56,7 +56,10 @@ export default function CourseUnitAssignmentCard({
             </div>
             <div className="flex items-center text-sm text-muted-foreground">
               <Users className="mr-2 h-4 w-4" />
-              Submissions: <span className="ml-1 text-black">1</span>
+              Submissions:{" "}
+              <span className="ml-1 text-black">
+                {assignment.submission_count} / {assignment.students.length}
+              </span>
             </div>
           </CardContent>
           <CardFooter>

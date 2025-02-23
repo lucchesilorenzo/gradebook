@@ -9,7 +9,7 @@ import {
 import { useUpdateAttendance } from "@/hooks/mutations/attendances/useUpdateAttendance";
 import { StudentRegisterData } from "@/lib/types";
 import {
-  AttendanceEditFormSchema,
+  attendanceEditFormSchema,
   TAttendanceEditFormSchema,
 } from "@/lib/validations/attendance-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,7 +35,7 @@ export default function AttendanceEditForm({
 }: AttendanceEditFormProps) {
   const { mutateAsync: updateAttendance } = useUpdateAttendance();
   const form = useForm({
-    resolver: zodResolver(AttendanceEditFormSchema),
+    resolver: zodResolver(attendanceEditFormSchema),
     defaultValues: {
       attendance_type: "",
       time: "",

@@ -1,5 +1,5 @@
 import { fetchData } from "@/lib/api-client";
-import { AssignmentWithStudents } from "@/lib/types/assignment-types";
+import { AssignmentWithoutSubmissionCount } from "@/lib/types/assignment-types";
 import { useQuery } from "@tanstack/react-query";
 
 type Slug = {
@@ -15,7 +15,7 @@ export function useAssignment({
 }: Slug) {
   return useQuery({
     queryKey: ["assignments", assignmentSlug],
-    queryFn: (): Promise<AssignmentWithStudents> =>
+    queryFn: (): Promise<AssignmentWithoutSubmissionCount> =>
       fetchData(
         `/assignments/${courseSlug}/${courseUnitSlug}/${assignmentSlug}`,
       ),

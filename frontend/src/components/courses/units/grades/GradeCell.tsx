@@ -18,13 +18,25 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useUpdateAssignmentStudentRecord } from "@/hooks/mutations/assignments/updateAssignmentStudentRecord";
 
 type GradeCellProps = {
   grade: number | null;
+  assignmentId: string;
   studentId: string;
 };
 
-export default function GradeCell({ grade, studentId }: GradeCellProps) {
+export default function GradeCell({
+  grade,
+  assignmentId,
+  studentId,
+}: GradeCellProps) {
+  const { mutateAsync: updateStudentAssignmentRecord } =
+    useUpdateAssignmentStudentRecord({
+      assignmentId,
+      studentId,
+    });
+
   const form = useForm({
     resolver: zodResolver(gradeCellFormSchema),
     defaultValues: {
@@ -33,7 +45,7 @@ export default function GradeCell({ grade, studentId }: GradeCellProps) {
   });
 
   async function onSubmit(data: TAssignmentGradeFormSchema) {
-    console.log(data, studentId);
+    await updateStudentAssignmentRecord(data);
   }
 
   return (

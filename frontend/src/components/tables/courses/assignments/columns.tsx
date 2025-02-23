@@ -26,7 +26,13 @@ export const columns: ColumnDef<AssignmentTable>[] = [
 
       return (
         <div className="w-[150px]">
-          {grade ?? <GradeCell grade={grade} studentId={row.original.id} />}
+          {grade ?? (
+            <GradeCell
+              grade={grade}
+              assignmentId={row.original.pivot.assignment_id}
+              studentId={row.original.pivot.student_id}
+            />
+          )}
         </div>
       );
     },
@@ -40,7 +46,13 @@ export const columns: ColumnDef<AssignmentTable>[] = [
 
       return (
         <div className="w-[150px]">
-          {notes ?? <NotesCell notes={notes} studentId={row.original.id} />}
+          {notes ?? (
+            <NotesCell
+              notes={notes}
+              assignmentId={row.original.pivot.assignment_id}
+              studentId={row.original.pivot.student_id}
+            />
+          )}
         </div>
       );
     },
