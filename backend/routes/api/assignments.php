@@ -7,4 +7,5 @@ Route::prefix('assignments')->group(function () {
   Route::get('/{courseSlug}/{courseUnitSlug}', [AssignmentController::class, 'getAssignments']);
   Route::get('/{courseSlug}/{courseUnitSlug}/{assignmentSlug}', [AssignmentController::class, 'getAssignment']);
   Route::post('/{courseSlug}/{courseUnitSlug}', [AssignmentController::class, 'createAssignment']);
+  Route::patch('/{assignment}/{student}/records', [AssignmentController::class, 'updateAssignmentStudentRecord']);
 });

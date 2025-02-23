@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAssignmentRequest;
+use App\Http\Requests\UpdateAssignmentStudentRecord;
 use App\Models\Assignment;
 use App\Models\Course;
+use App\Models\Student;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 
@@ -31,7 +33,14 @@ class AssignmentController extends Controller
             $assignments = $user->assignments()
                 ->where('course_id', $course->id)
                 ->where('course_unit_id', $courseUnit->id)
+                ->with('students')
                 ->get();
+
+            $assignments->each(function ($assignment) {
+                $assignment->submission_count = $assignment->students
+                    ->whereNotNull('pivot.grade')
+                    ->count();
+            });
 
             return response()->json($assignments);
         } catch (\Throwable $e) {
@@ -66,12 +75,10 @@ class AssignmentController extends Controller
                 ->where('course_id', $course->id)
                 ->where('course_unit_id', $courseUnit->id)
                 ->where('slug', $assignmentSlug)
+                ->with('students')
                 ->firstOrFail();
 
-            $assignmentWithStudents = $assignment->toArray();
-            $assignmentWithStudents['assignment_table'] = $assignment->students;
-
-            return response()->json($assignmentWithStudents);
+            return response()->json($assignment);
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not get assignment.',
@@ -133,6 +140,37 @@ class AssignmentController extends Controller
 
             return response()->json([
                 'message' => 'Could not create assignments.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Update assignment student record.
+     *
+     * @param UpdateAssignmentStudentRecord $request
+     * @param Assignment $assignment
+     * @param Student $student
+     * @return JsonResponse
+     */
+    public function updateAssignmentStudentRecord(
+        UpdateAssignmentStudentRecord $request,
+        Assignment $assignment,
+        Student $student
+    ): JsonResponse {
+        // Validation
+        $validatedData = $request->validated();
+
+        try {
+            // Update assignment student record
+            $assignment->students()->updateExistingPivot($student->id, $validatedData);
+
+            return response()->json([
+                'message' => 'Assignment student record updated successfully.',
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not update assignment student record.',
                 'error' => $e->getMessage(),
             ], 500);
         }
