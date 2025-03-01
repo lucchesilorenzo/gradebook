@@ -38,7 +38,7 @@ export default function CourseUnitAssignmentCard({
               <CardTitle className="text-xl font-bold">
                 {assignment.title}
               </CardTitle>
-              <Badge variant="success">
+              <Badge variant={assignment.is_active ? "success" : "destructive"}>
                 {assignment.is_active ? "Active" : "Completed"}
               </Badge>
             </div>
