@@ -1,13 +1,14 @@
 import H1 from "@/components/common/H1";
 import Loading from "@/components/common/Loading";
-import CourseUnitTabs from "@/components/courses/units/CourseUnitTabs";
-import { useAttendances } from "@/hooks/queries/useAttendances";
-import { useCourseBySlug } from "@/hooks/queries/courses/useCourseBySlug";
-import { Navigate, useParams } from "react-router-dom";
 import CourseUnitBreadcrumb from "@/components/courses/units/CourseUnitBreadcrumb";
+import CourseUnitTabs from "@/components/courses/units/CourseUnitTabs";
+import { useCourseBySlug } from "@/hooks/queries/courses/useCourseBySlug";
+import { useAttendances } from "@/hooks/queries/useAttendances";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function CourseUnitPage() {
   const { courseSlug, courseUnitSlug } = useParams();
+  const navigate = useNavigate();
 
   const { data: course, isLoading: isCourseLoading } =
     useCourseBySlug(courseSlug);
@@ -17,11 +18,15 @@ export default function CourseUnitPage() {
 
   if (isCourseLoading || isAttendancesLoading) return <Loading />;
   if (!course || !attendances || !courseSlug || !courseUnitSlug) {
-    return <Navigate to="*" state={{ content: "course" }} />;
+    navigate("*", { state: { content: "course" } });
+    return null;
   }
 
   const courseUnit = course.units.find((unit) => unit.slug === courseUnitSlug);
-  if (!courseUnit) return <Navigate to="*" state={{ content: "unit" }} />;
+  if (!courseUnit) {
+    navigate("*", { state: { content: "unit" } });
+    return null;
+  }
 
   return (
     <main className="space-y-2">

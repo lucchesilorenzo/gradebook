@@ -8,11 +8,12 @@ import { useCourseBySlug } from "@/hooks/queries/courses/useCourseBySlug";
 import env from "@/lib/env";
 import { capitalize } from "@/lib/utils";
 import { useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function CoursePage() {
   const { courseSlug } = useParams();
   const { data: course, isLoading } = useCourseBySlug(courseSlug);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = `${course?.name} | ${env.VITE_APP_NAME}`;
@@ -20,7 +21,8 @@ export default function CoursePage() {
 
   if (isLoading) return <Loading />;
   if (!courseSlug || !course) {
-    return <Navigate to="*" state={{ content: "course" }} />;
+    navigate("*", { state: { content: "course" } });
+    return null;
   }
 
   return (

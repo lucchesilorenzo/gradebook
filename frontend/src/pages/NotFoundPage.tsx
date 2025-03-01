@@ -27,7 +27,7 @@ export default function NotFoundPage({ content = "page" }: NotFoundPageProps) {
         </span>
       </h1>
 
-      <Button variant="link">
+      <Button variant="link" asChild>
         <Link to="/dashboard" className="flex items-center gap-2">
           <ArrowLeft /> Go back to dashboard
         </Link>
