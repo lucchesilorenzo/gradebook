@@ -24,8 +24,3 @@ export type AssignmentTable = Student & {
     notes: string | null;
   };
 };
-
-export type AssignmentWithoutSubmissionCount = Omit<
-  Assignment,
-  "submission_count"
->;

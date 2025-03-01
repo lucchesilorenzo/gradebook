@@ -7,13 +7,13 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { CourseUnit, TeacherCourse } from "@/lib/types";
-import { AssignmentWithoutSubmissionCount } from "@/lib/types/assignment-types";
+import { Assignment } from "@/lib/types/assignment-types";
 import { Link } from "react-router-dom";
 
 type CourseUnitBreadcrumbProps = {
   course: TeacherCourse;
   courseUnit: CourseUnit;
-  assignment: AssignmentWithoutSubmissionCount;
+  assignment: Assignment;
 };
 
 export default function CourseUnitAssignmentBreadcrumb({

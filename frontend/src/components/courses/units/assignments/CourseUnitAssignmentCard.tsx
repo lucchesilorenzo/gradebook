@@ -39,7 +39,7 @@ export default function CourseUnitAssignmentCard({
                 {assignment.title}
               </CardTitle>
               <Badge variant="success">
-                {assignment.is_active ? "Active" : "Expired"}
+                {assignment.is_active ? "Active" : "Completed"}
               </Badge>
             </div>
           </CardHeader>
@@ -47,6 +47,7 @@ export default function CourseUnitAssignmentCard({
             <p className="mb-4 text-sm text-muted-foreground">
               {assignment.description}
             </p>
+
             <div className="mb-2 flex items-center text-sm text-muted-foreground">
               <Calendar className="mr-2 h-4 w-4" />
               Deadline:
@@ -54,6 +55,7 @@ export default function CourseUnitAssignmentCard({
                 {new Date(assignment.deadline).toLocaleDateString("it-IT")}
               </span>
             </div>
+
             <div className="flex items-center text-sm text-muted-foreground">
               <Users className="mr-2 h-4 w-4" />
               Submissions:{" "}

@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import env from "@/lib/env";
-import { AssignmentWithoutSubmissionCount } from "@/lib/types";
+import { Assignment } from "@/lib/types";
 import {
   ColumnDef,
   flexRender,
@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 type AssignmentTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  assignment: AssignmentWithoutSubmissionCount;
+  assignment: Assignment;
 };
 
 export default function AssignmentTable<TData, TValue>({
@@ -99,7 +99,6 @@ export default function AssignmentTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-
       <TablePagination table={table} />
     </div>
   );
