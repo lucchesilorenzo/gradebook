@@ -78,7 +78,7 @@ class AssignmentController extends Controller
                 ->with('students')
                 ->firstOrFail();
 
-$assignment->submission_count = $assignment->students
+            $assignment->submission_count = $assignment->students
                 ->whereNotNull('pivot.grade')
                 ->count();
 
@@ -175,6 +175,29 @@ $assignment->submission_count = $assignment->students
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not update assignment student record.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Update assignment status.
+     *
+     * @param Assignment $assignment
+     * @return JsonResponse
+     */
+    public function updateAssignmentStatus(Assignment $assignment): JsonResponse
+    {
+        try {
+            // Update assignment status
+            $assignment->update(['is_active' => false]);
+
+            return response()->json([
+                'message' => 'Assignment status updated successfully.',
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not update assignment status.',
                 'error' => $e->getMessage(),
             ], 500);
         }
