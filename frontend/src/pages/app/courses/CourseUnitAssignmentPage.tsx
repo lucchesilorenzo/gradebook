@@ -8,6 +8,9 @@ import { useAssignment } from "@/hooks/queries/courses/assignments/useAssignment
 import { useCourseBySlug } from "@/hooks/queries/courses/useCourseBySlug";
 import { Navigate, useParams } from "react-router-dom";
 
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { CircleCheckBig } from "lucide-react";
+
 export default function CourseUnitAssignmentPage() {
   const { courseSlug, courseUnitSlug, assignmentSlug } = useParams();
   const { data: assignment, isLoading: isAssignmentLoading } = useAssignment({
@@ -47,6 +50,16 @@ export default function CourseUnitAssignmentPage() {
       <H2 className="font-normal text-muted-foreground">
         {assignment.description}
       </H2>
+
+      {assignment.submission_count === assignment.students.length && (
+        <Alert>
+          <CircleCheckBig className="h-4 w-4" />
+          <AlertTitle>All grades have been entered!</AlertTitle>
+          <AlertDescription>
+            Click <button>here</button> to mark this assignment as complete.
+          </AlertDescription>
+        </Alert>
+      )}
 
       <AssignmentTable
         data={assignment.students}
