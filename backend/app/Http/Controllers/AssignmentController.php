@@ -34,6 +34,7 @@ class AssignmentController extends Controller
                 ->where('course_id', $course->id)
                 ->where('course_unit_id', $courseUnit->id)
                 ->with('students')
+                ->orderBy('created_at', 'desc')
                 ->get();
 
             $assignments->each(function ($assignment) {
