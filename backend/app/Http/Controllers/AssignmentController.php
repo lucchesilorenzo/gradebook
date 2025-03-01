@@ -78,6 +78,10 @@ class AssignmentController extends Controller
                 ->with('students')
                 ->firstOrFail();
 
+$assignment->submission_count = $assignment->students
+                ->whereNotNull('pivot.grade')
+                ->count();
+
             return response()->json($assignment);
         } catch (\Throwable $e) {
             return response()->json([
