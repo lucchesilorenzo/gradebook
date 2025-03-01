@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type AuthGuardProps = {
   children: React.ReactNode;
@@ -7,10 +7,9 @@ type AuthGuardProps = {
 
 export default function AuthGuard({ children }: AuthGuardProps) {
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
-  if (!token) {
-    return <Navigate to="/auth/login" />;
-  }
+  if (!token) navigate("/auth/login");
 
   return children;
 }
