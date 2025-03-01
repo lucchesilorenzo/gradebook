@@ -189,6 +189,12 @@ class AssignmentController extends Controller
     public function updateAssignmentStatus(Assignment $assignment): JsonResponse
     {
         try {
+            if (!$assignment->is_active) {
+                return response()->json([
+                    'message' => 'Assignment is already marked as completed.',
+                ], 409);
+            }
+
             // Update assignment status
             $assignment->update(['is_active' => false]);
 
@@ -196,6 +202,7 @@ class AssignmentController extends Controller
                 'message' => 'Assignment status updated successfully.',
             ]);
         } catch (\Throwable $e) {
+
             return response()->json([
                 'message' => 'Could not update assignment status.',
                 'error' => $e->getMessage(),
