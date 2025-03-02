@@ -35,7 +35,7 @@ class AssignmentController extends Controller
                 ->where('course_unit_id', $courseUnit->id)
                 ->with('students')
                 ->orderBy('created_at', 'desc')
-                ->get();
+                ->paginate(2);
 
             $assignments->each(function ($assignment) {
                 $assignment->submission_count = $assignment->students

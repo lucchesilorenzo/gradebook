@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -13,17 +14,25 @@ import { Plus } from "lucide-react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import CourseUnitAssignmentCard from "./CourseUnitAssignmentCard";
+import CourseUnitAssignmentsPagination from "./CourseUnitAssignmentsPagination";
 
 export default function CourseUnitAssignments() {
   const { courseSlug, courseUnitSlug } = useParams();
-  const { data: assignments = [], isLoading } = useGetAssignments({
+
+  const [page, setPage] = useState(1);
+
+  const { data: assignments, isLoading } = useGetAssignments({
     courseSlug,
     courseUnitSlug,
+    page,
   });
-  const [assigmentSearchTerm, setAssignmentSearchTerm] = useState("");
 
-  const filteredAssignments = assignments.filter((assigment) =>
-    assigment.title.toLowerCase().includes(assigmentSearchTerm.toLowerCase()),
+  const [assignmentSearchTerm, setAssignmentSearchTerm] = useState("");
+
+  if (!assignments) return null;
+
+  const filteredAssignments = assignments.data.filter((assignment) =>
+    assignment.title.toLowerCase().includes(assignmentSearchTerm.toLowerCase()),
   );
 
   return (
@@ -42,7 +51,7 @@ export default function CourseUnitAssignments() {
         </div>
 
         <CardDescription>
-          Add new assigments for this course unit.
+          Add new assignments for this course unit.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -69,6 +78,16 @@ export default function CourseUnitAssignments() {
           )}
         </div>
       </CardContent>
+      <CardFooter>
+        <CourseUnitAssignmentsPagination
+          page={assignments.current_page}
+          lastPage={assignments.next_page_url}
+          totalPages={assignments.last_page}
+          courseSlug={courseSlug}
+          courseUnitSlug={courseUnitSlug}
+          setPage={setPage}
+        />
+      </CardFooter>
     </Card>
   );
 }

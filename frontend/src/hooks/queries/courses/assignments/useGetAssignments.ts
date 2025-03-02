@@ -1,16 +1,21 @@
 import { fetchData } from "@/lib/api-client";
-import { Assignment } from "@/types/assignment-types";
+import { AssignmentsWithPagination } from "@/types/assignment-types";
 import { useQuery } from "@tanstack/react-query";
 
-type Slug = {
+type getAssignments = {
   courseSlug?: string;
   courseUnitSlug?: string;
+  page?: number;
 };
 
-export function useGetAssignments({ courseSlug, courseUnitSlug }: Slug) {
+export function useGetAssignments({
+  courseSlug,
+  courseUnitSlug,
+  page,
+}: getAssignments) {
   return useQuery({
-    queryKey: ["assignments"],
-    queryFn: (): Promise<Assignment[]> =>
-      fetchData(`/assignments/${courseSlug}/${courseUnitSlug}`),
+    queryKey: ["assignments", page],
+    queryFn: (): Promise<AssignmentsWithPagination> =>
+      fetchData(`/assignments/${courseSlug}/${courseUnitSlug}?page=${page}`),
   });
 }
