@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Spinner } from "@/components/ui/spinner";
-import { Assignment } from "@/lib/types/assignment-types";
+import { Assignment } from "@/types/assignment-types";
 
 type CourseUnitAssignmentCardProps = {
   assignment: Assignment;

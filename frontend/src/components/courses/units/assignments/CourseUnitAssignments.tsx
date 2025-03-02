@@ -1,4 +1,6 @@
+import FormDialog from "@/components/common/FormDialog";
 import SearchInput from "@/components/common/SearchInput";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -6,17 +8,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useGetAssignments } from "@/hooks/queries/courses/assignments/useGetAssignments";
 import { Plus } from "lucide-react";
-import FormDialog from "@/components/common/FormDialog";
-import { Button } from "@/components/ui/button";
-import CourseUnitAssignmentCard from "./CourseUnitAssignmentCard";
-import { useParams } from "react-router-dom";
-import { useAssignments } from "@/hooks/queries/courses/assignments/useAssignments";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import CourseUnitAssignmentCard from "./CourseUnitAssignmentCard";
 
 export default function CourseUnitAssignments() {
   const { courseSlug, courseUnitSlug } = useParams();
-  const { data: assignments = [], isLoading } = useAssignments({
+  const { data: assignments = [], isLoading } = useGetAssignments({
     courseSlug,
     courseUnitSlug,
   });

@@ -1,5 +1,5 @@
 import { fetchData } from "@/lib/api-client";
-import { Assignment } from "@/lib/types/assignment-types";
+import { Assignment } from "@/types/assignment-types";
 import { useQuery } from "@tanstack/react-query";
 
 type Slug = {
@@ -7,7 +7,7 @@ type Slug = {
   courseUnitSlug?: string;
 };
 
-export function useAssignments({ courseSlug, courseUnitSlug }: Slug) {
+export function useGetAssignments({ courseSlug, courseUnitSlug }: Slug) {
   return useQuery({
     queryKey: ["assignments"],
     queryFn: (): Promise<Assignment[]> =>

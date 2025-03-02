@@ -1,8 +1,8 @@
 import { fetchData } from "@/lib/api-client";
-import { UserNotificationWithCount } from "@/lib/types";
+import { UserNotificationWithCount } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
-export function useUserNotificationsForPagination(page: number) {
+export function useGetUserNotificationsForPagination(page: number) {
   return useQuery({
     queryKey: ["user-notifications", page],
     queryFn: (): Promise<UserNotificationWithCount> =>

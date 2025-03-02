@@ -1,4 +1,4 @@
-import { UserSettings } from "@/lib/types/user-types";
+import { UserSettings } from "@/types/user-types";
 import { Card, CardHeader, CardTitle } from "../../ui/card";
 import ProfileUploadImageForm from "../ProfileUploadImageForm";
 import ProfilePicture from "../ProfilePicture";

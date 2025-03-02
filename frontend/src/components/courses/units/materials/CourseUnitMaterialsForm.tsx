@@ -10,7 +10,7 @@ import { useCreateCourseUnitMaterial } from "@/hooks/mutations/materials/useCrea
 import {
   courseUnitMaterialsFormSchema,
   TCourseUnitMaterialsFormSchema,
-} from "@/lib/validations/course-validations";
+} from "@/validations/course-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";

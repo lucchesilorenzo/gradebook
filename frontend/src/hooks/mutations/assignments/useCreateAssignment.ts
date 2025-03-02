@@ -1,5 +1,5 @@
 import { postData } from "@/lib/api-client";
-import { TAssignmentFormSchema } from "@/lib/validations/assignment-validations";
+import { TAssignmentFormSchema } from "@/validations/assignment-validations";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 

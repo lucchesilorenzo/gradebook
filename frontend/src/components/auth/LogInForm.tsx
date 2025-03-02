@@ -10,7 +10,7 @@ import { useLogIn } from "@/hooks/mutations/auth/useLogIn";
 import {
   logInFormSchema,
   TLogInFormSchema,
-} from "@/lib/validations/auth-validations";
+} from "@/validations/auth-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import EmailInput from "../common/EmailInput";

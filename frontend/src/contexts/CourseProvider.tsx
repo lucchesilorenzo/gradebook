@@ -1,4 +1,4 @@
-import { TeacherCourse } from "@/lib/types";
+import { TeacherCourse } from "@/types";
 import React, { createContext } from "react";
 
 type CourseProviderProps = {

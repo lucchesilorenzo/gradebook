@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import {
   gradeCellFormSchema,
   TAssignmentGradeFormSchema,
-} from "@/lib/validations/assignment-validations";
+} from "@/validations/assignment-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
@@ -18,7 +18,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useUpdateAssignmentStudentRecord } from "@/hooks/mutations/assignments/updateAssignmentStudentRecord";
+import { useUpdateAssignmentStudentRecord } from "@/hooks/mutations/assignments/useUpdateAssignmentStudentRecord";
 
 type GradeCellProps = {
   grade: number | null;

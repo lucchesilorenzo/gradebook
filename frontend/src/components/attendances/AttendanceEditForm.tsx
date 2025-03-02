@@ -7,11 +7,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useUpdateAttendance } from "@/hooks/mutations/attendances/useUpdateAttendance";
-import { StudentRegisterData } from "@/lib/types";
+import { StudentRegisterData } from "@/types";
 import {
   attendanceEditFormSchema,
   TAttendanceEditFormSchema,
-} from "@/lib/validations/attendance-validations";
+} from "@/validations/attendance-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { LoadingButton } from "../common/LoadingButton";

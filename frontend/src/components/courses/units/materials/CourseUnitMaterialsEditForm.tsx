@@ -7,7 +7,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useUpdateCourseUnitMaterial } from "@/hooks/mutations/materials/useUpdateCourseUnitMaterial";
-import { CourseUnitMaterial } from "@/lib/types";
+import { CourseUnitMaterial } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { LoadingButton } from "../../../common/LoadingButton";
@@ -15,7 +15,7 @@ import { Input } from "../../../ui/input";
 import {
   courseUnitMaterialsEditFormSchema,
   TCourseUnitMaterialsEditFormSchema,
-} from "@/lib/validations/course-validations";
+} from "@/validations/course-validations";
 
 type CourseUnitMaterialsEditFormProps = {
   onFormSubmit: () => void;

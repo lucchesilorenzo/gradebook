@@ -1,4 +1,4 @@
-import { TTask } from "@/lib/types";
+import { TTask } from "@/types";
 import { cn } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";

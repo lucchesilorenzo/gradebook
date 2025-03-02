@@ -14,7 +14,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { CourseUnitMaterial, StudentRegisterData } from "@/lib/types";
+import { CourseUnitMaterial, StudentRegisterData } from "@/types";
 import { useState } from "react";
 import AttendanceEditForm from "../attendances/AttendanceEditForm";
 import CourseUnitAssignmentForm from "../courses/units/assignments/CourseUnitAssignmentForm";

@@ -2,7 +2,7 @@ import MainCalendar from "@/components/calendar/MainCalendar";
 import H1 from "@/components/common/H1";
 import Loading from "@/components/common/Loading";
 import { CalendarEvent } from "@/components/ui/full-calendar";
-import { useSchedules } from "@/hooks/queries/useSchedules";
+import { useGetSchedules } from "@/hooks/queries/useGetSchedules";
 import env from "@/lib/env";
 import { useEffect } from "react";
 
@@ -11,7 +11,7 @@ export default function CalendarPage() {
     document.title = `Calendar | ${env.VITE_APP_NAME}`;
   }, []);
 
-  const { data: schedules = [], isLoading } = useSchedules();
+  const { data: schedules = [], isLoading } = useGetSchedules();
 
   const events: CalendarEvent[] = schedules.map((schedule) => ({
     id: schedule.id,

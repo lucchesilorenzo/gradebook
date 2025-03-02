@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { StudentRegisterData } from "@/lib/types";
+import { StudentRegisterData } from "@/types";
 import { EllipsisVertical } from "lucide-react";
 import { useState } from "react";
 

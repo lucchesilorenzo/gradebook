@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
-import { useTasks } from "@/hooks/queries/useTasks";
+import { useGetTasks } from "@/hooks/queries/useGetTasks";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { NotebookText } from "lucide-react";
 import { useState } from "react";
@@ -16,7 +16,7 @@ import TaskPagination from "./TaskPagination";
 
 export default function TasksCard() {
   const [page, setPage] = useState(1);
-  const { data: tasks, isLoading } = useTasks(page);
+  const { data: tasks, isLoading } = useGetTasks(page);
 
   if (!tasks) return null;
 

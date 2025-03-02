@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { TeacherCourse } from "@/lib/types";
+import { TeacherCourse } from "@/types";
 import { calculateCourseProgress, capitalize } from "@/lib/utils";
 import { BookOpen, Calendar, Users } from "lucide-react";
 import { Badge } from "../ui/badge";

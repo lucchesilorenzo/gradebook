@@ -1,4 +1,4 @@
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/contexts/useUser";
 import { Bell } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";

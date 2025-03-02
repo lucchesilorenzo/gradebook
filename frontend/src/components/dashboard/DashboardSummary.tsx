@@ -1,4 +1,4 @@
-import { useDashboard } from "@/hooks/queries/useDashboard";
+import { useGetDashboard } from "@/hooks/queries/useGetDashboard";
 import { format } from "date-fns";
 import { Bell, BookOpen, Clock, UsersIcon } from "lucide-react";
 import DashboardCard from "./DashboardCard";
@@ -23,7 +23,7 @@ export default function DashboardSummary() {
       },
     },
     isLoading,
-  } = useDashboard();
+  } = useGetDashboard();
 
   const formattedDate = data.next_lesson.start_datetime
     ? format(new Date(data.next_lesson.start_datetime), "dd/MM/yyyy 'at' HH:mm")

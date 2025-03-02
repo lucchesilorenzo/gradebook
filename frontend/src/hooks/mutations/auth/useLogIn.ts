@@ -1,5 +1,5 @@
 import { postData } from "@/lib/api-client";
-import { TLogInFormSchema } from "@/lib/validations/auth-validations";
+import { TLogInFormSchema } from "@/validations/auth-validations";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";

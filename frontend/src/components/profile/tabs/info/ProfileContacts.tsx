@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/contexts/useUser";
 import { Mail, Phone } from "lucide-react";
 import { formatPhoneNumberIntl } from "react-phone-number-input";
 

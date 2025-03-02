@@ -1,11 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useAcademy } from "@/hooks/queries/useAcademy";
+import { useGetAcademy } from "@/hooks/queries/useGetAcademy";
 import { Building2, Globe, Mail, MapPin, Phone } from "lucide-react";
-import { Spinner } from "../ui/spinner";
 import { Link } from "react-router-dom";
+import { Spinner } from "../ui/spinner";
 
 export default function AcademyCard() {
-  const { data: academy, isLoading } = useAcademy();
+  const { data: academy, isLoading } = useGetAcademy();
 
   if (!academy) return null;
 

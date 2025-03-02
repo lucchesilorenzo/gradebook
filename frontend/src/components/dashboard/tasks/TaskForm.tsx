@@ -3,7 +3,7 @@ import { useCreateTask } from "@/hooks/mutations/tasks/useCreateTask";
 import {
   taskFormSchema,
   TTaskFormSchema,
-} from "@/lib/validations/task-validations";
+} from "@/validations/task-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
 import { useForm } from "react-hook-form";

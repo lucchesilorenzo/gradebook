@@ -6,8 +6,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { CourseUnit, TeacherCourse } from "@/lib/types";
-import { Assignment } from "@/lib/types/assignment-types";
+import { CourseUnit, TeacherCourse } from "@/types";
+import { Assignment } from "@/types/assignment-types";
 import { Link } from "react-router-dom";
 
 type CourseUnitBreadcrumbProps = {

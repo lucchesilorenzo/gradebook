@@ -8,11 +8,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/contexts/useUser";
 import {
   profileFormSchema,
   TProfileFormSchema,
-} from "@/lib/validations/profile-validations";
+} from "@/validations/profile-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { capitalize } from "@/lib/utils";

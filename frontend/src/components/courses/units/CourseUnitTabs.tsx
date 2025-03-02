@@ -1,14 +1,14 @@
 import { columns } from "@/components/tables/courses/columns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useCourseUnitMaterials } from "@/hooks/queries/courses/useCourseUnitMaterials";
+import { useGetCourseUnitMaterials } from "@/hooks/queries/courses/useGetCourseUnitMaterials";
 import env from "@/lib/env";
-import { CourseUnit, TeacherCourse } from "@/lib/types";
-import { Attendance } from "@/lib/types/attendance-types";
+import { CourseUnit, TeacherCourse } from "@/types";
+import { Attendance } from "@/types/attendance-types";
 import { useEffect } from "react";
 import Loading from "../../common/Loading";
 import StudentRegisterTable from "../../tables/courses/StudentRegisterTable";
-import CourseUnitMaterials from "./materials/CourseUnitMaterials";
 import CourseUnitAssignments from "./assignments/CourseUnitAssignments";
+import CourseUnitMaterials from "./materials/CourseUnitMaterials";
 
 type CourseUnitTabsProps = {
   course: TeacherCourse;
@@ -25,10 +25,11 @@ export default function CourseUnitTabs({
     document.title = `${courseUnit?.name} | ${env.VITE_APP_NAME}`;
   }, [courseUnit?.name]);
 
-  const { data: courseUnitMaterials = [], isLoading } = useCourseUnitMaterials({
-    courseSlug: course.slug,
-    courseUnitSlug: courseUnit.slug,
-  });
+  const { data: courseUnitMaterials = [], isLoading } =
+    useGetCourseUnitMaterials({
+      courseSlug: course.slug,
+      courseUnitSlug: courseUnit.slug,
+    });
 
   const studentRegisterData = course.students.map((student) => ({
     ...student,

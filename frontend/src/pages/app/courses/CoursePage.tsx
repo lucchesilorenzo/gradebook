@@ -4,7 +4,7 @@ import CourseBreadcrumb from "@/components/courses/CourseBreadcrumb";
 import CourseDetailCard from "@/components/courses/CourseDetailCard";
 import CourseUnitsList from "@/components/courses/units/CourseUnitsList";
 import { Badge } from "@/components/ui/badge";
-import { useCourseBySlug } from "@/hooks/queries/courses/useCourseBySlug";
+import { useGetCourseBySlug } from "@/hooks/queries/courses/useGetCourseBySlug";
 import env from "@/lib/env";
 import { capitalize } from "@/lib/utils";
 import { useEffect } from "react";
@@ -12,7 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export default function CoursePage() {
   const { courseSlug } = useParams();
-  const { data: course, isLoading } = useCourseBySlug(courseSlug);
+  const { data: course, isLoading } = useGetCourseBySlug(courseSlug);
   const navigate = useNavigate();
 
   useEffect(() => {

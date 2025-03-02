@@ -1,8 +1,8 @@
 import { fetchData } from "@/lib/api-client";
-import { TeacherCourse } from "@/lib/types";
+import { TeacherCourse } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
-export function useCourseBySlug(courseSlug?: string) {
+export function useGetCourseBySlug(courseSlug?: string) {
   return useQuery({
     queryKey: ["course", courseSlug],
     queryFn: (): Promise<TeacherCourse> =>

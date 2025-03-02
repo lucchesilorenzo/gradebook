@@ -1,5 +1,5 @@
 import { fetchData } from "@/lib/api-client";
-import { Attendance } from "@/lib/types/attendance-types";
+import { Attendance } from "@/types/attendance-types";
 import { useQuery } from "@tanstack/react-query";
 
 type Slug = {
@@ -7,7 +7,7 @@ type Slug = {
   courseUnitSlug?: string;
 };
 
-export function useAttendances({ courseSlug, courseUnitSlug }: Slug) {
+export function useGetAttendances({ courseSlug, courseUnitSlug }: Slug) {
   return useQuery({
     queryKey: ["attendances"],
     queryFn: (): Promise<Attendance[]> =>

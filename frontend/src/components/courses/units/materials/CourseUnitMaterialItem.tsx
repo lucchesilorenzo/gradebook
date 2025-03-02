@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 import { courseUnitMaterialIcons } from "@/lib/data";
 import env from "@/lib/env";
-import { CourseUnitMaterial } from "@/lib/types";
+import { CourseUnitMaterial } from "@/types";
 import { CircleX, Edit, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import CourseUnitMaterialAlertDialog from "./CourseUnitMaterialAlertDialog";

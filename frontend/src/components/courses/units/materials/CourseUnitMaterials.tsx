@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CourseUnitMaterial } from "@/lib/types";
+import { CourseUnitMaterial } from "@/types";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import FormDialog from "../../../common/FormDialog";

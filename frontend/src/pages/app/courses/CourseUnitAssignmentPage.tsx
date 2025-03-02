@@ -5,22 +5,24 @@ import CourseUnitAssignmentAlert from "@/components/courses/units/assignments/Co
 import CourseUnitAssignmentBreadcrumb from "@/components/courses/units/grades/CourseUnitAssignmentBreadcrumb";
 import AssignmentTable from "@/components/tables/courses/assignments/AssignmentTable";
 import { columns } from "@/components/tables/courses/assignments/columns";
-import { useAssignment } from "@/hooks/queries/courses/assignments/useAssignment";
-import { useCourseBySlug } from "@/hooks/queries/courses/useCourseBySlug";
+import { useGetAssignment } from "@/hooks/queries/courses/assignments/useGetAssignment";
+import { useGetCourseBySlug } from "@/hooks/queries/courses/useGetCourseBySlug";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function CourseUnitAssignmentPage() {
   const { courseSlug, courseUnitSlug, assignmentSlug } = useParams();
   const navigate = useNavigate();
 
-  const { data: assignment, isLoading: isAssignmentLoading } = useAssignment({
-    courseSlug,
-    courseUnitSlug,
-    assignmentSlug,
-  });
+  const { data: assignment, isLoading: isAssignmentLoading } = useGetAssignment(
+    {
+      courseSlug,
+      courseUnitSlug,
+      assignmentSlug,
+    },
+  );
 
   const { data: course, isLoading: isCourseLoading } =
-    useCourseBySlug(courseSlug);
+    useGetCourseBySlug(courseSlug);
 
   const isLoading = isAssignmentLoading || isCourseLoading;
 

@@ -2,7 +2,7 @@ import { updateData } from "@/lib/api-client";
 import {
   TAssignmentGradeFormSchema,
   TAssignmentNotesFormSchema,
-} from "@/lib/validations/assignment-validations";
+} from "@/validations/assignment-validations";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 

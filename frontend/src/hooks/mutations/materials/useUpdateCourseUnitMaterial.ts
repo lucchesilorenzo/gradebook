@@ -1,5 +1,5 @@
 import { postData, updateData } from "@/lib/api-client";
-import { TCourseUnitMaterialsEditFormSchema } from "@/lib/validations/course-validations";
+import { TCourseUnitMaterialsEditFormSchema } from "@/validations/course-validations";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 

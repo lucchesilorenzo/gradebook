@@ -1,4 +1,4 @@
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/contexts/useUser";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { User } from "lucide-react";

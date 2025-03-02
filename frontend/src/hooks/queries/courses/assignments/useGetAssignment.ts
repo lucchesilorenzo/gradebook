@@ -1,5 +1,5 @@
 import { fetchData } from "@/lib/api-client";
-import { Assignment } from "@/lib/types/assignment-types";
+import { Assignment } from "@/types/assignment-types";
 import { useQuery } from "@tanstack/react-query";
 
 type Slug = {
@@ -8,7 +8,7 @@ type Slug = {
   assignmentSlug?: string;
 };
 
-export function useAssignment({
+export function useGetAssignment({
   courseSlug,
   courseUnitSlug,
   assignmentSlug,

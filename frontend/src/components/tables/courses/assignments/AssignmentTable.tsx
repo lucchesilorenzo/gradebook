@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import env from "@/lib/env";
-import { Assignment } from "@/lib/types";
+import { Assignment } from "@/types";
 import {
   ColumnDef,
   flexRender,

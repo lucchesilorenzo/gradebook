@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/contexts/useUser";
 import { capitalize } from "@/lib/utils";
 import { format } from "date-fns";
 import { Calendar, IdCard, MapPin, User } from "lucide-react";

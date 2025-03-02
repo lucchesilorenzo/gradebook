@@ -1,17 +1,17 @@
+import AuthGuard from "@/components/common/AuthGuard";
+import Header from "@/components/common/Header";
+import Loading from "@/components/common/Loading";
 import CourseProvider from "@/contexts/CourseProvider";
-import { useCourses } from "@/hooks/queries/courses/useCourses";
-import { Outlet } from "react-router-dom";
-import AuthGuard from "../common/AuthGuard";
-import Header from "../common/Header";
-import Loading from "../common/Loading";
-import { useUserSettings } from "@/hooks/queries/users/useUserSettings";
 import UserProvider from "@/contexts/UserProvider";
+import { useGetCourses } from "@/hooks/queries/courses/useGetCourses";
+import { useGetUserSettings } from "@/hooks/queries/users/useGetUserSettings";
+import { Outlet } from "react-router-dom";
 
 export default function AppLayout() {
   const { data: userSettings, isLoading: userSettingsLoading } =
-    useUserSettings();
+    useGetUserSettings();
   const { data: teacherCourses = [], isLoading: teacherCoursesLoading } =
-    useCourses();
+    useGetCourses();
 
   const isLoading = userSettingsLoading || teacherCoursesLoading;
 

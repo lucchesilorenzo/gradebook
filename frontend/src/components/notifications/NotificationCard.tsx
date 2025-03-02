@@ -1,4 +1,4 @@
-import { UserNotification } from "@/lib/types";
+import { UserNotification } from "@/types";
 import { format, formatDistanceToNow } from "date-fns";
 import { Bell, MoreHorizontal } from "lucide-react";
 import { Badge } from "../ui/badge";

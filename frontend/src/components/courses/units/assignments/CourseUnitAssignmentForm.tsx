@@ -13,7 +13,7 @@ import { useCreateAssignment } from "@/hooks/mutations/assignments/useCreateAssi
 import {
   assignmentFormSchema,
   TAssignmentFormSchema,
-} from "@/lib/validations/assignment-validations";
+} from "@/validations/assignment-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";

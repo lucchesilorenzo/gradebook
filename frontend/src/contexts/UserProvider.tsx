@@ -1,6 +1,6 @@
-import { useUserNotifications } from "@/hooks/queries/users/useUserNotifications";
+import { useGetUserNotifications } from "@/hooks/queries/users/useGetUserNotifications";
 import { getPrivateEcho } from "@/lib/echo";
-import { UserSettings } from "@/lib/types";
+import { UserSettings } from "@/types";
 import React, { createContext, useEffect } from "react";
 import { toast } from "sonner";
 
@@ -26,7 +26,7 @@ export default function UserProvider({
   children,
   userSettings,
 }: UserProviderProps) {
-  const { data, refetch } = useUserNotifications();
+  const { data, refetch } = useGetUserNotifications();
 
   useEffect(() => {
     const privateEcho = getPrivateEcho();

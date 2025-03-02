@@ -2,8 +2,8 @@ import H1 from "@/components/common/H1";
 import Loading from "@/components/common/Loading";
 import CourseUnitBreadcrumb from "@/components/courses/units/CourseUnitBreadcrumb";
 import CourseUnitTabs from "@/components/courses/units/CourseUnitTabs";
-import { useCourseBySlug } from "@/hooks/queries/courses/useCourseBySlug";
-import { useAttendances } from "@/hooks/queries/useAttendances";
+import { useGetCourseBySlug } from "@/hooks/queries/courses/useGetCourseBySlug";
+import { useGetAttendances } from "@/hooks/queries/useGetAttendances";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function CourseUnitPage() {
@@ -11,10 +11,9 @@ export default function CourseUnitPage() {
   const navigate = useNavigate();
 
   const { data: course, isLoading: isCourseLoading } =
-    useCourseBySlug(courseSlug);
-  const { data: attendances, isLoading: isAttendancesLoading } = useAttendances(
-    { courseSlug, courseUnitSlug },
-  );
+    useGetCourseBySlug(courseSlug);
+  const { data: attendances, isLoading: isAttendancesLoading } =
+    useGetAttendances({ courseSlug, courseUnitSlug });
 
   if (isCourseLoading || isAttendancesLoading) return <Loading />;
   if (!course || !attendances || !courseSlug || !courseUnitSlug) {
