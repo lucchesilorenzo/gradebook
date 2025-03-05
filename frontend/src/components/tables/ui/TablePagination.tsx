@@ -17,17 +17,21 @@ import {
 
 type TablePaginationProps<TData> = {
   table: Table<TData>;
+  rowSelection?: boolean;
 };
 
 export default function TablePagination<TData>({
   table,
+  rowSelection = false,
 }: TablePaginationProps<TData>) {
   return (
     <div className="flex items-center justify-between px-2">
-      <div className="hidden flex-1 text-sm text-muted-foreground sm:block">
-        {table.getFilteredSelectedRowModel().rows.length} of{" "}
-        {table.getFilteredRowModel().rows.length} row(s) selected.
-      </div>
+      {rowSelection && (
+        <div className="hidden flex-1 text-sm text-muted-foreground sm:block">
+          {table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredRowModel().rows.length} row(s) selected.
+        </div>
+      )}
 
       <div className="flex items-center space-x-6 lg:space-x-8">
         <div className="flex items-center space-x-2">

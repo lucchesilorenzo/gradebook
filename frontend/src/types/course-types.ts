@@ -64,14 +64,6 @@ export type TeacherCourse = {
 
 export type CourseUnit = TeacherCourse["units"][number];
 
-export type Student = TeacherCourse["students"][number];
-
-export type StudentRegisterData = Student & {
-  course_id: TeacherCourse["id"];
-  course_unit_id: CourseUnit["id"];
-  status?: string;
-};
-
 export type CourseUnitMaterial = {
   id: string;
   title: string;
@@ -81,4 +73,23 @@ export type CourseUnitMaterial = {
   url: string | null;
   created_at: string;
   updated_at: string;
+};
+
+export type Student = TeacherCourse["students"][number];
+
+export type StudentRegisterData = Student & {
+  course_id: TeacherCourse["id"];
+  course_unit_id: CourseUnit["id"];
+  status?: string;
+};
+
+export type StudentWithGrades = {
+  student: Pick<Student, "id" | "first_name" | "last_name">;
+  grades: {
+    id: string;
+    title: string;
+    grade: number;
+    notes: string | null;
+    date: string;
+  }[];
 };

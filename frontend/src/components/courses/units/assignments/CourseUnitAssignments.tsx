@@ -78,16 +78,18 @@ export default function CourseUnitAssignments() {
           )}
         </div>
       </CardContent>
-      <CardFooter>
-        <CourseUnitAssignmentsPagination
-          page={assignments.current_page}
-          lastPage={assignments.next_page_url}
-          totalPages={assignments.last_page}
-          courseSlug={courseSlug}
-          courseUnitSlug={courseUnitSlug}
-          setPage={setPage}
-        />
-      </CardFooter>
+      {filteredAssignments.length > 0 && (
+        <CardFooter>
+          <CourseUnitAssignmentsPagination
+            page={assignments.current_page}
+            lastPage={assignments.next_page_url}
+            totalPages={assignments.last_page}
+            courseSlug={courseSlug}
+            courseUnitSlug={courseUnitSlug}
+            setPage={setPage}
+          />
+        </CardFooter>
+      )}
     </Card>
   );
 }
