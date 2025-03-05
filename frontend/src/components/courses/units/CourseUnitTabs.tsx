@@ -1,4 +1,4 @@
-import { columns } from "@/components/tables/courses/columns";
+import { columns } from "@/components/tables/courses/units/student-register/columns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetCourseUnitMaterials } from "@/hooks/queries/courses/useGetCourseUnitMaterials";
 import env from "@/lib/env";
@@ -6,7 +6,7 @@ import { CourseUnit, TeacherCourse } from "@/types";
 import { Attendance } from "@/types/attendance-types";
 import { useEffect } from "react";
 import Loading from "../../common/Loading";
-import StudentRegisterTable from "../../tables/courses/StudentRegisterTable";
+import StudentRegisterTable from "../../tables/courses/units/student-register/StudentRegisterTable";
 import CourseUnitAssignments from "./assignments/CourseUnitAssignments";
 import CourseUnitMaterials from "./materials/CourseUnitMaterials";
 

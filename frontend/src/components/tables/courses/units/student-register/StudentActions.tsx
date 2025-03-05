@@ -11,12 +11,14 @@ import {
 import { StudentRegisterData } from "@/types";
 import { EllipsisVertical } from "lucide-react";
 import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 type StudentActionsProps = {
   student: StudentRegisterData;
 };
 
 export default function StudentActions({ student }: StudentActionsProps) {
+  const { courseSlug, courseUnitSlug } = useParams();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -33,6 +35,13 @@ export default function StudentActions({ student }: StudentActionsProps) {
           <DropdownMenuSeparator />
           <DropdownMenuItem onSelect={() => setIsOpen(!isOpen)}>
             Attendances
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link
+              to={`/courses/${courseSlug}/course-units/${courseUnitSlug}/students/${student.id}/grades`}
+            >
+              Grades
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

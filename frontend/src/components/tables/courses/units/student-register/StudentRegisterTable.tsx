@@ -18,7 +18,7 @@ import {
 import { format } from "date-fns";
 import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
-import TablePagination from "../ui/TablePagination";
+import TablePagination from "../../../ui/TablePagination";
 
 type StudentRegisterTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];

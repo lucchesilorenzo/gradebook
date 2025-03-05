@@ -9,6 +9,7 @@ import CalendarPage from "./pages/app/CalendarPage.tsx";
 import DashboardPage from "./pages/app/DashboardPage.tsx";
 import NotificationsPage from "./pages/app/NotificationsPage.tsx";
 import ProfilePage from "./pages/app/ProfilePage.tsx";
+import StudentGradesPage from "./pages/app/StudentGradesPage.tsx";
 import CoursePage from "./pages/app/courses/CoursePage.tsx";
 import CourseUnitAssignmentPage from "./pages/app/courses/CourseUnitAssignmentPage.tsx";
 import CourseUnitPage from "./pages/app/courses/CourseUnitPage.tsx";
@@ -31,6 +32,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/" element={<AppLayout />}>
             <Route index element={<Navigate to="dashboard" />} />
             <Route path="dashboard" element={<DashboardPage />} />
+
             <Route path="courses">
               <Route index element={<CoursesPage />} />
               <Route path=":courseSlug">
@@ -38,6 +40,14 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="course-units">
                   <Route path=":courseUnitSlug">
                     <Route index element={<CourseUnitPage />} />
+
+                    <Route path="students">
+                      <Route path=":studentId">
+                        <Route index element={<Navigate to="grades" />} />
+                        <Route path="grades" element={<StudentGradesPage />} />
+                      </Route>
+                    </Route>
+
                     <Route path="assignments">
                       <Route path=":assignmentSlug">
                         <Route index element={<CourseUnitAssignmentPage />} />
@@ -47,7 +57,9 @@ createRoot(document.getElementById("root")!).render(
                 </Route>
               </Route>
             </Route>
+
             <Route path="calendar" element={<CalendarPage />} />
+
             <Route path="teacher">
               <Route index element={<Navigate to="profile" />} />
               <Route path="profile" element={<ProfilePage />} />
