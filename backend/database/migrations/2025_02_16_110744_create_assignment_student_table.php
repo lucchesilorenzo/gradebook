@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignUuid('student_id')->constrained()->onDelete('cascade');
             $table->integer('grade')->nullable();
             $table->text('notes')->nullable();
+            $table->timestamps();
 
             $table->primary(['assignment_id', 'student_id']);
         });
