@@ -1,3 +1,5 @@
+import { useNavigate, useParams } from "react-router-dom";
+
 import H1 from "@/components/common/H1";
 import H2 from "@/components/common/H2";
 import Loading from "@/components/common/Loading";
@@ -7,7 +9,6 @@ import AssignmentTable from "@/components/tables/courses/units/assignments/Assig
 import { columns } from "@/components/tables/courses/units/assignments/columns";
 import { useGetAssignment } from "@/hooks/queries/courses/assignments/useGetAssignment";
 import { useGetCourseBySlug } from "@/hooks/queries/courses/useGetCourseBySlug";
-import { useNavigate, useParams } from "react-router-dom";
 
 export default function CourseUnitAssignmentPage() {
   const { courseSlug, courseUnitSlug, assignmentSlug } = useParams();

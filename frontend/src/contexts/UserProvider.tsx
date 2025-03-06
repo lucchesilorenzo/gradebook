@@ -1,8 +1,10 @@
+import React, { createContext, useEffect } from "react";
+
+import { toast } from "sonner";
+
 import { useGetUserNotifications } from "@/hooks/queries/users/useGetUserNotifications";
 import { getPrivateEcho } from "@/lib/echo";
 import { UserSettings } from "@/types";
-import React, { createContext, useEffect } from "react";
-import { toast } from "sonner";
 
 type Notification = {
   id: string;

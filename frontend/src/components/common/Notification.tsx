@@ -1,9 +1,12 @@
-import { useUser } from "@/hooks/contexts/useUser";
+import { useEffect } from "react";
+
 import { Bell } from "lucide-react";
 import { Link } from "react-router-dom";
+
 import { Button } from "../ui/button";
 import { NotificationBadge } from "../ui/notification-badge";
-import { useEffect } from "react";
+
+import { useUser } from "@/hooks/contexts/useUser";
 import env from "@/lib/env";
 
 export default function Notification() {

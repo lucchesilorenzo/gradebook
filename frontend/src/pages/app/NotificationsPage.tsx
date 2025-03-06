@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
+
 import H1 from "@/components/common/H1";
 import Loading from "@/components/common/Loading";
 import NotificationList from "@/components/notifications/NotificationList";
 import NotificationPagination from "@/components/notifications/NotificationPagination";
 import { useGetUserNotificationsForPagination } from "@/hooks/queries/users/useGetUserNotificationsForPagination";
 import env from "@/lib/env";
-import { useEffect, useState } from "react";
 
 export default function NotificationsPage() {
   useEffect(() => {

@@ -1,10 +1,13 @@
-import { TTask } from "@/types";
-import { cn } from "@/lib/utils";
-import { Trash2 } from "lucide-react";
 import { useState } from "react";
+
+import { Trash2 } from "lucide-react";
+
 import { Button } from "../../ui/button";
 import { Checkbox } from "../../ui/checkbox";
 import TaskAlertDialog from "./TaskAlertDialog";
+
+import { cn } from "@/lib/utils";
+import { TTask } from "@/types";
 
 type TaskProps = {
   task: TTask;

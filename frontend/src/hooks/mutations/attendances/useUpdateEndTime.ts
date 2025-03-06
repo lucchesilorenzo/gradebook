@@ -1,6 +1,7 @@
-import { updateData } from "@/lib/api-client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+
+import { updateData } from "@/lib/api-client";
 
 type useUpdateEndTimeProps = {
   end_time: string;

@@ -1,9 +1,10 @@
-import H1 from "@/components/common/H1";
-import DashboardSummary from "@/components/dashboard/DashboardSummary";
-import env from "@/lib/env";
 import { useEffect } from "react";
-import TasksCard from "@/components/dashboard/tasks/TasksCard";
+
+import H1 from "@/components/common/H1";
 import AcademyCard from "@/components/dashboard/AcademyCard";
+import DashboardSummary from "@/components/dashboard/DashboardSummary";
+import TasksCard from "@/components/dashboard/tasks/TasksCard";
+import env from "@/lib/env";
 
 export default function DashboardPage() {
   useEffect(() => {

@@ -1,3 +1,8 @@
+import { Calendar, Users } from "lucide-react";
+import { Link } from "react-router-dom";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -5,10 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Calendar, Users } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Spinner } from "@/components/ui/spinner";
 import { Assignment } from "@/types/assignment-types";
 

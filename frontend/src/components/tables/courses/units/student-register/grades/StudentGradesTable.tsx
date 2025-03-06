@@ -1,3 +1,13 @@
+import { useState } from "react";
+
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+
 import TablePagination from "@/components/tables/ui/TablePagination";
 import {
   Table,
@@ -7,14 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { useState } from "react";
 
 type StudentGradesTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];

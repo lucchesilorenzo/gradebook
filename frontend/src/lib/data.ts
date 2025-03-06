@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   CalendarClock,
   FileText,
@@ -6,7 +8,6 @@ import {
   LinkIcon,
   Video,
 } from "lucide-react";
-import React from "react";
 
 export const routes = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },

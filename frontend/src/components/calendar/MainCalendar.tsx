@@ -1,3 +1,5 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import {
   Calendar,
   CalendarCurrentDate,
@@ -11,7 +13,6 @@ import {
   CalendarWeekView,
   CalendarYearView,
 } from "@/components/ui/full-calendar";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type MainCalendarProps = {
   events: CalendarEvent[];

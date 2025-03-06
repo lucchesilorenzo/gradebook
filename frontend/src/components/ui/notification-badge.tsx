@@ -1,5 +1,6 @@
-import { cn } from "@/lib/utils";
 import { Badge, BadgeProps } from "./badge";
+
+import { cn } from "@/lib/utils";
 
 export interface NotificationBadgeProps extends BadgeProps {
   label?: string | number;

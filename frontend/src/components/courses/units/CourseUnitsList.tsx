@@ -1,3 +1,5 @@
+import CourseUnit from "./CourseUnit";
+
 import {
   Card,
   CardContent,
@@ -6,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { TeacherCourse } from "@/types";
-import CourseUnit from "./CourseUnit";
 
 type CourseUnitsListProps = {
   course: TeacherCourse;

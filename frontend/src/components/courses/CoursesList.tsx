@@ -1,5 +1,6 @@
-import { useCourse } from "@/hooks/contexts/useCourse";
 import CourseCard from "./CourseCard";
+
+import { useCourse } from "@/hooks/contexts/useCourse";
 
 export default function CoursesList() {
   const { teacherCourses } = useCourse();

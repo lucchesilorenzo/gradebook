@@ -1,3 +1,10 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+import EmailInput from "../common/EmailInput";
+import { LoadingButton } from "../common/LoadingButton";
+import PasswordInput from "../common/PasswordInput";
+
 import {
   Form,
   FormControl,
@@ -8,14 +15,9 @@ import {
 } from "@/components/ui/form";
 import { useLogIn } from "@/hooks/mutations/auth/useLogIn";
 import {
-  logInFormSchema,
   TLogInFormSchema,
+  logInFormSchema,
 } from "@/validations/auth-validations";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import EmailInput from "../common/EmailInput";
-import { LoadingButton } from "../common/LoadingButton";
-import PasswordInput from "../common/PasswordInput";
 
 export default function LogInForm() {
   const { mutateAsync: logIn } = useLogIn();

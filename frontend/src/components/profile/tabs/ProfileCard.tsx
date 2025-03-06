@@ -1,7 +1,8 @@
-import { UserSettings } from "@/types/user-types";
 import { Card, CardHeader, CardTitle } from "../../ui/card";
-import ProfileUploadImageForm from "../ProfileUploadImageForm";
 import ProfilePicture from "../ProfilePicture";
+import ProfileUploadImageForm from "../ProfileUploadImageForm";
+
+import { UserSettings } from "@/types/user-types";
 
 type ProfileCardProps = {
   userSettings: UserSettings;

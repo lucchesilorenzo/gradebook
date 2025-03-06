@@ -1,3 +1,8 @@
+import { format } from "date-fns";
+import { Clock } from "lucide-react";
+
+import { Badge } from "../ui/badge";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,9 +16,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useCreateAttendances } from "@/hooks/mutations/attendances/useCreateAttendances";
 import { useUpdateEndTime } from "@/hooks/mutations/attendances/useUpdateEndTime";
-import { format } from "date-fns";
-import { Clock } from "lucide-react";
-import { Badge } from "../ui/badge";
 
 type MainAlertDialogProps<T> = {
   children: React.ReactNode;

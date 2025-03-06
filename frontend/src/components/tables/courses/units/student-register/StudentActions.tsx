@@ -1,3 +1,8 @@
+import { useState } from "react";
+
+import { EllipsisVertical } from "lucide-react";
+import { Link, useParams } from "react-router-dom";
+
 import FormDialog from "@/components/common/FormDialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,9 +14,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { StudentRegisterData } from "@/types";
-import { EllipsisVertical } from "lucide-react";
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
 
 type StudentActionsProps = {
   student: StudentRegisterData;

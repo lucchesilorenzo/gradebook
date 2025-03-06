@@ -1,5 +1,6 @@
-import { UserContext } from "@/contexts/UserProvider";
 import { useContext } from "react";
+
+import { UserContext } from "@/contexts/UserProvider";
 
 export function useUser() {
   const context = useContext(UserContext);

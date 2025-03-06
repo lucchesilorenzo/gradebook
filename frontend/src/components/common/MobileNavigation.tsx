@@ -1,3 +1,11 @@
+import { useState } from "react";
+
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { Menu } from "lucide-react";
+import { Link } from "react-router-dom";
+
+import AppLogo from "./AppLogo";
+
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -9,11 +17,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { routes } from "@/lib/data";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { Link } from "react-router-dom";
-import AppLogo from "./AppLogo";
-import { Menu } from "lucide-react";
-import { useState } from "react";
 
 export default function MobileNavigation() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);

@@ -1,6 +1,7 @@
+import { Link, useLocation } from "react-router-dom";
+
 import { routes } from "@/lib/data";
 import { cn } from "@/lib/utils";
-import { Link, useLocation } from "react-router-dom";
 
 export default function Navigation() {
   const { pathname } = useLocation();

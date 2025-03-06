@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,7 +8,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Link } from "react-router-dom";
 
 type CourseBreadcrumbProps = {
   course: string;

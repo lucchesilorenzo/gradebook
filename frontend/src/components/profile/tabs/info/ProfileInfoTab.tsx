@@ -1,7 +1,8 @@
-import H2 from "@/components/common/H2";
-import ProfilePersonalInfo from "./ProfilePersonalInfo";
 import ProfileContacts from "./ProfileContacts";
+import ProfilePersonalInfo from "./ProfilePersonalInfo";
 import ProfileStatus from "./ProfileStatus";
+
+import H2 from "@/components/common/H2";
 
 export default function ProfileInfoTab() {
   return (

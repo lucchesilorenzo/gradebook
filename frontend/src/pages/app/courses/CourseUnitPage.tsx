@@ -1,10 +1,11 @@
+import { useNavigate, useParams } from "react-router-dom";
+
 import H1 from "@/components/common/H1";
 import Loading from "@/components/common/Loading";
 import CourseUnitBreadcrumb from "@/components/courses/units/CourseUnitBreadcrumb";
 import CourseUnitTabs from "@/components/courses/units/CourseUnitTabs";
 import { useGetCourseBySlug } from "@/hooks/queries/courses/useGetCourseBySlug";
 import { useGetAttendances } from "@/hooks/queries/useGetAttendances";
-import { useNavigate, useParams } from "react-router-dom";
 
 export default function CourseUnitPage() {
   const { courseSlug, courseUnitSlug } = useParams();

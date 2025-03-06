@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
+
 import { fetchData } from "@/lib/api-client";
 import { UserSettings } from "@/types/user-types";
-import { useQuery } from "@tanstack/react-query";
 
 export function useGetUserSettings() {
   return useQuery({

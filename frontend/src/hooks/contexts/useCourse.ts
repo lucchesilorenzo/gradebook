@@ -1,5 +1,6 @@
-import { CourseContext } from "@/contexts/CourseProvider";
 import { useContext } from "react";
+
+import { CourseContext } from "@/contexts/CourseProvider";
 
 export function useCourse() {
   const context = useContext(CourseContext);

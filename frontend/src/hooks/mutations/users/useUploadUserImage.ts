@@ -1,6 +1,7 @@
-import { postData } from "@/lib/api-client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+
+import { postData } from "@/lib/api-client";
 
 export function useUploadUserImage() {
   const queryClient = useQueryClient();

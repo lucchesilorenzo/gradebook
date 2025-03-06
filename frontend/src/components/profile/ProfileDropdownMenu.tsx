@@ -1,3 +1,9 @@
+import { useState } from "react";
+
+import { Link } from "react-router-dom";
+
+import ProfilePicture from "./ProfilePicture";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,9 +13,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useLogOut } from "@/hooks/mutations/auth/useLogOut";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import ProfilePicture from "./ProfilePicture";
 
 type ProfileDropdownMenuProps = {
   type: "desktop" | "mobile";

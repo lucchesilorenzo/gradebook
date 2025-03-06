@@ -1,5 +1,6 @@
-import { StudentWithGrades } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
+
+import { StudentWithGrades } from "@/types";
 
 export const columns: ColumnDef<StudentWithGrades["grades"][number]>[] = [
   {

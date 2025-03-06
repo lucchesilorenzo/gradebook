@@ -1,6 +1,7 @@
+import { Spinner } from "../ui/spinner";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dashboard } from "@/types/dashboard-types";
-import { Spinner } from "../ui/spinner";
 
 type DashboardCardProps = {
   card: Dashboard;

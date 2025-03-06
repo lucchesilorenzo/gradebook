@@ -1,8 +1,9 @@
-import { postData } from "@/lib/api-client";
-import { TLogInFormSchema } from "@/validations/auth-validations";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+
+import { postData } from "@/lib/api-client";
+import { TLogInFormSchema } from "@/validations/auth-validations";
 
 export function useLogIn() {
   const queryClient = useQueryClient();

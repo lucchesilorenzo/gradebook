@@ -1,8 +1,9 @@
+import { useEffect } from "react";
+
 import ProfileCard from "@/components/profile/tabs/ProfileCard";
 import ProfileTabs from "@/components/profile/tabs/ProfileTabs";
 import { useUser } from "@/hooks/contexts/useUser";
 import env from "@/lib/env";
-import { useEffect } from "react";
 
 export default function ProfilePage() {
   useEffect(() => {

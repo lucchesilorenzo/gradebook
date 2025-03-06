@@ -1,3 +1,5 @@
+import { BookOpen, Calendar, Users } from "lucide-react";
+
 import {
   Card,
   CardContent,
@@ -6,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { TeacherCourse } from "@/types";
-import { BookOpen, Calendar, Users } from "lucide-react";
 
 type CourseDetailCardProps = {
   course: TeacherCourse;

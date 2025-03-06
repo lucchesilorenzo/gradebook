@@ -1,10 +1,11 @@
+import { useEffect } from "react";
+
 import MainCalendar from "@/components/calendar/MainCalendar";
 import H1 from "@/components/common/H1";
 import Loading from "@/components/common/Loading";
 import { CalendarEvent } from "@/components/ui/full-calendar";
 import { useGetSchedules } from "@/hooks/queries/useGetSchedules";
 import env from "@/lib/env";
-import { useEffect } from "react";
 
 export default function CalendarPage() {
   useEffect(() => {

@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -6,7 +7,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { Button } from "@/components/ui/button";
 
 type CourseUnitAssignmentsPagination = {
   page: number;

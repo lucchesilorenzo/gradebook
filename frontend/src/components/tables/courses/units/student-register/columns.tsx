@@ -1,8 +1,10 @@
-import { Checkbox } from "@/components/ui/checkbox";
-import { StudentRegisterData } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Annoyed, Clock, IdCard, Mail, Smile } from "lucide-react";
+
 import StudentActions from "./StudentActions";
+
+import { Checkbox } from "@/components/ui/checkbox";
+import { StudentRegisterData } from "@/types";
 
 export const columns: ColumnDef<StudentRegisterData>[] = [
   {

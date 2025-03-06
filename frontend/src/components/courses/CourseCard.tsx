@@ -1,3 +1,10 @@
+import { BookOpen, Calendar, Users } from "lucide-react";
+import { Link } from "react-router-dom";
+
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import { Progress } from "../ui/progress";
+
 import {
   Card,
   CardContent,
@@ -6,13 +13,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { TeacherCourse } from "@/types";
 import { calculateCourseProgress, capitalize } from "@/lib/utils";
-import { BookOpen, Calendar, Users } from "lucide-react";
-import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
-import { Progress } from "../ui/progress";
-import { Link } from "react-router-dom";
+import { TeacherCourse } from "@/types";
 
 type CourseCardProps = {
   course: TeacherCourse;

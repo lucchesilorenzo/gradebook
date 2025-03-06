@@ -1,3 +1,8 @@
+import { CircleX, Edit, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
+
+import CourseUnitMaterialAlertDialog from "./CourseUnitMaterialAlertDialog";
+
 import FormDialog from "@/components/common/FormDialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,9 +14,6 @@ import {
 import { courseUnitMaterialIcons } from "@/lib/data";
 import env from "@/lib/env";
 import { CourseUnitMaterial } from "@/types";
-import { CircleX, Edit, ExternalLink } from "lucide-react";
-import { Link } from "react-router-dom";
-import CourseUnitMaterialAlertDialog from "./CourseUnitMaterialAlertDialog";
 
 type CourseUnitMaterialItem = {
   courseUnitMaterial: CourseUnitMaterial;

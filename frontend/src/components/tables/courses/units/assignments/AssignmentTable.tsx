@@ -1,3 +1,13 @@
+import { useEffect, useState } from "react";
+
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+
 import TablePagination from "@/components/tables/ui/TablePagination";
 import {
   Table,
@@ -9,14 +19,6 @@ import {
 } from "@/components/ui/table";
 import env from "@/lib/env";
 import { Assignment } from "@/types";
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { useEffect, useState } from "react";
 
 type AssignmentTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];

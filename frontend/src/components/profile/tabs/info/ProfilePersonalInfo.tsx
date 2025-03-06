@@ -1,8 +1,9 @@
+import { format } from "date-fns";
+import { Calendar, IdCard, MapPin, User } from "lucide-react";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { useUser } from "@/hooks/contexts/useUser";
 import { capitalize } from "@/lib/utils";
-import { format } from "date-fns";
-import { Calendar, IdCard, MapPin, User } from "lucide-react";
 
 export default function ProfilePersonalInfo() {
   const { userSettings } = useUser();

@@ -1,5 +1,6 @@
-import { UserNotification } from "@/types";
 import NotificationCard from "./NotificationCard";
+
+import { UserNotification } from "@/types";
 
 type NotificationListProps = {
   notifications: UserNotification[];

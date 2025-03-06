@@ -1,8 +1,10 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
+
 import AppLayout from "./layouts/AppLayout.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 import CalendarPage from "./pages/app/CalendarPage.tsx";

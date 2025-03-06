@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
+
 import { fetchData } from "@/lib/api-client";
 import { AssignmentsWithPagination } from "@/types/assignment-types";
-import { useQuery } from "@tanstack/react-query";
 
 type getAssignments = {
   courseSlug?: string;

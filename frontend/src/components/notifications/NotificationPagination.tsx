@@ -1,3 +1,5 @@
+import { Button } from "../ui/button";
+
 import {
   Pagination,
   PaginationContent,
@@ -6,7 +8,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { Button } from "../ui/button";
 
 type NotificationPaginationProps = {
   page: number;

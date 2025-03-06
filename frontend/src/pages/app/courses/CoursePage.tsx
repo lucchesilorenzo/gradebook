@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+
+import { useNavigate, useParams } from "react-router-dom";
+
 import H1 from "@/components/common/H1";
 import Loading from "@/components/common/Loading";
 import CourseBreadcrumb from "@/components/courses/CourseBreadcrumb";
@@ -7,8 +11,6 @@ import { Badge } from "@/components/ui/badge";
 import { useGetCourseBySlug } from "@/hooks/queries/courses/useGetCourseBySlug";
 import env from "@/lib/env";
 import { capitalize } from "@/lib/utils";
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 
 export default function CoursePage() {
   const { courseSlug } = useParams();

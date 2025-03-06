@@ -1,3 +1,17 @@
+import { useEffect, useState } from "react";
+
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import { format } from "date-fns";
+import { Plus } from "lucide-react";
+
+import TablePagination from "../../../ui/TablePagination";
+
 import MainAlertDialog from "@/components/common/MainAlertDialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,17 +22,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { format } from "date-fns";
-import { Plus } from "lucide-react";
-import { useEffect, useState } from "react";
-import TablePagination from "../../../ui/TablePagination";
 
 type StudentRegisterTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];

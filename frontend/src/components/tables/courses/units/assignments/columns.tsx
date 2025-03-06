@@ -1,7 +1,8 @@
+import { ColumnDef } from "@tanstack/react-table";
+
 import GradeCell from "@/components/courses/units/assignments/grades/GradeCell";
 import NotesCell from "@/components/courses/units/assignments/grades/NotesCell";
 import { AssignmentTable } from "@/types";
-import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<AssignmentTable>[] = [
   {

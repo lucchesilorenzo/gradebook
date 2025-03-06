@@ -1,7 +1,8 @@
-import { updateData } from "@/lib/api-client";
-import { TProfileFormSchema } from "@/validations/profile-validations";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+
+import { updateData } from "@/lib/api-client";
+import { TProfileFormSchema } from "@/validations/profile-validations";
 
 export function useUpdateUserSettings() {
   const queryClient = useQueryClient();

@@ -1,5 +1,6 @@
-import { TeacherCourse } from "@/types";
 import React, { createContext } from "react";
+
+import { TeacherCourse } from "@/types";
 
 type CourseProviderProps = {
   children: React.ReactNode;

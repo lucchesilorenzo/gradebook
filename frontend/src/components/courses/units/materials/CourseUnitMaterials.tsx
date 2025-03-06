@@ -1,3 +1,11 @@
+import { useState } from "react";
+
+import { Plus } from "lucide-react";
+
+import FormDialog from "../../../common/FormDialog";
+import { Button } from "../../../ui/button";
+import CourseUnitMaterialItem from "./CourseUnitMaterialItem";
+
 import SearchInput from "@/components/common/SearchInput";
 import {
   Card,
@@ -7,11 +15,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { CourseUnitMaterial } from "@/types";
-import { Plus } from "lucide-react";
-import { useState } from "react";
-import FormDialog from "../../../common/FormDialog";
-import { Button } from "../../../ui/button";
-import CourseUnitMaterialItem from "./CourseUnitMaterialItem";
 
 type CourseUnitMaterialsProps = {
   courseUnitMaterials: CourseUnitMaterial[];

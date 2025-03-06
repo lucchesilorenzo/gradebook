@@ -1,7 +1,8 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { useUser } from "@/hooks/contexts/useUser";
 import { Mail, Phone } from "lucide-react";
 import { formatPhoneNumberIntl } from "react-phone-number-input";
+
+import { Card, CardContent } from "@/components/ui/card";
+import { useUser } from "@/hooks/contexts/useUser";
 
 export default function ProfileContacts() {
   const { userSettings } = useUser();

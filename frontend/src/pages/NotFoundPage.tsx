@@ -1,9 +1,11 @@
+import { useEffect } from "react";
+
+import { ArrowLeft } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import env from "@/lib/env";
-import { ArrowLeft } from "lucide-react";
-import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
 
 type NotFoundPageProps = {
   content?: string;

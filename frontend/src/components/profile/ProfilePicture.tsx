@@ -1,8 +1,10 @@
-import { useUser } from "@/hooks/contexts/useUser";
-import { cn } from "@/lib/utils";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { User } from "lucide-react";
+
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+
+import { useUser } from "@/hooks/contexts/useUser";
 import env from "@/lib/env";
+import { cn } from "@/lib/utils";
 
 type ProfilePictureProps = {
   className?: string;

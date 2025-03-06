@@ -1,3 +1,7 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { useForm } from "react-hook-form";
+
 import { LoadingButton } from "@/components/common/LoadingButton";
 import {
   Form,
@@ -8,17 +12,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useUser } from "@/hooks/contexts/useUser";
-import {
-  profileFormSchema,
-  TProfileFormSchema,
-} from "@/validations/profile-validations";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { capitalize } from "@/lib/utils";
-import { format } from "date-fns";
 import { PhoneInput } from "@/components/ui/phone-input";
+import { useUser } from "@/hooks/contexts/useUser";
 import { useUpdateUserSettings } from "@/hooks/mutations/users/useUpdateUserSettings";
+import { capitalize } from "@/lib/utils";
+import {
+  TProfileFormSchema,
+  profileFormSchema,
+} from "@/validations/profile-validations";
 
 export default function ProfileEditForm() {
   const { userSettings } = useUser();

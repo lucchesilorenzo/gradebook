@@ -1,7 +1,9 @@
-import { useGetDashboard } from "@/hooks/queries/useGetDashboard";
 import { format } from "date-fns";
 import { Bell, BookOpen, Clock, UsersIcon } from "lucide-react";
+
 import DashboardCard from "./DashboardCard";
+
+import { useGetDashboard } from "@/hooks/queries/useGetDashboard";
 
 export default function DashboardSummary() {
   const {

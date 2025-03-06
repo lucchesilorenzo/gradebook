@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
+
 import { fetchData } from "@/lib/api-client";
 import { TeacherCourse } from "@/types";
-import { useQuery } from "@tanstack/react-query";
 
 export function useGetCourses() {
   return useQuery({

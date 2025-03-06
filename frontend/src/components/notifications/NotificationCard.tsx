@@ -1,6 +1,6 @@
-import { UserNotification } from "@/types";
 import { format, formatDistanceToNow } from "date-fns";
 import { Bell, MoreHorizontal } from "lucide-react";
+
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import {
@@ -19,8 +19,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { useMarkUserNotificationAsRead } from "@/hooks/mutations/users/useMarkUserNotificationAsRead";
+
 import { useDeleteUserNotification } from "@/hooks/mutations/users/useDeleteUserNotification";
+import { useMarkUserNotificationAsRead } from "@/hooks/mutations/users/useMarkUserNotificationAsRead";
+import { UserNotification } from "@/types";
 
 type NotificationCardProps = {
   notification: UserNotification;

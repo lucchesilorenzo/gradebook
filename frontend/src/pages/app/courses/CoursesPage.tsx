@@ -1,7 +1,8 @@
+import { useEffect } from "react";
+
 import H1 from "@/components/common/H1";
 import CoursesList from "@/components/courses/CoursesList";
 import env from "@/lib/env";
-import { useEffect } from "react";
 
 export default function CoursesPage() {
   useEffect(() => {

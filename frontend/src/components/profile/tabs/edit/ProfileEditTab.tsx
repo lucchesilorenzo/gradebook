@@ -1,5 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ProfileEditForm from "./ProfileEditForm";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function ProfileEditTab() {
   return (

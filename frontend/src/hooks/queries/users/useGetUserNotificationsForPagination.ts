@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
+
 import { fetchData } from "@/lib/api-client";
 import { UserNotificationWithCount } from "@/types";
-import { useQuery } from "@tanstack/react-query";
 
 export function useGetUserNotificationsForPagination(page: number) {
   return useQuery({

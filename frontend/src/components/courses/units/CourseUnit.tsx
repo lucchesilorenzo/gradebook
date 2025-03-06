@@ -1,3 +1,11 @@
+import { differenceInHours } from "date-fns";
+import { ArrowRight, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
+
+import { Badge } from "../../ui/badge";
+import { Button } from "../../ui/button";
+import { Progress } from "../../ui/progress";
+
 import {
   Card,
   CardContent,
@@ -7,12 +15,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { type CourseUnit } from "@/types";
-import { ArrowRight, Clock } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Badge } from "../../ui/badge";
-import { Button } from "../../ui/button";
-import { Progress } from "../../ui/progress";
-import { differenceInHours } from "date-fns";
 
 type CourseUnitProps = {
   courseUnit: CourseUnit;

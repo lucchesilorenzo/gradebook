@@ -1,7 +1,8 @@
+import { CircleCheckBig } from "lucide-react";
+
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useUpdateAssignmentStatus } from "@/hooks/mutations/assignments/useUpdateAssignmentStatus";
 import { Assignment } from "@/types";
-import { CircleCheckBig } from "lucide-react";
 
 type CourseUnitAssignmentCardProps = {
   assignment: Assignment;

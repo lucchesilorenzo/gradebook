@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
+
 import { fetchData } from "@/lib/api-client";
 import { Attendance } from "@/types/attendance-types";
-import { useQuery } from "@tanstack/react-query";
 
 type Slug = {
   courseSlug?: string;

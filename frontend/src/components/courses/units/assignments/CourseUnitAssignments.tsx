@@ -1,3 +1,11 @@
+import { useState } from "react";
+
+import { Plus } from "lucide-react";
+import { useParams } from "react-router-dom";
+
+import CourseUnitAssignmentCard from "./CourseUnitAssignmentCard";
+import CourseUnitAssignmentsPagination from "./CourseUnitAssignmentsPagination";
+
 import FormDialog from "@/components/common/FormDialog";
 import SearchInput from "@/components/common/SearchInput";
 import { Button } from "@/components/ui/button";
@@ -10,11 +18,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useGetAssignments } from "@/hooks/queries/courses/assignments/useGetAssignments";
-import { Plus } from "lucide-react";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
-import CourseUnitAssignmentCard from "./CourseUnitAssignmentCard";
-import CourseUnitAssignmentsPagination from "./CourseUnitAssignmentsPagination";
 
 export default function CourseUnitAssignments() {
   const { courseSlug, courseUnitSlug } = useParams();
