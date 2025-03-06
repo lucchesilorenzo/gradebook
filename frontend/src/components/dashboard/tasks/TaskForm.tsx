@@ -20,7 +20,7 @@ import {
 
 export default function TaskForm() {
   const { mutateAsync: createTask } = useCreateTask();
-  const form = useForm({
+  const form = useForm<TTaskFormSchema>({
     resolver: zodResolver(taskFormSchema),
     defaultValues: {
       title: "",

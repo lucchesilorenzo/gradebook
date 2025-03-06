@@ -24,6 +24,7 @@ import {
 export default function ProfileEditForm() {
   const { userSettings } = useUser();
   const { mutateAsync: updateUserSettings } = useUpdateUserSettings();
+
   const form = useForm({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {

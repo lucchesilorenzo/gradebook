@@ -21,7 +21,7 @@ import {
 
 export default function LogInForm() {
   const { mutateAsync: logIn } = useLogIn();
-  const form = useForm({
+  const form = useForm<TLogInFormSchema>({
     resolver: zodResolver(logInFormSchema),
     defaultValues: {
       email: "",

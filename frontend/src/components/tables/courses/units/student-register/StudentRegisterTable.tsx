@@ -10,9 +10,8 @@ import {
 import { format } from "date-fns";
 import { Plus } from "lucide-react";
 
-import TablePagination from "../../../ui/TablePagination";
-
 import MainAlertDialog from "@/components/common/MainAlertDialog";
+import TablePagination from "@/components/tables/ui/TablePagination";
 import { Button } from "@/components/ui/button";
 import {
   Table,
