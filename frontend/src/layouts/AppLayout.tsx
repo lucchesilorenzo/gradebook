@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import AuthGuard from "@/components/common/AuthGuard";
 import Header from "@/components/common/Header";
 import Loading from "@/components/common/Loading";
+import CanvasProvider from "@/contexts/CanvasProvider";
 import CourseProvider from "@/contexts/CourseProvider";
 import UserProvider from "@/contexts/UserProvider";
 import { useGetCourses } from "@/hooks/queries/courses/useGetCourses";
@@ -22,10 +23,12 @@ export default function AppLayout() {
     <AuthGuard>
       <UserProvider userSettings={userSettings}>
         <CourseProvider teacherCourses={teacherCourses}>
-          <Header />
-          <main className="px-6 py-1 md:px-10 md:py-3">
-            {isLoading ? <Loading /> : <Outlet />}
-          </main>
+          <CanvasProvider>
+            <Header />
+            <main className="px-6 py-1 md:px-10 md:py-3">
+              {isLoading ? <Loading /> : <Outlet />}
+            </main>
+          </CanvasProvider>
         </CourseProvider>
       </UserProvider>
     </AuthGuard>
