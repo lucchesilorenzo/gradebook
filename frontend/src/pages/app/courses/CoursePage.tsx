@@ -6,7 +6,7 @@ import H1 from "@/components/common/H1";
 import Loading from "@/components/common/Loading";
 import CourseBreadcrumb from "@/components/courses/CourseBreadcrumb";
 import CourseDetailCard from "@/components/courses/CourseDetailCard";
-import CourseUnitsList from "@/components/courses/units/CourseUnitsList";
+import CourseTabs from "@/components/courses/CourseTabs";
 import { Badge } from "@/components/ui/badge";
 import { useGetCourseBySlug } from "@/hooks/queries/courses/useGetCourseBySlug";
 import env from "@/lib/env";
@@ -41,11 +41,7 @@ export default function CoursePage() {
 
       <CourseDetailCard course={course} />
 
-      {!course.units.length ? (
-        <p>No units found for this course.</p>
-      ) : (
-        <CourseUnitsList course={course} />
-      )}
+      <CourseTabs course={course} />
     </main>
   );
 }
