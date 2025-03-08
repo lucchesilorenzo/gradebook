@@ -6,8 +6,13 @@ import DeskGroup from "./DeskGroup";
 import { useCanvas } from "@/hooks/contexts/useCanvas";
 import { handleZoom } from "@/lib/canvas-utils";
 import { CANVAS_HEIGHT, CANVAS_SCALE_BY, CANVAS_WIDTH } from "@/lib/constants";
+import { Student } from "@/types";
 
-export default function Canvas() {
+type CanvasProps = {
+  students: Student[];
+};
+
+export default function Canvas({ students }: CanvasProps) {
   const { stageRef, isZoomActive } = useCanvas();
 
   function handleWheelZoom(e: Konva.KonvaEventObject<WheelEvent>) {
@@ -28,7 +33,11 @@ export default function Canvas() {
         onDragEnd={() => (document.body.style.cursor = "default")}
       >
         <Layer>
-          <DeskGroup />
+          {students
+            .filter((student) => student.desk_position)
+            .map((student) => (
+              <DeskGroup student={student} />
+            ))}
         </Layer>
       </Stage>
     </div>

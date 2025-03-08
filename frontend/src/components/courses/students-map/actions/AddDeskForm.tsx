@@ -51,8 +51,8 @@ export default function AddDeskForm({
     resolver: zodResolver(deskFormSchema),
     defaultValues: {
       student_id: "",
-      desk_position_x: 5,
-      desk_position_y: 5,
+      x: 5,
+      y: 5,
     },
   });
 
@@ -114,7 +114,7 @@ export default function AddDeskForm({
 
               <FormField
                 control={form.control}
-                name="desk_position_x"
+                name="x"
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center justify-between">
@@ -134,7 +134,7 @@ export default function AddDeskForm({
 
               <FormField
                 control={form.control}
-                name="desk_position_y"
+                name="y"
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center justify-between">

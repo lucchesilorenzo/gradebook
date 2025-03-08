@@ -22,8 +22,8 @@ class UpdateStudentDeskPositionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'desk_position_x' => 'required|integer|min:5|max:1795',
-            'desk_position_y' => 'required|integer|min:5|max:595',
+            'x' => 'required|integer|min:5|max:1795',
+            'y' => 'required|integer|min:5|max:595',
         ];
     }
 }

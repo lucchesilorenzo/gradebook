@@ -8,7 +8,7 @@ export const deskFormSchema = z.object({
     .trim()
     .min(1, "Student name is required.")
     .max(40, "Student name is too long."),
-  desk_position_x: z.coerce
+  x: z.coerce
     .number({
       invalid_type_error: "X position must be a number.",
     })
@@ -17,7 +17,7 @@ export const deskFormSchema = z.object({
       CANVAS_WIDTH - 5,
       `X position must be between 5 and ${CANVAS_WIDTH - 5}.`,
     ),
-  desk_position_y: z.coerce
+  y: z.coerce
     .number({
       invalid_type_error: "Y position must be a number.",
     })

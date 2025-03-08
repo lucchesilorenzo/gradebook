@@ -21,7 +21,7 @@ export default function StudentsMap({ courseSlug }: StudentsMapProps) {
             <CanvasActions students={students} courseSlug={courseSlug} />
           </div>
 
-          <Canvas />
+          <Canvas students={students} />
         </div>
       )}
     </>
