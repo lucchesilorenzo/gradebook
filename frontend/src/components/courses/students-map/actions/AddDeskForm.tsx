@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -17,24 +19,52 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { deskFormSchema } from "@/validations/canvas-validations";
-import { TDeskFormSchema } from "@/validations/canvas-validations";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useUpdateStudentDeskPosition } from "@/hooks/queries/courses/useUpdateStudentDeskPosition";
+import { Student } from "@/types";
+import {
+  TDeskFormSchema,
+  deskFormSchema,
+} from "@/validations/canvas-validations";
 
-export default function AddDeskForm() {
+type AddDeskFormProps = {
+  students: Student[];
+  courseSlug: string;
+};
+
+export default function AddDeskForm({
+  students,
+  courseSlug,
+}: AddDeskFormProps) {
+  const { mutateAsync: updateStudentDeskPosition } =
+    useUpdateStudentDeskPosition(courseSlug);
+
+  const [open, setOpen] = useState(false);
+
   const form = useForm<TDeskFormSchema>({
     resolver: zodResolver(deskFormSchema),
     defaultValues: {
-      student_name: "",
+      student_id: "",
+      desk_position_x: 5,
+      desk_position_y: 5,
     },
   });
 
   async function onSubmit(data: TDeskFormSchema) {
-    console.log(data);
+    await updateStudentDeskPosition(data);
+
     form.reset();
+    setOpen(false);
   }
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button>Add desk</Button>
       </PopoverTrigger>
@@ -52,13 +82,69 @@ export default function AddDeskForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
-                name="student_name"
+                name="student_id"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="flex items-center gap-10">
+                    <div className="flex items-center justify-between">
                       <FormLabel>Student</FormLabel>
+                      <Select
+                        defaultValue={field.value}
+                        onValueChange={field.onChange}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="max-w-[190px]">
+                            <SelectValue placeholder="Student name" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="max-h-64">
+                          {students
+                            .filter((student) => !student.desk_position)
+                            .map((student) => (
+                              <SelectItem key={student.id} value={student.id}>
+                                {student.first_name} {student.last_name}
+                              </SelectItem>
+                            ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="desk_position_x"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex items-center justify-between">
+                      <FormLabel>X</FormLabel>
                       <FormControl>
-                        <Input placeholder="Student name" {...field} />
+                        <Input
+                          className="max-w-[190px]"
+                          placeholder="5"
+                          {...field}
+                        />
+                      </FormControl>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="desk_position_y"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex items-center justify-between">
+                      <FormLabel>Y</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="max-w-[190px]"
+                          placeholder="5"
+                          {...field}
+                        />
                       </FormControl>
                     </div>
                     <FormMessage />
