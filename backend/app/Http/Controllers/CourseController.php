@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateStudentDeskPositionRequest;
 use App\Models\Course;
 use App\Models\Student;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
 
 class CourseController extends Controller
 {
@@ -113,6 +113,62 @@ class CourseController extends Controller
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not get student grades for unit.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Get course students.
+     *
+     * @param string $courseSlug
+     * @return JsonResponse
+     */
+    public function getCourseStudents(string $courseSlug): JsonResponse
+    {
+        try {
+            $course = Course::where('slug', $courseSlug)->firstOrFail();
+
+            $courseStudents = $course->students()->get();
+
+            return response()->json($courseStudents);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not get course students.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Update student desk position.
+     *
+     * @param string $courseSlug
+     * @return JsonResponse
+     */
+    public function updateStudentDeskPosition(
+        UpdateStudentDeskPositionRequest $request,
+        string $courseSlug,
+        Student $student
+    ): JsonResponse {
+        // Validation
+        $validatedData = $request->validated();
+
+        try {
+            $course = Course::where('slug', $courseSlug)->firstOrFail();
+
+            $student = $course->students()->findOrFail($student->id);
+
+            $student->update([
+                'desk_position' => $validatedData,
+            ]);
+
+            return response()->json([
+                'message' => 'Student desk position updated successfully.',
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Could not update student desk position.',
                 'error' => $e->getMessage(),
             ], 500);
         }

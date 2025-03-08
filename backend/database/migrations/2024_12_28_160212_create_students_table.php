@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone_number')->unique()->nullable();
             $table->enum('gender', ['MALE', 'FEMALE']);
             $table->decimal('attendance_rate', 5, 2)->default(0);
+            $table->json('desk_position')->nullable();
             $table->timestamps();
         });
     }
