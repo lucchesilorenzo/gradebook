@@ -22,6 +22,7 @@ export default function CoursePage() {
   }, [course?.name]);
 
   if (isLoading) return <Loading />;
+
   if (!courseSlug || !course) {
     navigate("*", { state: { content: "course" } });
     return null;

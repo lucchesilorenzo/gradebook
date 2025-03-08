@@ -24,7 +24,7 @@ export default function CourseTabs({ course }: CourseTabsProps) {
         )}
       </TabsContent>
       <TabsContent value="students-map">
-        <StudentsMap />
+        <StudentsMap courseSlug={course.slug} />
       </TabsContent>
     </Tabs>
   );

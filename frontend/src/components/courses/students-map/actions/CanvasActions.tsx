@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { Hand, PointerOff, ZoomIn, ZoomOut } from "lucide-react";
 
 import AddDeskForm from "./AddDeskForm";
@@ -13,21 +11,34 @@ import {
 } from "@/components/ui/tooltip";
 import { useCanvas } from "@/hooks/contexts/useCanvas";
 import { handleZoomReset } from "@/lib/canvas-utils";
+import { Student } from "@/types";
 
-export default function CanvasActions() {
-  const { stageRef } = useCanvas();
-  const [isZoomActive, setIsZoomActive] = useState(false);
-  const [isPanActive, setIsPanActive] = useState(false);
+type CanvasActionsProps = {
+  students: Student[];
+  courseSlug: string;
+};
+
+export default function CanvasActions({
+  students,
+  courseSlug,
+}: CanvasActionsProps) {
+  const {
+    stageRef,
+    isPanActive,
+    isZoomActive,
+    setIsZoomActive,
+    setIsPanActive,
+  } = useCanvas();
 
   function handleZoomResetAction() {
-    if (stageRef.current) {
+    if (stageRef.current && isZoomActive) {
       handleZoomReset(stageRef.current);
     }
   }
 
   return (
     <div className="flex items-center gap-4">
-      <AddDeskForm />
+      <AddDeskForm students={students} courseSlug={courseSlug} />
 
       <TooltipProvider>
         <Tooltip>

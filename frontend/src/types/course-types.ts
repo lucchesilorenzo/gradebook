@@ -21,6 +21,7 @@ export type TeacherCourse = {
     phone_number: string;
     gender: string;
     attendance_rate: number;
+    desk_position: string | null;
     created_at: string;
     updated_at: string;
   }[];

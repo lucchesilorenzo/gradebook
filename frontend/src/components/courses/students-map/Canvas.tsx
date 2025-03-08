@@ -8,10 +8,10 @@ import { handleZoom } from "@/lib/canvas-utils";
 import { CANVAS_HEIGHT, CANVAS_SCALE_BY, CANVAS_WIDTH } from "@/lib/constants";
 
 export default function Canvas() {
-  const { stageRef } = useCanvas();
+  const { stageRef, isZoomActive } = useCanvas();
 
   function handleWheelZoom(e: Konva.KonvaEventObject<WheelEvent>) {
-    if (stageRef.current) {
+    if (stageRef.current && isZoomActive) {
       handleZoom(e, stageRef.current, CANVAS_SCALE_BY);
     }
   }
