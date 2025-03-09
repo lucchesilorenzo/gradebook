@@ -10,10 +10,22 @@ interface LoadingButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   isLoading: boolean;
+  loadingText?: string;
 }
 
 const LoadingButton = React.forwardRef<HTMLButtonElement, LoadingButtonProps>(
-  ({ children, variant, size, className, isLoading, ...props }, ref) => {
+  (
+    {
+      children,
+      variant,
+      size,
+      className,
+      isLoading,
+      loadingText = "Loading...",
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <Button
         className={cn(buttonVariants({ variant, size, className }))}
@@ -22,7 +34,7 @@ const LoadingButton = React.forwardRef<HTMLButtonElement, LoadingButtonProps>(
         disabled={isLoading}
       >
         {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        {isLoading ? "Loading..." : children}
+        {isLoading ? loadingText : children}
       </Button>
     );
   },

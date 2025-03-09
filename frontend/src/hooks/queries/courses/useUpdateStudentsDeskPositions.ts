@@ -2,15 +2,15 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 import { updateData } from "@/lib/api-client";
-import { TDeskFormSchema } from "@/validations/canvas-validations";
+import { Desk } from "@/types";
 
-export function useUpdateStudentDeskPosition(courseSlug?: string) {
+export function useUpdateStudentsDeskPositions(courseSlug?: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ student_id: studentId, ...data }: TDeskFormSchema) =>
+    mutationFn: (data: Desk[]) =>
       updateData(
-        `/courses/teacher/${courseSlug}/students/${studentId}/desk-position`,
+        `/courses/teacher/${courseSlug}/students/desk-positions`,
         data,
       ),
     onSuccess: (response) => {

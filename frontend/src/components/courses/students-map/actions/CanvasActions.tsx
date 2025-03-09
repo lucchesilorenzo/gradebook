@@ -2,6 +2,7 @@ import { Hand, PointerOff, ZoomIn, ZoomOut } from "lucide-react";
 
 import AddDeskForm from "./AddDeskForm";
 
+import { LoadingButton } from "@/components/common/LoadingButton";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -10,18 +11,24 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useCanvas } from "@/hooks/contexts/useCanvas";
+import { useUpdateStudentsDeskPositions } from "@/hooks/queries/courses/useUpdateStudentsDeskPositions";
 import { handleZoomReset } from "@/lib/canvas-utils";
-import { Student } from "@/types";
+import { Desk, Student } from "@/types";
 
 type CanvasActionsProps = {
-  students: Student[];
+  filteredStudents: Student[];
+  desks: Desk[];
   courseSlug: string;
 };
 
 export default function CanvasActions({
-  students,
+  filteredStudents,
+  desks,
   courseSlug,
 }: CanvasActionsProps) {
+  const { mutateAsync: updateStudentsDeskPositions, isPending } =
+    useUpdateStudentsDeskPositions(courseSlug);
+
   const {
     stageRef,
     isPanActive,
@@ -38,7 +45,16 @@ export default function CanvasActions({
 
   return (
     <div className="flex items-center gap-4">
-      <AddDeskForm students={students} courseSlug={courseSlug} />
+      <AddDeskForm filteredStudents={filteredStudents} />
+
+      <LoadingButton
+        disabled={!desks.length}
+        isLoading={isPending}
+        loadingText="Saving..."
+        onClick={() => updateStudentsDeskPositions(desks)}
+      >
+        Save
+      </LoadingButton>
 
       <TooltipProvider>
         <Tooltip>

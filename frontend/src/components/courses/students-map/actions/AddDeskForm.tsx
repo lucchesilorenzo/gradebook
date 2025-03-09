@@ -26,7 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useUpdateStudentDeskPosition } from "@/hooks/queries/courses/useUpdateStudentDeskPosition";
+import { useCanvas } from "@/hooks/contexts/useCanvas";
 import { Student } from "@/types";
 import {
   TDeskFormSchema,
@@ -34,17 +34,11 @@ import {
 } from "@/validations/canvas-validations";
 
 type AddDeskFormProps = {
-  students: Student[];
-  courseSlug: string;
+  filteredStudents: Student[];
 };
 
-export default function AddDeskForm({
-  students,
-  courseSlug,
-}: AddDeskFormProps) {
-  const { mutateAsync: updateStudentDeskPosition } =
-    useUpdateStudentDeskPosition(courseSlug);
-
+export default function AddDeskForm({ filteredStudents }: AddDeskFormProps) {
+  const { setDesks } = useCanvas();
   const [open, setOpen] = useState(false);
 
   const form = useForm<TDeskFormSchema>({
@@ -57,10 +51,23 @@ export default function AddDeskForm({
   });
 
   async function onSubmit(data: TDeskFormSchema) {
-    await updateStudentDeskPosition(data);
+    const student = filteredStudents.find(
+      (student) => student.id === data.student_id,
+    );
+
+    if (!student) return;
+
+    setDesks((prev) => [
+      ...prev,
+      {
+        ...data,
+        student_first_name: student.first_name,
+        student_last_name: student.last_name,
+      },
+    ]);
+    setOpen(false);
 
     form.reset();
-    setOpen(false);
   }
 
   return (
@@ -97,13 +104,11 @@ export default function AddDeskForm({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="max-h-64">
-                          {students
-                            .filter((student) => !student.desk_position)
-                            .map((student) => (
-                              <SelectItem key={student.id} value={student.id}>
-                                {student.first_name} {student.last_name}
-                              </SelectItem>
-                            ))}
+                          {filteredStudents.map((student) => (
+                            <SelectItem key={student.id} value={student.id}>
+                              {student.first_name} {student.last_name}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
