@@ -1,5 +1,5 @@
 import Konva from "konva";
-import { Layer, Stage } from "react-konva";
+import { Layer, Rect, Stage } from "react-konva";
 
 import DeskGroup from "./DeskGroup";
 
@@ -33,6 +33,17 @@ export default function Canvas({ desks }: CanvasProps) {
         onDragEnd={() => (document.body.style.cursor = "default")}
       >
         <Layer>
+          <Rect
+            name="background"
+            x={0}
+            y={0}
+            width={CANVAS_WIDTH}
+            height={CANVAS_HEIGHT}
+            fill="#F4F4F5"
+            listening={false}
+            visible={false}
+          />
+
           {desks.map((desk) => (
             <DeskGroup key={desk.student_id} desk={desk} />
           ))}

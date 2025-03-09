@@ -1,4 +1,4 @@
-import { Hand, PointerOff, ZoomIn, ZoomOut } from "lucide-react";
+import { Hand, Import, PointerOff, ZoomIn, ZoomOut } from "lucide-react";
 
 import AddDeskForm from "./AddDeskForm";
 
@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useCanvas } from "@/hooks/contexts/useCanvas";
 import { useUpdateStudentsDeskPositions } from "@/hooks/queries/courses/useUpdateStudentsDeskPositions";
-import { handleZoomReset } from "@/lib/canvas-utils";
+import { handleDownload, handleZoomReset } from "@/lib/canvas-utils";
 import { Desk, Student } from "@/types";
 
 type CanvasActionsProps = {
@@ -40,6 +40,19 @@ export default function CanvasActions({
   function handleZoomResetAction() {
     if (stageRef.current && isZoomActive) {
       handleZoomReset(stageRef.current);
+    }
+  }
+
+  function handleExport() {
+    if (stageRef.current) {
+      handleZoomResetAction();
+
+      stageRef.current.findOne(".background")?.show();
+
+      const url = stageRef.current.toDataURL();
+      handleDownload(url, "students-map");
+
+      stageRef.current.findOne(".background")?.hide();
     }
   }
 
@@ -83,6 +96,10 @@ export default function CanvasActions({
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
+
+      <Button onClick={handleExport}>
+        <Import /> Export
+      </Button>
     </div>
   );
 }

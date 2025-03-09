@@ -34,3 +34,13 @@ export function handleZoomReset(stage: Konva.Stage) {
   stage.position({ x: 0, y: 0 });
   stage.batchDraw();
 }
+
+export function handleDownload(dataURL: string, fileName: string = "canvas") {
+  const link = document.createElement("a");
+  link.href = dataURL;
+  link.download = `${fileName}.png`;
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
