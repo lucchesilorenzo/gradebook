@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateStudentDeskPositionRequest extends FormRequest
+class UpdateStudentsDeskPositionsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,9 @@ class UpdateStudentDeskPositionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'x' => 'required|integer|min:5|max:1795',
-            'y' => 'required|integer|min:5|max:595',
+            '*.student_id' => 'required|exists:students,id',
+            '*.x' => 'required|numeric|min:0|max:1800',
+            '*.y' => 'required|numeric|min:0|max:800',
         ];
     }
 }

@@ -9,6 +9,6 @@ Route::prefix('courses')->group(function () {
     Route::get('/{courseSlug}', [CourseController::class, 'getTeacherCourse']);
     Route::get('/{courseSlug}/{courseUnitSlug}/students/{student}/grades', [CourseController::class, 'getStudentGradesForUnit']);
     Route::get('/{courseSlug}/students', [CourseController::class, 'getCourseStudents']);
-    Route::patch('/{courseSlug}/students/{student}/desk-position', [CourseController::class, 'updateStudentDeskPosition']);
+    Route::patch('/{courseSlug}/students/desk-positions', [CourseController::class, 'updateStudentsDeskPositions']);
   });
 });
