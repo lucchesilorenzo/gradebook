@@ -1,6 +1,7 @@
 import { Hand, Import, PointerOff, ZoomIn, ZoomOut } from "lucide-react";
 
 import AddDeskForm from "./AddDeskForm";
+import DrawingToolsForm from "./DrawingToolsForm";
 
 import { LoadingButton } from "@/components/common/LoadingButton";
 import { Button } from "@/components/ui/button";
@@ -68,6 +69,8 @@ export default function CanvasActions({
       >
         Save
       </LoadingButton>
+
+      <DrawingToolsForm />
 
       <TooltipProvider>
         <Tooltip>

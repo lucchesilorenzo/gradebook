@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Pencil } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import { LoadingButton } from "@/components/common/LoadingButton";
@@ -26,45 +27,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
 import { useCanvas } from "@/hooks/contexts/useCanvas";
-import { Student } from "@/types";
 import {
-  TDeskFormSchema,
-  deskFormSchema,
+  TDrawingToolsFormSchema,
+  drawingToolsFormSchema,
 } from "@/validations/canvas-validations";
 
-type AddDeskFormProps = {
-  filteredStudents: Student[];
-};
-
-export default function AddDeskForm({ filteredStudents }: AddDeskFormProps) {
-  const { setDesks } = useCanvas();
+export default function DrawingToolsForm() {
+  const { setDrawingTool } = useCanvas();
   const [open, setOpen] = useState(false);
 
-  const form = useForm<TDeskFormSchema>({
-    resolver: zodResolver(deskFormSchema),
+  const form = useForm<TDrawingToolsFormSchema>({
+    resolver: zodResolver(drawingToolsFormSchema),
     defaultValues: {
-      student_id: "",
-      x: 5,
-      y: 5,
+      name: "",
+      color: "#000000",
+      size: 5,
     },
   });
 
-  async function onSubmit(data: TDeskFormSchema) {
-    const student = filteredStudents.find(
-      (student) => student.id === data.student_id,
-    );
-
-    if (!student) return;
-
-    setDesks((prev) => [
-      ...prev,
-      {
-        ...data,
-        student_first_name: student.first_name,
-        student_last_name: student.last_name,
-      },
-    ]);
+  async function onSubmit(data: TDrawingToolsFormSchema) {
+    setDrawingTool(data);
     setOpen(false);
 
     form.reset();
@@ -74,15 +58,17 @@ export default function AddDeskForm({ filteredStudents }: AddDeskFormProps) {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button>Add desk</Button>
+        <Button>
+          <Pencil />
+        </Button>
       </PopoverTrigger>
 
       <PopoverContent className="w-80">
         <div className="space-y-4">
           <div className="space-y-2">
-            <h4 className="font-medium leading-none">Add desk</h4>
+            <h4 className="font-medium leading-none">Select tool</h4>
             <p className="text-sm text-muted-foreground">
-              Add a new desk to the map.
+              Select the tool you want to use.
             </p>
           </div>
 
@@ -90,28 +76,28 @@ export default function AddDeskForm({ filteredStudents }: AddDeskFormProps) {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
-                name="student_id"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center justify-between">
-                      <FormLabel>Student</FormLabel>
-                      <Select
-                        defaultValue={field.value}
-                        onValueChange={field.onChange}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="max-w-[190px]">
-                            <SelectValue placeholder="Student name" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent className="max-h-64">
-                          {filteredStudents.map((student) => (
-                            <SelectItem key={student.id} value={student.id}>
-                              {student.first_name} {student.last_name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <FormLabel>Tool</FormLabel>
+
+                      <div className="flex items-center gap-2">
+                        <Select
+                          defaultValue={field.value}
+                          onValueChange={field.onChange}
+                        >
+                          <FormControl>
+                            <SelectTrigger className="w-[140px]">
+                              <SelectValue placeholder="Select a tool" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="max-h-64">
+                            <SelectItem value="pencil">Pencil</SelectItem>
+                            <SelectItem value="eraser">Eraser</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
                     <FormMessage />
                   </FormItem>
@@ -120,15 +106,15 @@ export default function AddDeskForm({ filteredStudents }: AddDeskFormProps) {
 
               <FormField
                 control={form.control}
-                name="x"
+                name="color"
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center justify-between">
-                      <FormLabel>X</FormLabel>
+                      <FormLabel>Color</FormLabel>
                       <FormControl>
                         <Input
-                          className="max-w-[190px]"
-                          placeholder="5"
+                          className="h-8 w-10 border-none p-0"
+                          type="color"
                           {...field}
                         />
                       </FormControl>
@@ -140,16 +126,18 @@ export default function AddDeskForm({ filteredStudents }: AddDeskFormProps) {
 
               <FormField
                 control={form.control}
-                name="y"
+                name="size"
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center justify-between">
-                      <FormLabel>Y</FormLabel>
+                      <FormLabel>Size</FormLabel>
                       <FormControl>
-                        <Input
+                        <Slider
                           className="max-w-[190px]"
-                          placeholder="5"
-                          {...field}
+                          min={1}
+                          max={20}
+                          defaultValue={[field.value]}
+                          onChange={field.onChange}
                         />
                       </FormControl>
                     </div>
