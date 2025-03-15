@@ -35,7 +35,7 @@ import {
 } from "@/validations/canvas-validations";
 
 export default function DrawingToolsForm() {
-  const { setDrawingTool } = useCanvas();
+  const { setDrawingTools } = useCanvas();
   const [open, setOpen] = useState(false);
 
   const form = useForm<TDrawingToolsFormSchema>({
@@ -48,7 +48,15 @@ export default function DrawingToolsForm() {
   });
 
   async function onSubmit(data: TDrawingToolsFormSchema) {
-    setDrawingTool(data);
+    setDrawingTools((prev) => [
+      ...prev,
+      {
+        name: data.name,
+        color: data.name === "eraser" ? "#F4F4F4" : data.color,
+        size: data.size,
+        points: [],
+      },
+    ]);
     setOpen(false);
 
     form.reset();
@@ -114,6 +122,7 @@ export default function DrawingToolsForm() {
                       <FormControl>
                         <Input
                           className="h-8 w-10 border-none p-0"
+                          disabled={form.watch("name") === "eraser"}
                           type="color"
                           {...field}
                         />

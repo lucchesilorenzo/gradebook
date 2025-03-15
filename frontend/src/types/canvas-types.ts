@@ -5,3 +5,10 @@ export type Desk = {
   x: number;
   y: number;
 };
+
+export type DrawingToolExtended = {
+  name: string;
+  color: string;
+  size: number;
+  points: number[][];
+};

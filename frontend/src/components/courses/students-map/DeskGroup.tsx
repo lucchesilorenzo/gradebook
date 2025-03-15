@@ -8,9 +8,10 @@ import { Desk } from "@/types/canvas-types";
 
 type DeskGroupProps = {
   desk: Desk;
+  isDeskDraggable: boolean;
 };
 
-export default function DeskGroup({ desk }: DeskGroupProps) {
+export default function DeskGroup({ desk, isDeskDraggable }: DeskGroupProps) {
   const { setDesks, isPanActive } = useCanvas();
   const deskRef = useRef<Konva.Group>(null);
 
@@ -30,10 +31,11 @@ export default function DeskGroup({ desk }: DeskGroupProps) {
 
   return (
     <Group
+      name="desk"
       ref={deskRef}
       x={desk.x}
       y={desk.y}
-      draggable={isPanActive}
+      draggable={isPanActive && isDeskDraggable}
       onDragEnd={handleDragEnd}
     >
       <Rect width={200} height={100} stroke="gray" />

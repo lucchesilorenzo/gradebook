@@ -2,16 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
-import { LoadingButton } from "../../../common/LoadingButton";
-import { Input } from "../../../ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../../../ui/select";
-
+import { LoadingButton } from "@/components/common/LoadingButton";
 import {
   Form,
   FormControl,
@@ -20,6 +11,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useCreateCourseUnitMaterial } from "@/hooks/mutations/materials/useCreateCourseUnitMaterial";
 import {
   TCourseUnitMaterialsFormSchema,
@@ -34,8 +33,10 @@ export default function CourseUnitMaterialsForm({
   onFormSubmit,
 }: CourseUnitMaterialsFormProps) {
   const { courseSlug, courseUnitSlug } = useParams();
+
   const { mutateAsync: createCourseUnitMaterial } =
     useCreateCourseUnitMaterial();
+
   const form = useForm({
     resolver: zodResolver(courseUnitMaterialsFormSchema),
     defaultValues: {
@@ -62,6 +63,7 @@ export default function CourseUnitMaterialsForm({
       courseSlug,
       courseUnitSlug,
     });
+
     onFormSubmit();
   }
 
