@@ -35,9 +35,13 @@ import {
 
 type AddDeskFormProps = {
   filteredStudents: Student[];
+  courseSlug: string;
 };
 
-export default function AddDeskForm({ filteredStudents }: AddDeskFormProps) {
+export default function AddDeskForm({
+  filteredStudents,
+  courseSlug,
+}: AddDeskFormProps) {
   const { setDesks } = useCanvas();
   const [open, setOpen] = useState(false);
 
@@ -63,6 +67,7 @@ export default function AddDeskForm({ filteredStudents }: AddDeskFormProps) {
         ...data,
         student_first_name: student.first_name,
         student_last_name: student.last_name,
+        course_slug: courseSlug,
       },
     ]);
     setOpen(false);

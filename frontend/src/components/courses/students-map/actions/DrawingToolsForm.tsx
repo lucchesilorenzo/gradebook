@@ -34,7 +34,13 @@ import {
   drawingToolsFormSchema,
 } from "@/validations/canvas-validations";
 
-export default function DrawingToolsForm() {
+type DrawingToolsFormProps = {
+  courseSlug: string;
+};
+
+export default function DrawingToolsForm({
+  courseSlug,
+}: DrawingToolsFormProps) {
   const { setDrawingTools } = useCanvas();
   const [open, setOpen] = useState(false);
 
@@ -54,6 +60,7 @@ export default function DrawingToolsForm() {
         name: data.name,
         color: data.name === "eraser" ? "#F4F4F4" : data.color,
         size: data.size,
+        course_slug: courseSlug,
         points: [],
       },
     ]);
@@ -91,10 +98,7 @@ export default function DrawingToolsForm() {
                       <FormLabel>Tool</FormLabel>
 
                       <div className="flex items-center gap-2">
-                        <Select
-                          defaultValue={field.value}
-                          onValueChange={field.onChange}
-                        >
+                        <Select onValueChange={field.onChange}>
                           <FormControl>
                             <SelectTrigger className="w-[140px]">
                               <SelectValue placeholder="Select a tool" />

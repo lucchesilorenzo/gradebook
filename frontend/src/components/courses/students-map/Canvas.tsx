@@ -8,14 +8,15 @@ import DeskGroup from "./DeskGroup";
 import { useCanvas } from "@/hooks/contexts/useCanvas";
 import { handleZoom } from "@/lib/canvas-utils";
 import { CANVAS_HEIGHT, CANVAS_SCALE_BY, CANVAS_WIDTH } from "@/lib/constants";
-import { Desk } from "@/types";
+import { Desk, DrawingToolExtended } from "@/types";
 
 type CanvasProps = {
   desks: Desk[];
+  drawingTools: DrawingToolExtended[];
 };
 
-export default function Canvas({ desks }: CanvasProps) {
-  const { stageRef, isZoomActive, drawingTools, setDrawingTools } = useCanvas();
+export default function Canvas({ desks, drawingTools }: CanvasProps) {
+  const { stageRef, isZoomActive, setDrawingTools } = useCanvas();
 
   const isDrawing = useRef(false);
   const [isDeskDraggable, setIsDeskDraggable] = useState(true);

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateStudentsDeskPositionsRequest;
 use App\Models\Course;
 use App\Models\Student;
 use Illuminate\Http\JsonResponse;
@@ -135,44 +134,6 @@ class CourseController extends Controller
         } catch (\Throwable $e) {
             return response()->json([
                 'message' => 'Could not get course students.',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
-    }
-
-    /**
-     * Update student desk position.
-     *
-     * @param string $courseSlug
-     * @return JsonResponse
-     */
-    public function updateStudentsDeskPositions(
-        UpdateStudentsDeskPositionsRequest $request,
-        string $courseSlug,
-    ): JsonResponse {
-        // Validation
-        $validatedData = $request->validated();
-
-        try {
-            $course = Course::where('slug', $courseSlug)->firstOrFail();
-
-            foreach ($validatedData as $desk) {
-                $student = $course->students()->findOrFail($desk['student_id']);
-
-                $student->update([
-                    'desk_position' => [
-                        'x' => $desk['x'],
-                        'y' => $desk['y'],
-                    ],
-                ]);
-            }
-
-            return response()->json([
-                'message' => 'Desk positions updated successfully.',
-            ]);
-        } catch (\Throwable $e) {
-            return response()->json([
-                'message' => 'Could not update desk positions.',
                 'error' => $e->getMessage(),
             ], 500);
         }

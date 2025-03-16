@@ -27,7 +27,6 @@ class Student extends Model
         'phone_number',
         'gender',
         'attendance_rate',
-        'desk_position',
     ];
 
     /**

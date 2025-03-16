@@ -29,7 +29,6 @@ class StudentFactory extends Factory
             'phone_number' => fake()->unique()->e164PhoneNumber(),
             'gender' => fake()->randomElement(['MALE', 'FEMALE']),
             'attendance_rate' => 0,
-            'desk_position' => null,
         ];
     }
 }
