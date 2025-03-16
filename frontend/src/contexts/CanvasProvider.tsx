@@ -14,10 +14,12 @@ type CanvasContext = {
   isZoomActive: boolean;
   isPanActive: boolean;
   drawingTools: DrawingToolExtended[];
+  selectedDesk: string;
   setIsZoomActive: React.Dispatch<React.SetStateAction<boolean>>;
   setIsPanActive: React.Dispatch<React.SetStateAction<boolean>>;
   setDesks: React.Dispatch<React.SetStateAction<Desk[]>>;
   setDrawingTools: React.Dispatch<React.SetStateAction<DrawingToolExtended[]>>;
+  setSelectedDesk: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const CanvasContext = createContext<CanvasContext | null>(null);
@@ -29,6 +31,7 @@ export default function CanvasProvider({ children }: CanvasProviderProps) {
   const [isZoomActive, setIsZoomActive] = useState(true);
   const [isPanActive, setIsPanActive] = useState(true);
   const [drawingTools, setDrawingTools] = useState<DrawingToolExtended[]>([]);
+  const [selectedDesk, setSelectedDesk] = useState("");
 
   return (
     <CanvasContext.Provider
@@ -38,10 +41,12 @@ export default function CanvasProvider({ children }: CanvasProviderProps) {
         isZoomActive,
         isPanActive,
         drawingTools,
+        selectedDesk,
         setDesks,
         setIsZoomActive,
         setIsPanActive,
         setDrawingTools,
+        setSelectedDesk,
       }}
     >
       {children}

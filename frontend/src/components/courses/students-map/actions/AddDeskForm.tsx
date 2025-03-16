@@ -100,10 +100,7 @@ export default function AddDeskForm({
                   <FormItem>
                     <div className="flex items-center justify-between">
                       <FormLabel>Student</FormLabel>
-                      <Select
-                        defaultValue={field.value}
-                        onValueChange={field.onChange}
-                      >
+                      <Select onValueChange={field.onChange}>
                         <FormControl>
                           <SelectTrigger className="max-w-[190px]">
                             <SelectValue placeholder="Student name" />

@@ -9,10 +9,16 @@ import { Desk } from "@/types/canvas-types";
 type DeskGroupProps = {
   desk: Desk;
   isDeskDraggable: boolean;
+  setShowAlertDialog: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function DeskGroup({ desk, isDeskDraggable }: DeskGroupProps) {
-  const { setDesks, isPanActive } = useCanvas();
+export default function DeskGroup({
+  desk,
+  isDeskDraggable,
+  setShowAlertDialog,
+}: DeskGroupProps) {
+  const { isPanActive, setDesks, setSelectedDesk } = useCanvas();
+
   const deskRef = useRef<Konva.Group>(null);
 
   function handleDragEnd() {
@@ -29,13 +35,26 @@ export default function DeskGroup({ desk, isDeskDraggable }: DeskGroupProps) {
     }
   }
 
+  function handleRightClick(e: Konva.KonvaEventObject<MouseEvent>) {
+    e.evt.preventDefault();
+
+    if (e.target.parent) {
+      const studentId = e.target.parent.id().split("%")[1];
+      setSelectedDesk(studentId);
+    }
+
+    setShowAlertDialog(true);
+  }
+
   return (
     <Group
       name="desk"
+      id={`desk%${desk.student_id}`}
       ref={deskRef}
       x={desk.x}
       y={desk.y}
       draggable={isPanActive && isDeskDraggable}
+      onContextMenu={handleRightClick}
       onDragEnd={handleDragEnd}
     >
       <Rect width={200} height={100} stroke="gray" />

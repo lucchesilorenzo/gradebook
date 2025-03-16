@@ -31,18 +31,18 @@ type FormDialogProps = {
     | "edit-course-unit-material"
     | "add-course-unit-assignment";
   open?: boolean;
-  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   student?: StudentRegisterData;
   courseUnitMaterial?: CourseUnitMaterial;
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function FormDialog({
   children,
   actionType,
   open,
-  setOpen,
   student,
   courseUnitMaterial,
+  setOpen,
 }: FormDialogProps) {
   const [internalOpen, setInternalOpen] = useState(false);
   const isOpen = open ?? internalOpen;

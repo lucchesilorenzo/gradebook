@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import Konva from "konva";
 import { Layer, Line, Rect, Stage } from "react-konva";
 
+import DeskAlertDialog from "./DeskAlertDialog";
 import DeskGroup from "./DeskGroup";
 
 import { useCanvas } from "@/hooks/contexts/useCanvas";
@@ -20,6 +21,7 @@ export default function Canvas({ desks, drawingTools }: CanvasProps) {
 
   const isDrawing = useRef(false);
   const [isDeskDraggable, setIsDeskDraggable] = useState(true);
+  const [showAlertDialog, setShowAlertDialog] = useState(false);
 
   function handleWheelZoom(e: Konva.KonvaEventObject<WheelEvent>) {
     if (stageRef.current && isZoomActive) {
@@ -119,10 +121,18 @@ export default function Canvas({ desks, drawingTools }: CanvasProps) {
               key={desk.student_id}
               desk={desk}
               isDeskDraggable={isDeskDraggable}
+              setShowAlertDialog={setShowAlertDialog}
             />
           ))}
         </Layer>
       </Stage>
+
+      {showAlertDialog && (
+        <DeskAlertDialog
+          showAlertDialog={showAlertDialog}
+          setShowAlertDialog={setShowAlertDialog}
+        />
+      )}
     </div>
   );
 }
