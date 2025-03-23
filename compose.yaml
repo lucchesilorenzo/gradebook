@@ -1,0 +1,133 @@
+services:
+  web:
+    container_name: frontend
+
+    depends_on:
+      - api
+
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    ports:
+      - "5173:5173"
+
+    env_file:
+      - ./frontend/.env
+
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+    develop:
+      watch:
+        - path: ./frontend/package.json
+          action: rebuild
+
+        - path: ./frontend/package-lock.json
+          action: rebuild
+
+        - path: ./frontend
+          target: /app
+          action: sync
+
+  api:
+    container_name: backend
+
+    depends_on:
+      - db
+
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - ./backend/.env
+
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - /app/vendor
+
+    command: php artisan serve --host=0.0.0.0 --port=8000
+
+    develop:
+      watch:
+        - path: ./backend/package.json
+          action: rebuild
+
+        - path: ./backend/package-lock.json
+          action: rebuild
+
+        - path: ./backend/composer.json
+          action: rebuild
+
+        - path: ./backend/composer.lock
+          action: rebuild
+
+        - path: ./backend
+          target: /app
+          action: sync
+
+  # queue:
+  #   container_name: queue
+
+  #   depends_on:
+  #     - api
+
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+
+  #   command: php artisan queue:work
+
+  # schedule:
+  #   container_name: schedule
+
+  #   depends_on:
+  #     - api
+
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+
+  #   command: php artisan schedule:work
+
+  reverb:
+    container_name: reverb
+
+    depends_on:
+      - api
+
+    env_file:
+      - ./backend/.env
+
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    ports:
+      - "8080:8080"
+
+    command: php artisan reverb:start
+
+  db:
+    image: postgres:16-alpine
+    container_name: db
+
+    ports:
+      - "5432:5432"
+
+    environment:
+      POSTGRES_DB: gradebook
+      POSTGRES_USER: gradebook
+      POSTGRES_PASSWORD: gradebook
+
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
