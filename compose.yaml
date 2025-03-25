@@ -52,8 +52,6 @@ services:
       - /app/node_modules
       - /app/vendor
 
-    command: php artisan serve --host=0.0.0.0 --port=8000
-
     develop:
       watch:
         - path: ./backend/package.json
@@ -72,29 +70,37 @@ services:
           target: /app
           action: sync
 
-  # queue:
-  #   container_name: queue
+    command: php artisan serve --host=0.0.0.0 --port=8000
 
-  #   depends_on:
-  #     - api
+  queue:
+    container_name: queue
 
-  #   build:
-  #     context: ./backend
-  #     dockerfile: Dockerfile
+    depends_on:
+      - api
 
-  #   command: php artisan queue:work
+    env_file:
+      - ./backend/.env
 
-  # schedule:
-  #   container_name: schedule
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
 
-  #   depends_on:
-  #     - api
+    command: php artisan queue:work
 
-  #   build:
-  #     context: ./backend
-  #     dockerfile: Dockerfile
+  schedule:
+    container_name: schedule
 
-  #   command: php artisan schedule:work
+    depends_on:
+      - api
+
+    env_file:
+      - ./backend/.env
+
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    command: php artisan schedule:work
 
   reverb:
     container_name: reverb
@@ -112,7 +118,7 @@ services:
     ports:
       - "8080:8080"
 
-    command: php artisan reverb:start
+    command: php artisan reverb:start --debug
 
   db:
     image: postgres:16-alpine
