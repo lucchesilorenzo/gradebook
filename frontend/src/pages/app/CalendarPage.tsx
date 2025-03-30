@@ -25,6 +25,7 @@ export default function CalendarPage() {
   return (
     <main>
       <H1>My Calendar</H1>
+
       {isLoading ? <Loading /> : <MainCalendar events={events} />}
     </main>
   );

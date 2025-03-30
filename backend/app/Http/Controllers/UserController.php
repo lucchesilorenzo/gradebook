@@ -26,7 +26,6 @@ class UserController extends Controller
         }
     }
 
-
     /**
      * Get user notifications.
      *

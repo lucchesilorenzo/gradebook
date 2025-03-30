@@ -1,6 +1,6 @@
 <h1 align="center">
   <br />
-   <img src="screenshots/gradebook-logo.png" alt="GradeBook Logo" width="300" />
+   <img src="screenshots/gradebook_logo.png" alt="GradeBook Logo" width="300" />
   <br />
    GradeBook
   <br />
@@ -17,7 +17,7 @@
 - Teachers can log in securely to access their dashboard and courses.
 - Ensures data privacy and security.
 
-![Login Screenshot](screenshots/gradebook-1.png)
+![Login Screenshot](screenshots/gradebook_01.png)
 
 ### Dashboard
 
@@ -27,28 +27,37 @@
 - Manage tasks: create and delete tasks.
 - View academy-related statistics, personalized for each teacher.
 
-![Dashboard Screenshot](screenshots/gradebook-2.png)
+![Dashboard Screenshot](screenshots/gradebook_02.png)
 
 ### Courses
 
 - Displays courses where the logged-in teacher is assigned.
 - Each course contains educational units, but only the ones where the teacher is involved are visible.
-- Inside an educational unit:
-  - **Attendance tracking**: Register lesson start and end times, record early exits and late arrivals.
-  - **Material management**: Upload and organize teaching materials (links, videos, PDFs).
+- Students map is available for each course.
 
-![Courses Screenshot](screenshots/gradebook-2.png)
-![Courses Screenshot](screenshots/gradebook-3.png)
-![Courses Screenshot](screenshots/gradebook-4.png)
-![Courses Screenshot](screenshots/gradebook-5.png)
-![Courses Screenshot](screenshots/gradebook-6.png)
+![Courses Screenshot](screenshots/gradebook_03.png)
+![Courses Screenshot](screenshots/gradebook_04.png)
+![Courses Screenshot](screenshots/gradebook_05.png)
+
+Inside an educational unit:
+
+- **Attendance tracking**: Register lesson start and end times, record early exits and late arrivals.
+- **Grades**: View grades and average for each student.
+- **Material management**: Upload and organize teaching materials (links, videos, PDFs).
+- **Assignments**: Create and manage assignments. Assign grades and notes to each student. Export assignment details to PDF.
+
+![Courses Screenshot](screenshots/gradebook_06.png)
+![Courses Screenshot](screenshots/gradebook_07.png)
+![Courses Screenshot](screenshots/gradebook_08.png)
+![Courses Screenshot](screenshots/gradebook_09.png)
+![Courses Screenshot](screenshots/gradebook_10.png)
 
 ### Calendar
 
 - Displays all scheduled lessons for the teacher.
 - Clear and user-friendly calendar view for easy lesson tracking.
 
-![Calendar Screenshot](screenshots/gradebook-7.png)
+![Calendar Screenshot](screenshots/gradebook_11.png)
 
 ### Notifications
 
@@ -59,7 +68,7 @@
 
 - Notifications are stored in the system for later reference.
 
-![Profile Screenshot](screenshots/gradebook-8.png)
+![Profile Screenshot](screenshots/gradebook_12.png)
 
 ### Profile
 
@@ -67,8 +76,8 @@
 - Edit profile information.
 - Upload a profile picture.
 
-![Profile Screenshot](screenshots/gradebook-9.png)
-![Profile Screenshot](screenshots/gradebook-10.png)
+![Profile Screenshot](screenshots/gradebook_13.png)
+![Profile Screenshot](screenshots/gradebook_14.png)
 
 ---
 
@@ -109,7 +118,7 @@
 Ensure you have the following installed:
 
 - [Git](https://git-scm.com/)
-- [Node.js (v22+)](https://nodejs.org/en/)
+- [Node.js (20+)](https://nodejs.org/en/)
 - [PHP, Composer and Laravel](https://laravel.com/docs/11.x#installing-php)
 - [PostgreSQL](https://www.postgresql.org/)
 
@@ -219,9 +228,47 @@ Ensure you have the following installed:
 
 Here's a basic overview of the core models:
 
-![Eloquent ER Diagram](./screenshots/gradebook-schema.png)
+![Eloquent ER Diagram](./screenshots/gradebook_schema.svg)
 
 ---
+
+## Installation with Docker
+
+### Prerequisites
+
+Ensure you have the following installed:
+
+- [Docker](https://www.docker.com/get-started/)
+
+1. **Copy the `.env.example` file to `.env` in both the frontend and backend directories.**
+2. **Generate the Laravel application key by running:**
+
+   ```bash
+   php artisan key:generate
+   ```
+
+3. **Update the database host in the backend `.env` file:**
+
+   ```bash
+   DB_HOST=db
+   DB_DATABASE=gradebook
+   DB_USERNAME=gradebook
+   DB_PASSWORD=gradebook
+   ```
+
+4. **Start the containers with:**
+
+   ```bash
+   docker compose up
+   ```
+
+5. **Make migrations and seed data:**
+
+   ```bash
+   docker compose exec backend php artisan migrate --seed
+   ```
+
+6. **Access the frontend at [http://localhost:5173](http://localhost:5173).**
 
 ## License
 

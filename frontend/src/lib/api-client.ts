@@ -12,6 +12,7 @@ function applyInterceptors(axiosInstance: AxiosInstance) {
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
   });
 
@@ -20,6 +21,7 @@ function applyInterceptors(axiosInstance: AxiosInstance) {
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
       }
+
       return response;
     },
     (error) => {
@@ -27,6 +29,7 @@ function applyInterceptors(axiosInstance: AxiosInstance) {
         if (error.response?.status === 401) {
           localStorage.removeItem("token");
         }
+
         throw new Error(
           error.response?.data?.message ||
             "An error occurred while making the request.",
