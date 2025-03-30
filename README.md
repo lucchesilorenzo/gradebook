@@ -232,6 +232,12 @@ Here's a basic overview of the core models:
 
 ---
 
+## API Documentation
+
+The API documentation is available at [http://localhost:8000/api/docs](http://localhost:8000/api/docs).
+
+---
+
 ## Installation with Docker
 
 ### Prerequisites
