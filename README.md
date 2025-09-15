@@ -108,7 +108,8 @@ Inside an educational unit:
 - [Zod](https://zod.dev/) for schema validation.
 - [Axios](https://axios-http.com/) for API requests.
 - [date-fns](https://date-fns.org/) for date formatting.
-
+- [Konva.js](https://konvajs.org/docs/react/index.html) for interactive 2D canvases.
+  
 ---
 
 ## Getting Started
